@@ -1,0 +1,112 @@
+<template>
+<div  class="space-x-2 absolute left-[10px] top-[48%]">
+    <div v-if="!sessionData.proudSkillExtraLevelMap"  class="flex flex-row space-x-2">
+        <div v-for="(skillLv, skillKey) in sessionData.skillLevelMap" :key="skillKey">
+            <div v-for="(icon, iconKey) in charData.Skills" :key="iconKey" > 
+                <div v-if="iconKey == skillKey">
+                <div class="indicator">
+                    <span class="indicator-item font-bold indicator-bottom indicator-center badge  badge-black mb-[-8px]">{{skillLv}}</span>
+                    <div class=" place-items-center">
+                        <img  class="w-[60px] h-[40px]" src="/image/attribute/talentBorder.png" alt="" srcset="">
+                        <img  class="w-10 h-10 ml-[10px] mt-[-40px]" :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${icon}.png`" >
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div v-else-if="Object.keys(sessionData.proudSkillExtraLevelMap).length == 1" >
+            <div v-for="conS in Object.keys(sessionData.proudSkillExtraLevelMap)" :key="conS">
+                <div v-for="(proudVal, proudKey) in charData.ProudMap" :key="proudVal">
+                    <div v-if="proudVal == conS" class="flex flex-row space-x-4">
+                    <div v-for="(skillLv, skillKey) in sessionData.skillLevelMap" :key="skillKey" >
+                        <div v-for="(icon, iconKey) in charData.Skills" :key="iconKey" class="avatar indicator "> 
+                            <div v-if="skillKey == iconKey"  class="indicator-item ">
+                                <span v-if="skillKey == proudKey" class="ml-[10px] text-center text-md font-bold text-blue-500">
+                                {{skillLv + sessionData.proudSkillExtraLevelMap[conS]}}
+                                </span>
+                                <span v-else class="ml-[10px] text-center text-md font-bold text-black dark:text-white">{{skillLv}}</span> 
+                            </div>
+                            <div v-if="iconKey == skillKey" class=" rounded-full w-10 h-10 ring ring-base-content">
+                                <img  :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${icon}.png`">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div v-else-if="Object.keys(sessionData.proudSkillExtraLevelMap).length == 2" >
+        <div v-for="conT in Object.keys(sessionData.proudSkillExtraLevelMap).splice(0,1)" :key="conT">
+            <div v-for="conS in Object.keys(sessionData.proudSkillExtraLevelMap).splice(1,1)" :key="conS">
+                <div v-for="proudVal in charData.ProudMap" :key="proudVal">
+                    <div v-if="proudVal == conT && conS" class="flex flex-row space-x-2">
+                        <div v-for="(skillLv, skillKey) in sessionData.skillLevelMap" :key="skillKey">
+                            <div v-for="(icon, iconKey) in charData.Skills" :key="iconKey" > 
+                                    <div class="indicator" v-if="skillKey == iconKey && skillKey == charData.SkillOrder[0]" >
+                                        <span v-if="proudVal != 3331" class="indicator-item font-bold indicator-bottom indicator-center badge  badge-black mb-[-8px]">{{skillLv}}</span>
+                                        <span v-else class="indicator-item font-bold indicator-bottom indicator-center badge  badge-black mb-[-8px]">{{skillLv + sessionData.proudSkillExtraLevelMap[conT]}}</span>
+                                        <div class=" place-items-center">
+                                            <img  class="w-[60px] h-[40px]" src="/image/attribute/talentBorder.png" alt="" srcset="">
+                                            <img  class="w-10 h-10 ml-[10px] mt-[-40px]" :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${icon}.png`" >
+                                        </div>
+                                    </div>
+                                    <div class="indicator" v-if="skillKey == iconKey && skillKey == charData.SkillOrder[1]" >
+                                     <span class="indicator-item font-bold indicator-bottom indicator-center badge badge-info mb-[-8px]">{{skillLv + sessionData.proudSkillExtraLevelMap[conS]}}</span>
+                                        <div class=" place-items-center">
+                                            <img  class="w-[60px] h-[40px]" src="/image/attribute/talentBorder.png" alt="" srcset="">
+                                            <img  class="w-10 h-10 ml-[10px] mt-[-40px]" :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${icon}.png`" >
+                                        </div>
+                                    </div>
+                                    <div class="indicator" v-if="skillKey == iconKey && skillKey == charData.SkillOrder[2]" >
+                                    
+                                    <span v-if="skillKey == 10333" class="indicator-item font-bold indicator-bottom indicator-center badge badge-info mb-[-8px]">{{skillLv}}</span>
+                                    <span v-else class="indicator-item font-bold indicator-bottom indicator-center badge badge-info mb-[-8px]">{{skillLv + sessionData.proudSkillExtraLevelMap[conS]}}</span>
+                                        <div class=" place-items-center">
+                                            <img  class="w-[60px] h-[40px]" src="/image/attribute/talentBorder.png" alt="" srcset="">
+                                            <img  class="w-10 h-10 ml-[10px] mt-[-40px]" :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${icon}.png`" >
+                                        </div>
+                                    </div>
+                                <!-- <div v-if="iconKey == skillKey" class=" rounded-full w-10 h-10 ring ring-base-content">
+                                    <img :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${icon}.png`">
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div v-else-if="Object.keys(sessionData.proudSkillExtraLevelMap).length == 3" >
+        <div v-for="nT in Object.keys(sessionData.proudSkillExtraLevelMap).splice(0,1)" :key="nT">
+            <div v-for="conT in Object.keys(sessionData.proudSkillExtraLevelMap).splice(1,1)" :key="conT">
+                <div v-for="conS in Object.keys(sessionData.proudSkillExtraLevelMap).splice(2,2)" :key="conS">
+                <div v-for="proudVal in charData.ProudMap" :key="proudVal">
+                    <div v-if="proudVal == nT && conT && conS" class="flex flex-row space-x-4">
+                    <div v-for="(skillLv, skillKey) in sessionData.skillLevelMap" :key="skillKey">
+                        
+                            <div v-for="(icon, iconKey) in charData.Skills" :key="iconKey" class="avatar indicator"> 
+                            <div class="indicator-item" v-if="skillKey == iconKey">
+                            <span  v-if="skillKey == charData.SkillOrder[0] ">{{skillLv + sessionData.proudSkillExtraLevelMap[nT]}}</span>
+                            <span v-if="skillKey == charData.SkillOrder[1] ">{{skillLv + sessionData.proudSkillExtraLevelMap[conT]}}</span>
+                            <span v-if="skillKey == charData.SkillOrder[2]">{{skillLv + sessionData.proudSkillExtraLevelMap[conS]}}</span>
+                            </div>
+                            <div v-if="iconKey == skillKey" class=" rounded-full w-10 h-10 ring ring-base-content">
+                                <img :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${icon}.png`">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</template>
+
+<script>
+export default {
+    props:['sessionData','charData'],
+}
+</script>
