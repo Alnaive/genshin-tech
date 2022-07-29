@@ -18,13 +18,13 @@ use Illuminate\Support\Facades\Http;
 class WelcomeController extends Controller
 {
     public function index() {
-       
         return Inertia::render('Welcome');
     }
     public function uid($uid){
         $character = Character::all();
+        $enkaKey = config('services.ENKA_KEY');
         $itemName = json_decode(file_get_contents(public_path() . "/asset/ItemName.json"), true);
-        $response = json_decode(file_get_contents("https://enka.network/u/$uid/__data.json?key=b21lZ2FsdWxrZWt3dGY"), true);
+        $response = json_decode(file_get_contents("https://enka.network/u/$uid/__data.json?key=$enkaKey"), true);
         return Inertia::render('UID/UID', [
             'uid' => $response,
             'UID' => $uid,
