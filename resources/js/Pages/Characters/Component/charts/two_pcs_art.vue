@@ -1,5 +1,5 @@
 <template>
-    <apexcharts  width="500"  height="350" type="bar" class="text-green-500" :options="chartOptions" :series="series" ></apexcharts>
+    <apexcharts  width="500"  height="350" type="bar" :options="chartOptions" :series="series" ></apexcharts>
 </template>
 
 <script>
@@ -9,36 +9,37 @@ export default {
      components:{
         apexcharts: VueApexCharts,
     },
-    props:['art2Name', 'art2Total'],
+    props:['art2Name', 'totalArt2', 'title'],
     data: function(){
         return{
-            series: [{
-               name: 'Total',
-            data: this.art2Total
-          }],
-          chartOptions: {
-            chart: {
-              type: 'bar',
-              height: 350
-            },
-            plotOptions: {
-              bar: {
-                borderRadius: 4,
-                horizontal: true,
-              }
-            },
-            dataLabels: {
-              enabled: false
+         chartOptions: {
+              chart: {
+              width: '100%',
+              type: 'bar'
+              },
+            title: {
+                text: this.title + ' 2 Set Artifact',
+                align: 'left',
+                margin: 10,
+                offsetX: 0,
+                offsetY: 0,
+                floating: false,
+                style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                color: '#9ca3af'
+                },
             },
             xaxis: {
-              categories: this.art2Name,
-              labels: {
+            categories: this.art2Name,
+             labels: {
                     show: true,
                     style: {
-                    colors: '#22c55e',
-                    fontSize: '12px'
+                    colors: '#9ca3af',
+                    fontSize: '12px',
+                    fontWeight:  'bold',
                     },
-                },
+                }
             },
             yaxis: [
               {
@@ -47,15 +48,27 @@ export default {
                 },
                 labels: {
                   style: {
-                    colors: '#22c55e',
+                    fontWeight:  'bold',
+                    colors: '#9ca3af',
                   }
                 },
                 tooltip: {
-                  enabled: true
+                  enabled: true,
+                        fillSeriesColor: true,
+                              theme: true,
+                  style: {
+                    fontSize:  '14px',
+                    fontWeight:  'bold',
+                    color: '#9ca3af'
+                  },
                 }
               },
             ],
-          },
+        },
+        series: [{
+            name: 'Total',
+            data: this.totalArt2,
+        }],
         }
     }
 }

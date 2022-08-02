@@ -55,10 +55,11 @@ class WeaponController extends Controller
      */
     public function create()
     {
-        $weapons = json_decode(file_get_contents(public_path() . "/asset/WeaponExcelConfigData.json"), true);
+        // $weapons = json_decode(file_get_contents(public_path() . "/asset/WeaponExcelConfigData.json"), true);
+        $response = json_decode(file_get_contents("https://api.ambr.top/v2/en/weapon"), true);
 
         return Inertia::render('Weapons/create', [
-            'weapons' => $weapons,
+            'weapons' => $response,
         ]);
     }
     public function getWeaponApi(){

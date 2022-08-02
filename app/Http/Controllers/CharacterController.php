@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Character;
 use App\Models\Build;
 use App\Models\Artifact;
-use App\Models\Constellation;
-use App\Models\Talent;
-use App\Models\Pcs;
 use App\Models\Weapon;
 use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
@@ -25,6 +22,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Jenssegers\Agent\Agent;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\characterRequest;
+use App\Charts\WeaponsChart;
 
 class CharacterController extends Controller
 {
@@ -56,7 +54,8 @@ class CharacterController extends Controller
     {
         $allCharacter = Character::all();
         $dataChar = [];
-        $charData = json_decode(file_get_contents(public_path() . "/asset/characters.json"), true);
+        // $charData = json_decode(file_get_contents("https://cdn.jsdelivr.net/gh/EnkaNetwork/API-docs@master/store/characters.json"), true);
+        $charData = json_decode(file_get_contents("https://api.ambr.top/v2/en/avatar"), true);
         $tt = collect($charData)->keys();
         // dd($allCharacter[0]['SideIconName'] == $charData[10000002]['SideIconName']);
         return Inertia::render('Characters/create',[
@@ -65,7 +64,9 @@ class CharacterController extends Controller
         ]);
     }
     public function getCharacterApi(){
-        $itemName = json_decode(file_get_contents(public_path() . "/asset/ItemName.json"), true);
+        // $itemName = json_decode(file_get_contents(public_path() . "/asset/ItemName.json"), true);
+        $itemName = json_decode(file_get_contents("https://cdn.jsdelivr.net/gh/EnkaNetwork/API-docs@master/store/characters.json"), true);
+        // $itemName = json_decode(file_get_contents("https://api.ambr.top/v2/en/avatar"), true);
         return Inertia::render('Characters/getCharacter',[
             'itemName' => $itemName,
         ]);
@@ -137,7 +138,7 @@ class CharacterController extends Controller
         
         $img1 = $request->avatar;
         if ($request->file('avatar')) {
-            $img1 = $request->avatar->hashName();
+            $img1 = $request->avatar->getClientOriginalName();
             $request->avatar->storeAS('images/icon/avatar', $img1);
             }
         $data = $request->all();
@@ -162,15 +163,10 @@ class CharacterController extends Controller
     {
         $agent = new Agent();
 
-        $character = Character::with('build','weapon','party','constellation','talent')->where('slug', $slug)->first();
+        $character = Character::with('build')->withCount('build')->where('slug', $slug)->first();
         $title = $character->name;
         $expiresAt = now()->addHours(1);
         views($character)->cooldown($expiresAt)->record();
-        $checkDraft = Character::join('builds', 'builds.character_id', '=', 'characters.id')->where('builds.status', '=', 'draft')->where('slug', $slug)->get();
-        $checkPublish = Character::join('builds', 'builds.character_id', '=', 'characters.id')->where('builds.status', '=', 'publish')->where('slug', $slug)->get();
-        $collectDraft = collect($checkDraft)->toArray();
-        $collectPublish = collect($checkPublish)->toArray();
-        
         if( $character->build->isEmpty()){
             return Inertia::render('Characters/showEmpty', [
                 'character' => $character,
@@ -178,132 +174,89 @@ class CharacterController extends Controller
                 'agent' => $agent->isMobile(),
             ]);
         } else  {
-        $total_party = Character::join('builds', 'builds.character_id', '=', 'characters.id')->where('builds.status', '=', 'publish')->where('slug', $slug)
-        ->select('builds.party_id')
-        ->groupBy('party_id')
-        ->get();
-           
-        $party_name = Build::join('characters', 'characters.id', 'builds.character_id')->where('builds.status', '=', 'publish')->where('slug', $slug)
-        ->select('builds.party_id')
-        ->groupBy('party_id')
-        ->get();
-        
-        $collection = collect($total_party);
-        $test = [];
-        foreach($collection as $data)
-        foreach($data->party_id as $gg){
-            $test[] = $gg;
-        }
+        $level = [0,1,2,3,4,5,6,7,8,9,10];
 
-        $array = array_count_values($test);
-        $totalParty = [];
-        foreach($array as $data){
-                $totalParty[] = $data;
-        }
-        $collectName = collect($party_name);
-        $test2 = [];
-        foreach($collectName as $data)
-        foreach($data->party as $rr){
-            $test2[] = $rr->name;
-        }
-        $array1 = array_count_values($test2);
-
-        $PartyName = [];
-        foreach($array1 as $key=>$data){
-            $PartyName[] = $key;
-        }
-        
-        $build = Character::join('builds', 'builds.character_id', '=', 'characters.id')->where('builds.status', '=', 'publish')->where('slug', $slug)
-        ->orderBy('builds.created_at', 'desc')
-        ->paginate(3);
-
-        // Artifact count
-        $artifact4Count = Character::join('builds', 'builds.character_id', '=', 'characters.id')
-        ->where('builds.status', '=', 'publish')
-        ->select('builds.four_pcs_art', DB::raw('count(builds.four_pcs_art) as total'))
-           ->groupBy('four_pcs_art',)
+        $countNormalAttack = Character::join('builds', 'builds.character_id', '=', 'characters.id')
+        ->select('builds.normalAttack',  DB::raw('count(builds.normalAttack) as total'))
+        ->groupBy('normalAttack',)
            ->orderBy('total', 'desc')
-           ->whereNotNull('builds.four_pcs_art')
            ->where('slug', $slug)
            ->get();
 
-        $artifact4Name = Build::join('characters', 'characters.id', 'builds.character_id')->with('set4')
-        ->where('builds.status', '=', 'publish')
-           ->select('builds.four_pcs_art', DB::raw('count(builds.four_pcs_art) as total'))
-           ->groupBy('four_pcs_art',)
-                   ->orderBy('total', 'desc')
-            ->whereNotNull('builds.four_pcs_art')
-           ->where('slug', $slug)
-           ->get();
-   
-           $art4Total = [];
-           foreach($artifact4Count as $data){
-               $art4Total[] = $data->total;
-           }
-           $art4Name = [];
-           foreach($artifact4Name as $data){
-                $art4Name[] = $data->set4->name;
-           }
-        
-        $art2 = Character::join('builds', 'builds.character_id', '=', 'characters.id')->where('builds.status', '=', 'publish')->where('slug', $slug)
-           ->select('builds.two_pcs_art')
-           ->groupBy('two_pcs_art')
-           ->get();
-            $art2Count = [];
-            foreach($art2 as $data)
-            foreach($data->two_pcs_art as $data_two_pcs){
-                $art2Count[] = $data_two_pcs;
-            }
-            $arrayArt2 = array_count_values($art2Count);
-            $art2Total = [];
-            foreach($arrayArt2 as $data){
-                    $art2Total[] = $data;
-            }
-        
-        $art2Name = Build::join('characters', 'characters.id', 'builds.character_id')->where('builds.status', '=', 'publish')->where('slug', $slug)
-        ->select('builds.two_pcs_art')
-        ->groupBy('two_pcs_art')
-        ->get();
-        $collectArt2Name = collect($art2Name);
-        $name2Art = [];
-        foreach($collectArt2Name as $data)
-        foreach($data->set2 as $rr){
-            $name2Art[] = $rr->name;
-        }
-        $arrayArt2Name = array_count_values($name2Art);
+        $collectNormal = collect($countNormalAttack);
+        $normalAttack = [];
 
-        $art2TotalName = [];
-        foreach($arrayArt2Name as $key=>$data){
-            $art2TotalName[] = $key;
+        for($i=0; $i < 11; $i++){
+            $levelVal = 0;
+            foreach($collectNormal as $key => $data){
+                if($data['normalAttack'] == $level[$i]){
+                    $levelVal = $data['total'];
+                }
+            }
+            $normalAttack[] = $levelVal;
         }
-        $weapon_count = Character::join('builds', 'builds.character_id', '=', 'characters.id')
-         ->where('builds.status', '=', 'publish')
-         ->select('builds.weapon_id',  DB::raw('count(builds.weapon_id) as total'))
-            ->groupBy('weapon_id',)
+
+        $countElementalSkill = Character::join('builds', 'builds.character_id', '=', 'characters.id')
+        ->select('builds.elementalSkill',  DB::raw('count(builds.elementalSkill) as total'))
+            ->groupBy('elementalSkill',)
             ->orderBy('total', 'desc')
             ->where('slug', $slug)
             ->get();
+        $collectElemental = collect($countElementalSkill);
+
+        $elementalSkill = [];
+        for($i=0; $i < 11; $i++){
+            $levelVal = 0;
+            foreach($collectElemental as $key => $data){
+                if($data['elementalSkill'] == $level[$i]){
+                    $levelVal = $data['total'];
+                }
+            }
+            $elementalSkill[] = $levelVal;
+        }
+        $countElementalBurst = Character::join('builds', 'builds.character_id', '=', 'characters.id')
+        ->select('builds.elementalBurst',  DB::raw('count(builds.elementalBurst) as total'))
+            ->groupBy('elementalBurst',)
+            ->orderBy('total', 'desc')
+            ->where('slug', $slug)
+            ->get();
+        $elementalBurst = [];
+        $collectBurst = collect($countElementalBurst);
+
+        $elementalBurst = [];
+        for($i=0; $i < 11; $i++){
+            $levelVal = 0;
+            foreach($collectBurst as $key => $data){
+                if($data['elementalBurst'] == $level[$i]){
+                    $levelVal = $data['total'];
+                }
+            }
+            $elementalBurst[] = $levelVal;
+        }
+        $weapon_count = Character::join('builds', 'builds.character_id', '=', 'characters.id')
+        ->select('builds.weapon_id',  DB::raw('count(builds.weapon_id) as total'))
+           ->groupBy('weapon_id',)
+           ->orderBy('total', 'desc')
+           ->where('slug', $slug)
+           ->get();
 
         $weapon_name = Build::join('characters', 'characters.id', 'builds.character_id')->with('weapon')
-        ->where('builds.status', '=', 'publish')
-        ->withcount('weapon')
         ->select('builds.weapon_id', DB::raw('count(builds.weapon_id) as total'))
         ->groupBy('weapon_id',)
                 ->orderBy('total', 'desc')
         ->where('slug', $slug)
         ->get();
 
-        $gg = [];
+        $weaponName = [];
         foreach($weapon_name as $data){
-            $gg[] = $data->weapon->name;
+            $weaponName[] = $data->weapon->name;
         }
-        $pp = [];
+        $totalWeapon = [];
         foreach($weapon_count as $data){
-             $pp[] =  $data->total;
+                $totalWeapon[] =  $data->total;
         }
-        
+
         $weaponRecom = Build::join('characters', 'characters.id', 'builds.character_id')->with('weapon')
-        ->where('builds.status', '=', 'publish')
         ->select('builds.weapon_id', DB::raw('count(builds.weapon_id) as total'))
         ->groupBy('weapon_id',)
                 ->orderBy('total', 'desc')
@@ -314,128 +267,78 @@ class CharacterController extends Controller
         foreach($weaponRecom as $data){
             $weaponRecommendation[] = $data;
         }
-        $artifact4Recom = Build::join('characters', 'characters.id', 'builds.character_id')->with('set4.pcs')
-        ->where('builds.status', '=', 'publish')
-           ->select('builds.four_pcs_art', DB::raw('count(builds.four_pcs_art) as total'))
-           ->groupBy('four_pcs_art',)
-                   ->orderBy('total', 'desc')
+
+         // Artifact count
+         $artifact4Count = Character::join('builds', 'builds.character_id', '=', 'characters.id')
+         ->select('builds.four_pcs_art', DB::raw('count(builds.four_pcs_art) as total'))
+            ->groupBy('four_pcs_art',)
+            ->orderBy('total', 'desc')
             ->whereNotNull('builds.four_pcs_art')
-           ->where('slug', $slug)->limit(3)
-           ->get();
-           $art4Recommendation = [];
-           foreach($artifact4Recom as $data){
-                $art4Recommendation[] = $data;
-           }
-        $art2Recom = Build::join('characters', 'characters.id', 'builds.character_id')->where('builds.status', '=', 'publish')->where('slug', $slug)
-           ->select('builds.two_pcs_art')
-           ->groupBy('two_pcs_art')->limit(3)
-           ->get();
-           $Count = 0;
-           $art2Recommendation = [];
-           foreach($art2Recom as $data)
-           foreach($data->set2 as $rr){
-            $Count++;
-            if ($Count == 4){
-                break; //stop foreach loop after 4th loop
-            }
-               $art2Recommendation[] = $rr;
-           }
-        $charMedian = Character::join('builds', 'builds.character_id', '=', 'characters.id')
-            ->where('builds.status', '=', 'publish')
-            ->select('builds.hp','builds.atk', 'builds.defense', 'builds.em','builds.c_rate','builds.c_damage', 'builds.er')
             ->where('slug', $slug)
             ->get();
-            $hp = [];
-            $atk = [];
-            $defense = [];
-            $em = [];
-            $critRate = [];
-            $critDamage = [];
-            $er = [];
-            foreach($charMedian as $data){
-                $hp[] = $data->hp;
-                $atk[] = $data->atk;
-                $defense[] = $data->defense;
-                $em[] = $data->em;
-                $critRate[] = $data->c_rate;
-                $critDamage[] = $data->c_damage;
-                $er[] = $data->er;
-            }
-            $medianHp = collect($hp)->median();
-            $medianAtk = collect($atk)->median();
-            $medianDefense = collect($defense)->median();
-            $medianEm = collect($em)->median();
-            $medianCritRate = collect($critRate)->median();
-            $medianCritDamage = collect($critDamage)->median();
-            $medianEr = collect($er)->median();
-            
-        $charlv_count = Character::join('builds', 'builds.character_id', '=', 'characters.id')
-            ->where('builds.status', '=', 'publish')
-        ->select('builds.char_lv', DB::raw('count(builds.char_lv) as total'), DB::raw('builds.char_lv as lv'))
-            ->groupBy('char_lv')
+ 
+         $artifact4Name = Build::join('characters', 'characters.id', 'builds.character_id')->with('set4')
+            ->select('builds.four_pcs_art', DB::raw('count(builds.four_pcs_art) as total'))
+            ->groupBy('four_pcs_art',)
+                    ->orderBy('total', 'desc')
+             ->whereNotNull('builds.four_pcs_art')
             ->where('slug', $slug)
             ->get();
-            $lv = [];
-            $total_lv = [];
-            foreach($charlv_count as $data){
-                $lv[] = sprintf("Lv %s", $data->lv);
-                $total_lv[] = $data->total;
+    
+            $art4Total = [];
+            foreach($artifact4Count as $data){
+                $art4Total[] = $data->total;
             }
-        
-        $count_talent1 = Character::join('builds', 'builds.character_id', '=', 'characters.id')
-            ->where('builds.status', '=', 'publish')
-            ->select('builds.talent1')
-            ->orderBy('builds.talent1', 'ASC')
-            ->where('slug', $slug)
+            $art4Name = [];
+            foreach($artifact4Name as $data){
+                 $art4Name[] = $data->set4->name;
+            }
+
+            $art2Name = Build::join('characters', 'characters.id', 'builds.character_id')->where('slug', $slug)
+            ->select('builds.two_pcs_art')
+            ->groupBy('two_pcs_art')
             ->get();
-            $collectTalent1 = collect($count_talent1);
-            $talent1 = [];
-            foreach($collectTalent1 as $data){
-                $talent1[] = $data->talent1;
+
+            $collectArt2Name = collect($art2Name);
+
+            $art2Name = [];
+            foreach($collectArt2Name as $data)
+            foreach($data->set2 as $rr){
+                $art2Name[] = $rr->name;
             }
-            $arraytalent1 = array_count_values($talent1);
-            $labelTalent1 = [];
-            $t1 = [];
-            foreach($arraytalent1 as $key=>$data){
-                    $labelTalent1[] = sprintf("Lv %s", $key);
-                    $t1[] = $data;
+            $arrayArt2Name = array_count_values($art2Name);
+
+            $totalArt2 = [];
+            foreach($arrayArt2Name as $key=>$data){
+                $totalArt2[] = $data;
             }
-            // dd($talent1, $arraytalent1, $labelTalent1);
-        $collectTalent2 = Character::join('builds', 'builds.character_id', '=', 'characters.id')
-            ->where('builds.status', '=', 'publish')
-            ->select('builds.talent2')
-            ->orderBy('builds.talent2', 'ASC')
-            ->where('slug', $slug)
+            $artifact4Recom = Build::join('characters', 'characters.id', 'builds.character_id')->with('set4')
+            ->select('builds.four_pcs_art', DB::raw('count(builds.four_pcs_art) as total'))
+            ->groupBy('four_pcs_art',)
+                    ->orderBy('total', 'desc')
+                ->whereNotNull('builds.four_pcs_art')
+            ->where('slug', $slug)->limit(3)
             ->get();
-            $talent2 = [];
-            foreach($collectTalent2 as $data){
-                $talent2[] = $data->talent2;
+            $art4Recom = [];
+            foreach($artifact4Recom as $data){
+                    $art4Recom[] = $data;
             }
-            $arraytalent2 = array_count_values($talent2);
-            $labelTalent2 = [];
-            $t2 = [];
-            foreach($arraytalent2 as $key=>$data){
-                    $labelTalent2[] = sprintf("Lv %s", $key);
-                    $t2[] = $data;
-            }
-        $collectTalent3 = Character::join('builds', 'builds.character_id', '=', 'characters.id')
-            ->where('builds.status', '=', 'publish')
-            ->select('builds.talent3')
-            ->orderBy('builds.talent3', 'ASC')
-            ->where('slug', $slug)
+            $artifact2Recom = Build::join('characters', 'characters.id', 'builds.character_id')->with('set2')->where('slug', $slug)
+            ->select('builds.two_pcs_art')
+            ->groupBy('two_pcs_art')->limit(3)
             ->get();
-            $talent3 = [];
-            foreach($collectTalent3 as $data){
-                $talent3[] = $data->talent3;
+            $Count = 0;
+            $art2Recom = [];
+            foreach($artifact2Recom as $data)
+            foreach($data->set2 as $rr){
+                $Count++;
+                if ($Count == 4){
+                    break; //stop foreach loop after 4th loop
+                }
+                $art2Recom[] = $rr;
             }
-            $arraytalent3 = array_count_values($talent3);
-            $labelTalent3 = [];
-            $t3 = [];
-            foreach($arraytalent3 as $key=>$data){
-                    $labelTalent3[] = sprintf("Lv %s", $key);
-                    $t3[] = $data;
-            }
-       
+        }
+        $build = Build::join('characters', 'characters.id', 'builds.character_id')->with('character','weapon')->inRandomOrder()->limit(1)->where('slug', $slug)->get();
         SEOMeta::setTitle($character->name);
         SEOMeta::setDescription($character->description);
         SEOMeta::addMeta('article:published_time', $character->updated_at->toW3CString(), 'property');
@@ -447,44 +350,29 @@ class CharacterController extends Controller
         OpenGraph::addProperty('type', 'article');
         OpenGraph::addProperty('locale', 'pt-br');
         OpenGraph::addProperty('locale:alternate', ['pt-pt', 'en-us']);
- 
         OpenGraph::addImage(url($character->icon), ['height' => 300, 'width' => 300]);
         return Inertia::render('Characters/show', [
             'character' => $character,
             'title' => $title,
-            'build' => $build,
-            'weapon_count' => $pp,
-            'weapon_name' => $gg,
-            'weaponRecom' => $weaponRecommendation,
-            'art4Recom' => $art4Recommendation,
-            'art2Recom' => $art2Recommendation,
-            'total_lv' => $total_lv,
-            'lv' => $lv,
-            't1' => $t1,
-            't1Label' => $labelTalent1,
-            't2' => $t2,
-            't2Label' => $labelTalent2,
-            't3' => $t3,
-            't3Label' => $labelTalent3,
-            'totalParty' => $totalParty,
-            'partyName' => $PartyName,
-            'art4Total' => $art4Total,
+            'weaponName' => $weaponName,
+            'totalWeapon' => $totalWeapon,
+            'weaponRecom' => $weaponRecom,
             'art4Name' => $art4Name,
-            'art2Total' => $art2Total,
-            'art2Name' => $art2TotalName,
-            'medianHp' => $medianHp,
-            'medianAtk' => $medianAtk,
-            'medianDefense' => $medianDefense,
-            'medianEm' => $medianEm,
-            'medianCritRate' => $medianCritRate,
-            'medianCritDamage' => $medianCritDamage,
-            'medianEr' => $medianEr,
-            'agent' => $agent->isMobile(),
+            'totalArt4' => $art4Total,
+            'art2Name' => $art2Name,
+            'totalArt2' => $totalArt2,
+            'art4Recom' => $art4Recom,
+            'art2Recom' => $art2Recom,
+            'normalAttack' => $normalAttack,
+            'elementalSkill' => $elementalSkill,
+            'elementalBurst' => $elementalBurst,
+            'build' => $build,
         ]);
-       }
-
     }
-
+    public function weaponChart(WeaponsChart $chart)
+    {
+        return Inertia::render('Character/Component/charts/weapon', ['chart' => $chart->build()]);
+    }
     /**
      * Show the form for editing the specified resource.
      *

@@ -13,6 +13,7 @@ class Artifact extends Model
     protected $guarded = [];
     protected $casts = [
       'rarity' => 'array',
+      'affixList' => 'json',
   ];
     public function sluggable(){
         return ['slug'=>['source'=>'name','onUpdate'=>true]];

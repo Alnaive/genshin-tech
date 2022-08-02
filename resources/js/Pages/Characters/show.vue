@@ -3,146 +3,140 @@
         <title>{{title}}</title>
     </Head>
     <Guest>
-        <template #header>
-            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <h2  class="text-xl font-semibold leading-tight">
-                    {{title}} 
-                </h2>
+        <div class="flex justify-between container mx-auto space-x-4 mt-5">
+            <div>
+                <h2  class="text-xl font-semibold leading-tight mt-2">{{character.name}}</h2>
             </div>
-        </template>
-        <div class="flex flex-wrap">
-        <tabs v-model="active">
-            <tab>Statistic</tab>
-            <!-- <tab>Profile</tab> -->
-        </tabs>
-        </div>
-         <tab-panels v-model="active">
-            <tab-panel >
-                <div class="grid gap-3 overflow-hidden xl:grid-cols-3 xl:grid-rows-3 xl:gap-5 xl:grid-flow-col lg:grid-cols-2 lg:grid-rows-4 lg:gap-3 lg:grid-flow-col w-auto">
-                    <div class="card image-full bg-white dark:bg-dark-eval-1">
-                        <avatar :character="character" :char="char"></avatar>
-                    </div>
-                    <div class="card bg-white dark:bg-dark-eval-1">
-                        <div class="card-body">
-                            <h2 class="card-title">Artifact Recommendation</h2>
-                            <div class="flex flex-wrap">
-                                <tabs v-model="activeTabPcs">
-                                    <tab>4PCS</tab>
-                                    <tab>2PCS</tab>
-                                </tabs>
-                            </div>
-                            <tab-panels v-model="activeTabPcs">
-                                <tab-panel>
-                                    <div class="flex flex-wrap justify-center">
-                                        <artifact :art4Recom="art4Recom"/>
-                                    </div>
-                                </tab-panel>
-                                <tab-panel>
-                                    <div class="flex flex-wrap justify-center">
-                                 <artifact :art2Recom="art2Recom" />
-                             </div> 
-                                </tab-panel>
-                            </tab-panels>
-                        </div>
-                    </div>
-                    <div class="card bg-white dark:bg-dark-eval-1 xl:col-span-2 xl:row-start-3 lg:row-start-4 lg:col-span-1 ">
-                        <WeaponCharts :weapon_name="weapon_name" :weapon_count="weapon_count" :title="title"> </WeaponCharts>
-                    </div>
-                    <div class="card bg-white dark:bg-dark-eval-1">
-                        <div class="card-body ">
-                        <h2 class="card-title">Stats Overview</h2>
-                            <div class="divider"><strong>Median</strong></div>
-                            <div class="flex items-center gap-2"> 
-                                <img src="/image/attribute/Icon_Attribute_Health.png" class="w-8 h-8">
-                                <strong class="flex-1 w-64">Max Hp</strong>
-                                <strong class="mr-2">{{HpFormat}}</strong>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <img src="/image/attribute/Icon_Attribute_Attack.png" class="w-8 h-8">
-                                <strong class="flex-1 w-64">Attack</strong>
-                                <strong class="mr-2">{{AtkFormat}}</strong> 
-                            </div> 
-                            <div class="flex items-center gap-2">
-                                <img src="/image/attribute/Icon_Attribute_Defense.png" class="w-8 h-8">
-                                <strong class="flex-1 w-64">Defense</strong>
-                                <strong class="mr-2">{{DefenseFormat}}</strong> 
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <img src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" class="w-8 h-8">
-                                <strong class="flex-1 w-64">Elemental Mastery</strong> 
-                                <strong class="mr-2">{{EmFormat}}</strong>
-                            </div>
-                            <div class="flex items-center gap-2"> 
-                                <img src="/image/attribute/Icon_Attribute_Energy_Recharge.png" class="w-8 h-8">
-                                <strong class="flex-1 w-64">Energy Recharge</strong>
-                                <strong class="mr-2">{{medianEr}} %</strong>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <img src="/image/attribute/Icon_Attribute_Critical_Hit.png" class="w-8 h-8">
-                                <strong class="flex-1 w-64">CRIT Rate</strong>
-                                <strong class="mr-2">{{medianCritRate}} %</strong> 
-                            </div> 
-                            <div class="flex items-center gap-2">
-                                <img src="/image/attribute/Icon_Attribute_Critical_Hit.png" class="w-8 h-8">
-                                <strong class="flex-1 w-64">CRIT Damage</strong>
-                                <strong class="mr-2">{{medianCritDamage}} %</strong> 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-white dark:bg-dark-eval-1">
-                        <div class="card-body ">
-                            <h2 class="card-title">Weapon Recommendation</h2>
-                             <div class="flex flex-wrap justify-center">
-                                 <weapon :weaponRecom="weaponRecom"/>
-                             </div>
-                        </div>
-                    </div>
-                    <div class="card bg-white dark:bg-dark-eval-1">
-                        <div class="flex flex-wrap ml-5">
-                            <tabs v-model="activeTabLv">
-                            <tab>Party</tab>
-                            <tab>Lv</tab>
-                        </tabs>
-                        </div>
-                        <tab-panels v-model="activeTabLv">
-                            <tab-panel><Party :totalParty="totalParty" :partyName="partyName" :title="title"></Party></tab-panel>
-                            <tab-panel><CharLv :lv="lv" :total_lv="total_lv" :title="title"></CharLv></tab-panel>
-                        </tab-panels>
-                         
-                    </div>
-                    <div class="card bg-white dark:bg-dark-eval-1">
-                        <div class="flex flex-wrap ml-5">
-                            <tabs v-model="activeTabTalent">
-                            <tab>Normal Attack</tab>
-                            <tab>Elemental Skill</tab>
-                            <tab>Elemental Burst</tab>
-                        </tabs>
-                        </div>
-                        <tab-panels v-model="activeTabTalent">
-                            <tab-panel><Talent :t1="t1" :t1Label="t1Label" /></tab-panel>
-                            <tab-panel><Talent2 :t2="t2" :t2Label="t2Label" /></tab-panel>
-                            <tab-panel><Talent3 :t3="t3" :t3Label="t3Label" /></tab-panel>
-                        </tab-panels>
-                    </div>
-                    <div class="card bg-white dark:bg-dark-eval-1 xl:col-span-1 xl:row-start-8 lg:row-start-3 lg:col-start-1">
-                        <div class="flex flex-wrap ml-5">
-                            <tabs v-model="activeTabArt">
-                            <tab>4 Set</tab>
-                            <tab>2 Set</tab>
-                        </tabs>
-                        </div>
-                        <tab-panels v-model="activeTabArt">
-                            <tab-panel><FourPcs :art4Name="art4Name" :art4Total="art4Total" /></tab-panel>
-                            <tab-panel><TwoPcs :art2Name="art2Name" :art2Total="art2Total" /></tab-panel>
-                        </tab-panels>
-                    </div>
+            <form @submit.prevent="searchUID(uid)">
+                <div class="flex flex-row space-x-4">
+                    <Link :href="route('seeBuild', { id: character.slug })" class="btn btn-info"><VueFeather type="eye" size="24"></VueFeather></Link>
+                    <input v-model="uid" type="text" placeholder="UID" class="input input-bordered w-full max-w-xs bg-accent-content dark:bg-base-100"><br>
+                    <button class="btn btn-primary"><VueFeather type="plus" size="24"></VueFeather></button>
                 </div>
-            </tab-panel>
-            <tab-panel>
-                  Null
-            </tab-panel>
+            </form>
+        </div>
+        <div class="flex flex-col md:flex-row mt-5 container mx-auto gap-5">
+            <div  class="flex flex-row card shadow-lg overflow-x-auto" >
+                    <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+                        <li>
+                                <div id="potraitData" class="w-[414px] h-[736px] card " >
+                                    <figure>
+                                        <img :src="showAvatar() + build[0].character.avatar" >
+                                    </figure> 
+                                    <div class="drop-shadow-lg shadow-black font-bold text-white absolute ml-4 top-0 mt-1">
+                                    <pre data-prefix="$"><code>{{ build[0].character.name}}</code></pre> 
+                                    <pre data-prefix=">" class="text-warning"><code>Level {{ build[0].level}}/{{( build[0].ascendsion * 10) + ( build[0].ascendsion>0?10:0) + 20}}</code></pre> 
+                                    </div>
+                                    <Equip :build="build" />
+                                    <Conste :build="build" />
+                                    <Talent :build="build" /> 
+                                    <div class="card absolute inset-x-0 bottom-0 mt-5">
+                                        <div class="bg-transparent" >
+                                            <section class="px-2 py-2 text-white" >
+                                                <Stats :build="build" />
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                        </li>
+                        <li>
+                    <div class="space-y-1 mt-3 mr-2 text-white">
+                        <Weapon :build="build" />
+                        <Flower :build="build"/>
+                        <Plume :build="build"/>
+                        <Sands :build="build"/>
+                        <Goblet :build="build"/>
+                        <Circlet :build="build"/>
+                        <div  class="flex space-x-4 ml-[120px]" >
+                            <div class="flex-none ...">
+                            <div class="flex flex-col">
+                                    <div  v-if="build[0].two_pcs_art">
+                                        <div v-for="data in build[0].two_pcs_art" :key="data" class="font-bold text-md">
+                                        {{data}}
+                                        </div>
+                                    </div>
+                                    <div v-if="build[0].one_pcs_art">
+                                        <div class="font-bold text-md mt-[12px]">{{build[0].one_pcs_art}}</div>
+                                    </div>
+                                    <div v-if="build[0].four_pcs_art">
+                                        <div class="font-bold text-md mt-[12px]">{{build[0].four_pcs_art}}</div>
+                                    </div>
+                            </div>
+                            </div>
+                            <div class="flex-none ...">
+                                <div class="flex flex-col " >
+                                    <div  v-if="build[0].two_pcs_art">
+                                    <div v-for="data in build[0].two_pcs_art" :key="data" class="font-bold text-md">
+                                        <div class="font-bold text-md badge">2</div>
+                                        </div>
+                                    </div>
+                                    <div v-if="build[0].one_pcs_art">
+                                        <div class="font-bold text-md badge mt-[12px]">3</div>
+                                    </div>
+                                    <div v-if="build[0].four_pcs_art">
+                                        <div class="font-bold text-md badge mt-[12px]">4</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row mt-5 container mx-auto gap-5">
+            <div class="card">
+                <WeaponCharts class="overflow-auto" :weaponName="weaponName" :totalWeapon="totalWeapon" :title="title"/>
+            </div>
+            <div class="card px-4">
+                <h1> Weapon Recommendation</h1>
+                <div class="flex">
+                    <weaponRecom :weaponRecom="weaponRecom"/>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row mt-5 container mx-auto gap-5">
+            <div class="card">
+                 <div class="flex flex-wrap ml-5">
+                    <tabs v-model="activeTabArt">
+                    <tab>4 Set</tab>
+                    <tab>2 Set</tab>
+                </tabs>
+                </div>
+                <tab-panels v-model="activeTabArt">
+                    <tab-panel><FourPcs class="overflow-auto" :art4Name="art4Name" :totalArt4="totalArt4" :title="title"/></tab-panel>
+                    <tab-panel><TwoPcs class="oveflow-auto" :art2Name="art2Name" :totalArt2="totalArt2" :title="title"/></tab-panel>
+                </tab-panels>
+                
+            </div>
+            <div class="card px-4">
+                <h1> Artifact Recommendation</h1>
+                <div class="flex flex-wrap">
+                    <tabs v-model="activeTabPcs">
+                        <tab>4PCS</tab>
+                        <tab>2PCS</tab>
+                    </tabs>
+                </div>
+                <tab-panels v-model="activeTabPcs">
+                    <tab-panel>
+                        <div class="flex flex-wrap justify-center">
+                            <artifact :art4Recom="art4Recom"/>
+                        </div>
+                    </tab-panel>
+                    <tab-panel>
+                        <div class="flex flex-wrap justify-center">
+                        <artifact :art2Recom="art2Recom" />
+                    </div> 
+                    </tab-panel>
+                </tab-panels>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row container mx-auto">
+            <div class="card">
+                <TalentChart :normalAttack="normalAttack" :elementalSkill="elementalSkill" :elementalBurst="elementalBurst" :title="title"/>
+            </div>
             
-            </tab-panels>
+        </div>
     </Guest>
 </template>
 
@@ -157,17 +151,26 @@ import Charts from '@/Shared/Charts';
 import { ref } from "vue";
 import VueApexCharts from 'vue3-apexcharts'
 import avatar from './Component/avatar.vue'
-import weapon from './Component/weapon.vue'
+import weaponRecom from './Component/weaponRecom.vue'
 import artifact from './Component/artifact.vue'
 import CharLv from './Component/charts/char_lv'
 import Party from './Component/charts/Party'
 import WeaponCharts from './Component/charts/weapon'
 import FourPcs from './Component/charts/four_pcs_art.vue'
 import TwoPcs from './Component/charts/two_pcs_art.vue'
-import Talent from './Component/charts/talent.vue'
-import Talent2 from './Component/charts/talent2.vue'
-import Talent3 from './Component/charts/talent3.vue'
+import TalentChart from './Component/charts/talent.vue'
  import Pagination from '@/Components/Pagination'
+import Equip from '@/Shared/component/Equip.vue';
+import Conste from '@/Shared/component/Conste.vue';
+import Talent from '@/Shared/component/Talent.vue';
+import Stats from '@/Shared/component/Stats.vue';
+import Weapon from '@/Shared/component/Weapon.vue';
+import Flower from '@/Shared/component/Flower.vue';
+import Plume from '@/Shared/component/Plume.vue';
+import Sands from '@/Shared/component/Sands.vue';
+import Goblet from '@/Shared/component/Goblet.vue';
+import Circlet from '@/Shared/component/Circlet.vue';
+import VueFeather from 'vue-feather';
 
 export default {
     components:{
@@ -176,48 +179,28 @@ export default {
         Tab, Tabs, TabPanel, TabPanels,
         Pagination,
         Charts,
-        apexcharts: VueApexCharts,
-        avatar, weapon, artifact,
+        apexcharts: VueApexCharts, VueFeather,
+        avatar, weaponRecom, artifact,
         CharLv,
-        WeaponCharts, Party, FourPcs, TwoPcs, Talent, Talent2, Talent3,
+        WeaponCharts, Party, FourPcs, TwoPcs, TalentChart, 
+         Equip, Conste, Talent, Stats, Weapon, Flower, Plume, Sands, Goblet, Circlet,
     },
     props: {
         title: String,
         character: Object,
-        builds: Object,
-        weapon_count: Object,
-        weapon_name: Object,
+        weaponName: Object,
+        totalWeapon: Object,
         weaponRecom: Object,
-        art2Recom: Object,
-        art4Recom: Object,
-        lv: Object,
-        total_lv: Object,
-        agent: Object,
-        t1Label: Array,
-        t1: Array,
-        t2: Array,
-        t2Label: Array,
-        t3: Array,
-        t3Label: Array,
-        totalParty: Array,
-        partyName: Object,
-        art4Total: Object, 
         art4Name: Object,
-        art2Total: Object,
+        totalArt4: Object,
         art2Name: Object,
-        medianHp : String,
-        medianAtk : String,
-        medianDefense : String,
-        medianEm : String,
-        medianCritRate : String,
-        medianCritDamage : String,
-        medianEr : String,
-        char: {
-                type: Object,
-                default(rawProps) {
-                    return JSON.parse(localStorage.getItem('character')) || []
-                }
-            },
+        totalArt2: Object,
+        art4Recom: Object,
+        art2Recom: Object,
+        normalAttack: Object,
+        elementalSkill: Object,
+        elementalBurst: Object,
+        build:Object,
     },
    
     setup() {
@@ -230,55 +213,31 @@ export default {
         return { active, activeTabPcs, activeTabArt, activeTabLv, activeTabTalent };
     },
     methods:{
-        
-         showCharIcon() {
-            return "/storage/images/icon/character/";
+        searchUID(uid){
+            this.$inertia.get(`/u/${uid}`, {}, { preserveScroll: true });
         },
          showAvatar() {
-            return "/storage/images/icon/avatar/";
-        },
-        bgImage(){
-            return "/storage/images/icon/avatar/";
-        },
-        
-        showElement(){
-            const ele = this.character.element;
-            if(ele == "Cryo"){
-                return "../image/element/Element_Cryo.png"
-            } else if(ele == "Geo"){
-                return "../image/element/Element_Geo.png"
-            } else if(ele == "Dendro"){
-                return "../image/element/Element_Dendro.png"
-            } else if(ele == "Anemo"){
-                return "../image/element/Element_Anemo.png"
-            } else if(ele == "Electro"){
-                return "../image/element/Element_Electro.png"
-            } else if(ele == "Hydro"){
-                return "../image/element/Element_Hydro.png"
-            } else if(ele == "Pyro"){
-                return "../image/element/Element_Pyro.png"
-            }
-        },
+                return "/storage/images/icon/avatar/";
+            }, 
+        bgElement(){
+            const ele = this.build[0].character.element;
+                if(ele == "Ice"){
+                    return "../image/element/bgCryo.jpg"
+                } else if(ele == "Rock"){
+                    return "../image/element/bgGeo.jpg"
+                } else if(ele == "Dendro"){
+                    return "../image/element/bgDendro.jpg"
+                } else if(ele == "Wind"){
+                    return "../image/element/bgAnemo.jpg"
+                } else if(ele == "Electric"){
+                    return "../image/element/bgElectro.jpg"
+                } else if(ele == "Water"){
+                    return "../image/element/bgHydro.jpg"
+                } else if(ele == "Fire"){
+                    return "../image/element/bgPyro.jpg"
+                }
+            },
     },
-     computed:{
-        HpFormat(){
-            const formatter = new Intl.NumberFormat('us');
-                return formatter.format(this.medianHp);
-            },
-        AtkFormat(){
-            const formatter = new Intl.NumberFormat('us');
-                return formatter.format(this.medianAtk);
-            },
-        DefenseFormat(){
-            const formatter = new Intl.NumberFormat('us');
-                return formatter.format(this.medianDefense);
-            },
-        EmFormat(){
-            const formatter = new Intl.NumberFormat('us');
-                return formatter.format(this.medianEm) ;
-            },
-        }
-    
 }
 </script>
 

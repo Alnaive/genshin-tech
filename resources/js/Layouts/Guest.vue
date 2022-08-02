@@ -1,10 +1,11 @@
 <template>
-<div class="drawer bg-white dark:bg-base-300">
+<div class="drawer bg-gray-100 dark:bg-dark-eval-1">
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
-  <div class="drawer-content flex flex-col">
+  <div class="drawer-content  bg-gray-100 dark:bg-dark-eval-1 flex flex-col">
     <!-- Navbar -->
-    <div class="w-full navbar container mx-auto bg-white dark:bg-base-300">
-      <div class="flex-none lg:hidden">
+    <div class="w-full navbar bg-white dark:bg-base-300">
+      <div class="container mx-auto"> 
+        <div class="flex-none lg:hidden">
         <label for="my-drawer-3" class="btn btn-square btn-ghost">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </label>
@@ -17,7 +18,7 @@
                 type="button"
                 @click="toggleDarkMode"
                 v-slot="{ iconSizeClasses }"
-                class="md:hidden"
+                class="md:hidden mt-1"
                 srText="Toggle dark mode"
             >
                 <MoonIcon
@@ -99,9 +100,16 @@
             </li>
         </ul>
       </div>
+      </div>
     </div>
     <!-- Page content here -->
-    <div class="min-h-screen text-gray-900 bg-gray-100 dark:bg-dark-bg dark:text-gray-100 lg:flex lg:flex-col lg:items-center">
+    <div class="min-h-screen text-gray-900 bg-gray-100 dark:bg-dark-eval-1 dark:text-gray-100 lg:flex lg:flex-col lg:items-center">
+        <!-- Page Heading -->
+            <header v-if="$slots.header">
+                <div class="p-4 sm:p-6">
+                    <slot name="header" />
+                </div>
+            </header>
         <main class="flex-1 px-4 sm:px-6">
             <slot />
         </main>

@@ -15,9 +15,9 @@ use Auth; use DB;
 class DashboardController extends Controller
 {
     public function index(){
-        $query = Build::with('user','character.constellation','character.talent', 'party', 'set4.pcs','set2.pcs','flower','plume','sand','goblet','circlet','weapon')->where('status','draft')->orderBy('id','asc');
+        $query = Build::all();
         return Inertia::render('Admin/Dashboard', [
-            'builds' => $query->paginate(10),
+            'builds' => $query,
             'characters' => Character::all(),
             'artifactPcs' => Pcs::all(),
             'weapons' => Weapon::all(),

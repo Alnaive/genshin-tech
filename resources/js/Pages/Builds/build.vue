@@ -59,7 +59,7 @@
                                                         {{ character.name }}
                                                     </div>
                                                     <div class="text-sm text-gray-500">
-                                                        By {{ data.name }}
+                                                        By {{ data.nickname }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -67,7 +67,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="avatar">
                                                 <div class="w-12 rounded-xl">
-                                                    <img :src="data.weapon.icon">
+                                                    <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${data.weapon.icon}`">
                                                 </div>
                                             </div>
                                         </td>
@@ -79,7 +79,7 @@
 
                                             <div class="flex items-center gap-2">
                                                 <img src="/image/attribute/Icon_Attribute_Attack.png" class="w-8 h-8">
-                                                <strong class="mr-2">{{data.atk}}</strong> 
+                                                <strong class="mr-2">{{data.attack}}</strong> 
                                             </div> 
                                             <div class="flex items-center gap-2">
                                                 <img src="/image/attribute/Icon_Attribute_Defense.png" class="w-8 h-8">
@@ -87,70 +87,65 @@
                                             </div>
                                             <div class="flex items-center gap-2">
                                                 <img src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" class="w-8 h-8">
-                                                <strong class="mr-2">{{data.em}}</strong>
+                                                <strong class="mr-2">{{data.elementalMastery}}</strong>
                                             </div>
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-white">
-                                            <div class="flex items-center gap-2">
-                                                <img src="/image/attribute/Icon_Attribute_Critical_Hit.png" class="w-8 h-8">
-                                                <strong class="mr-2">{{data.c_rate}} %</strong> 
-                                            </div> 
-                                            <div class="flex items-center gap-2">
-                                                <img src="/image/attribute/Icon_Attribute_Critical_Hit.png" class="w-8 h-8">
-                                                <strong class="mr-2">{{data.c_damage}} %</strong> 
+                                           <div class="flex items-center gap-2">
+                                                <img src="/image/svg/FIGHT_PROP_CRITICAL.svg" class="w-8 h-7">
+                                                <strong class="mr-2 "> <span >{{ data.criticalRate }}%</span> <br>
+                                                </strong>
                                             </div>
-                                            <div class="flex items-center gap-2" v-if="data.healing_bonus > 0">
-                                                <img src="/image/attribute/Icon_Attribute_Healing.png" class="w-8 h-8">
-                                                <strong class="mr-2">{{data.healing_bonus}} %</strong>
-                                            </div> 
-                                            <div class="flex items-center gap-2"> 
+                                                <div class="flex items-center gap-2">
+                                                <img src="/image/attribute/Icon_Attribute_Critical_Damage.png" class="w-8 h-8">
+                                                <strong class="mr-2 "> <span >{{ data.criticalDamage }}%</span> <br>
+                                                </strong>
+                                            </div>
+                                            <div class="flex items-center gap-2">
                                                 <img src="/image/attribute/Icon_Attribute_Energy_Recharge.png" class="w-8 h-8">
-                                                <strong class="mr-2">{{data.er}} %</strong>
+                                                <strong class="mr-2 "> <span >{{ data.energyRecharge }}%</span> <br>
+                                                </strong>
                                             </div>
-                                            <div class="flex items-center gap-2" v-if="data.elemental_dmg > 0 && data.main_goblet =='Pyro DMG Bonus'"> 
-                                                <img  src="/image/attribute/Pyro.png" class="w-8 h-8">
-                                                <strong class="mr-2">{{data.elemental_dmg}} %</strong>
+                                            <div class="flex items-center gap-2" v-if="data.healingBonus > 0">
+                                                <img src="/image/attribute/Icon_Attribute_Healing_Bonus.png" class="w-8 h-8">
+                                                <strong class="mr-2 "> <span >{{ data.healingBonus }}%</span> <br>
+                                                </strong>
                                             </div>
-                                            <div class="flex items-center gap-2" v-else-if="data.elemental_dmg > 0 && data.main_goblet =='Hydro DMG Bonus'"> 
-                                                <img  src="/image/attribute/Hydro.png" class="w-8 h-8">
-                                                <strong class="mr-2">{{data.elemental_dmg}} %</strong>
+                                           <div class="flex items-center gap-2" v-if="character.element == 'Water' && data.hydroDamageBonus > 0">
+                                                <img src="/image/attribute/Hydro.png" class="w-8 h-8">
+                                                <strong class="mr-2 "> <span >{{ data.hydroDamageBonus }}%</span> <br>
+                                                </strong>
                                             </div>
-                                            <div class="flex items-center gap-2" v-else-if="data.elemental_dmg > 0 && data.main_goblet =='Anemo DMG Bonus'"> 
-                                                <img  src="/image/attribute/Anemo.png" class="w-8 h-8">
-                                                <strong class="mr-2">{{data.elemental_dmg}} %</strong>
+                                            <div class="flex items-center gap-2" v-if="character.element == 'Wind' && data.anemoDamageBonus > 0">
+                                                <img src="/image/attribute/Anemo.png" class="w-8 h-8">
+                                                <strong class="mr-2 "> <span >{{ data.anemoDamageBonus }}%</span> <br>
+                                                </strong>
+                                            </div> 
+                                            <div class="flex items-center gap-2" v-if="character.element == 'Fire' && data.pyroDamageBonus > 0">
+                                                <img src="/image/attribute/Pyro.png" class="w-8 h-8">
+                                                <strong class="mr-2 "> <span >{{ data.pyroDamageBonus }}%</span> <br>
+                                                </strong>
                                             </div>
-                                            <div class="flex items-center gap-2" v-else-if="data.elemental_dmg > 0 && data.main_goblet =='Electro DMG Bonus'"> 
-                                                <img  src="/image/attribute/Electro.png" class="w-8 h-8">
-                                                <strong class="mr-2">{{data.elemental_dmg}} %</strong>
+                                            <div class="flex items-center gap-2" v-if="character.element == 'Ice' && data.cryoDamageBonus > 0">
+                                                <img src="/image/attribute/Cryo.png" class="w-8 h-8">
+                                                <strong class="mr-2 "> <span >{{ data.cryoDamageBonus }}%</span> <br>
+                                                </strong>
                                             </div>
-                                            <div class="flex items-center gap-2" v-else-if="data.elemental_dmg > 0 && data.main_goblet =='Dendro DMG Bonus'"> 
-                                                <img  src="/image/attribute/Dendro.png" class="w-8 h-8">
-                                                <strong class="mr-2">{{data.elemental_dmg}} %</strong>
+                                            <div class="flex items-center gap-2" v-if="character.element == 'Electric' && data.electroDamageBonus > 0">
+                                                <img src="/image/attribute/Electro.png" class="w-8 h-8">
+                                                <strong class="mr-2 "> <span >{{ data.electroDamageBonus }}%</span> <br>
+                                                </strong>
                                             </div>
-                                            <div class="flex items-center gap-2" v-else-if="data.elemental_dmg > 0 && data.main_goblet =='Cryo DMG Bonus'"> 
-                                                <img  src="/image/attribute/Cryo.png" class="w-8 h-8">
-                                                <strong class="mr-2">{{data.elemental_dmg}} %</strong>
+                                            <div class="flex items-center gap-2" v-if="character.element == 'Rock' && data.geoDamageBonus > 0">
+                                                <img src="/image/attribute/Geo.png" class="w-8 h-8">
+                                                <strong class="mr-2 "> <span >{{ data.geoDamageBonus }}%</span> <br>
+                                                </strong>
                                             </div>
-                                            <div class="flex items-center gap-2" v-else-if="data.elemental_dmg > 0 && data.main_goblet =='Geo DMG Bonus'"> 
-                                                <img  src="/image/attribute/Geo.png" class="w-8 h-8">
-                                                <strong class="mr-2">{{data.elemental_dmg}} %</strong>
-                                            </div>
-                                            <div class="flex items-center gap-2" v-else-if="elemental_dmg > 0 "> 
-                                                <img  :src="showElement()" class="w-8 h-8">
-                                                <strong class="flex-1 w-64" v-if="character.element == 'Geo'">Geo DMG Bonus</strong>
-                                                <strong class="flex-1 w-64" v-else-if="character.element == 'Cryo'">Cryo DMG Bonus</strong>
-                                                <strong class="flex-1 w-64" v-else-if="character.element == 'Dendro'">Dendro DMG Bonus</strong>
-                                                <strong class="flex-1 w-64" v-else-if="character.element == 'Electro'">Electro DMG Bonus</strong>
-                                                <strong class="flex-1 w-64" v-else-if="character.element == 'Anemo'">Anemo DMG Bonus</strong>
-                                                <strong class="flex-1 w-64" v-else-if="character.element == 'Hydro'">Hydro DMG Bonus</strong>
-                                                <strong class="flex-1 w-64" v-else-if="character.element == 'Pyro'">Pyro DMG Bonus</strong>
-                                                <strong class="mr-2">{{data.elemental_dmg}} %</strong>
-                                            </div>
-                                            <div class="flex items-center gap-2" v-if="data.physical_dmg > 0"> 
+                                            <div class="flex items-center gap-2" v-if="data.physicalDamageBonus > 0">
                                                 <img src="/image/attribute/Icon_Attribute_Physical2.png" class="w-8 h-8">
-                                                <strong class="flex-1 w-64">Physical DMG Bonus</strong>
-                                                <strong class="mr-2">{{data.physical_dmg}} %</strong>
+                                                <strong class="mr-2 "> <span >{{ data.physicalDamageBonus }}%</span> <br>
+                                                </strong>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-white">
@@ -191,18 +186,6 @@ export default {
         build: Object,
         filters: Object,
         search_url: Object,
-        artifacts: {
-			type: Object,
-			 default(rawProps) {
-				return GenshinDb.artifacts('names', { matchCategories: true });
-			    }
-            },
-        weapons: {
-			type: Object,
-			 default(rawProps) {
-				return GenshinDb.weapons('names', { matchCategories: true });
-			    }
-            },
     },
     data() {
         return{
@@ -220,18 +203,6 @@ export default {
                 }, 150),
             },
         },
-    methods: {
-     api(data){
-            const i = data.set4.name;
-            const a = data.weapon.name;
-            const artifact = GenshinDb.artifacts(i);
-            const weapon = GenshinDb.weapons(a);
-            const weaponStats = GenshinDb.weapons(a).stats(90);
-            localStorage.setItem('artifact', JSON.stringify(artifact));
-            localStorage.setItem('weapon', JSON.stringify(weapon));
-            localStorage.setItem('weaponStats', JSON.stringify(weaponStats));
-        },
-    },
 }
 
 

@@ -76,10 +76,10 @@ export default {
         setup(props){
             const form = useForm({
                 id:props.weapon.id,
-                name: '',
+                name: props.weapon.name,
                 icon: props.weapon.icon,
-                rarity: props.weapon.rankLevel,
-                weaponType: props.weapon.weaponType,
+                rarity: props.weapon.rank,
+                weaponType: props.weapon.type,
             });
             return {form};
         },

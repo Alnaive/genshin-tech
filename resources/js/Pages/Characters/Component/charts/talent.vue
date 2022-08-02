@@ -9,17 +9,27 @@ export default {
      components:{
         apexcharts: VueApexCharts,
     },
-    props:['t1Label','t1'],
+    props:['normalAttack','elementalSkill', 'elementalBurst', 'title'],
     data: function(){
         return{
-        series: [{
-            name: 'Total',
-            data: this.t1,
-          }],
+        series: [
+          {
+              name: "Normal Attack",
+              data: this.normalAttack
+          },
+          {
+              name: "Elemental Skill",
+              data: this.elementalSkill
+          },
+          {
+              name: "Elemental Burst",
+              data: this.elementalBurst
+          }
+          ],
           chartOptions: {
             chart: {
               height: 350,
-              type: 'area',
+              type: 'line',
               zoom: {
                 enabled: false
               }
@@ -28,40 +38,57 @@ export default {
               enabled: false
             },
             stroke: {
-              curve: 'smooth'
+              curve: 'straight'
             },
             title: {
-              text: 'Normal Attack Charts',
+              text: this.title + ' Talent Distribution',
               align: 'left',
-              style: {
-                fontSize:  '14px',
-                fontWeight:  'bold',
-                color:  '#22c55e'
-                },
+               style: {
+                    fontSize:  '14px',
+                    fontWeight:  'bold',
+                    color: '#9ca3af'
+                  },
             },
-            colors:['#22c55e'],
+            grid: {
+              row: {
+                colors: ['transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+              },
+            },
             xaxis: {
-              type: 'category',
-              categories: this.t1Label,
+              categories: [0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
               labels: {
                     show: true,
                     style: {
-                    colors: '#22c55e',
-                    fontSize: '12px'
+                    colors: '#9ca3af',
+                    fontSize: '12px',
+                    fontWeight:  'bold',
                     },
                 }
             },
-            yaxis: {
-              opposite: true,
-              labels: {
-                    show: true,
-                    style: {
-                    colors: '#22c55e',
-                    fontSize: '12px'
-                    },
+            yaxis: [
+              {
+                axisTicks: {
+                  show: true,
+                },
+                labels: {
+                  style: {
+                    fontWeight:  'bold',
+                    colors: '#9ca3af',
+                  }
+                },
+                tooltip: {
+                  enabled: true,
+                        fillSeriesColor: true,
+                              theme: true,
+                  style: {
+                    fontSize:  '14px',
+                    fontWeight:  'bold',
+                    color: '#9ca3af'
+                  },
                 }
-            },
-            
+              },
+            ],
           },
         }
     }
@@ -69,6 +96,6 @@ export default {
 </script>
 <style>
     .apexcharts-legend-text{
-        color: #22c55e !important;
+        color: #9ca3af !important;
     }
 </style>

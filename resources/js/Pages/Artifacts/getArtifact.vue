@@ -7,7 +7,7 @@
         <template #header>
             <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <h2 class="text-xl font-semibold leading-tight space-y-4">
-                    Get Artifact API {{param}}
+                    Get Artifact API 
                 </h2><br>
             </div>
             <div class="card bg-white rounded-md shadow-md dark:bg-dark-eval-1 p-5">
@@ -60,9 +60,11 @@ export default {
         },
         setup(props){
             const form = useForm({
-                id: props.artifact.setId,
-                name: '',
-                icon: props.artifact.setIcon,
+                id: props.artifact.id,
+                name: props.artifact.name,
+                icon: props.artifact.icon,
+                rarity: props.artifact.levelList,
+                affixList: props.artifact.affixList,
             });
            
             return {form,};

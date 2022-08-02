@@ -1,387 +1,373 @@
 <template>
-    <div v-for="weapon in weapons" :key="weapon.id" class="avatar absolute left-2 top-20 indicator">
-        <div v-if="weapon_id == null" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bgRarity() + ')', backgroundSize:'contain' }">
-        </div>
-        <div v-else-if="weapon.id == weapon_id && weapon.rarity == '5'" @change="$emit('update:weapon_id', $event.target.value)"  class="mb-8 rounded-btn w-12 h-12 " 
-        :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
+<!-- <Equip :uid="uid" ></Equip> -->
+    <div class="avatar absolute left-2 top-20 indicator">
+        <div v-if="build.equipList[5].flat.rankLevel == 5" class="mb-8 rounded-btn w-12 h-12 " :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }" >
             <div class="indicator-item avatar">
-                <div v-if="weapon.id == weapon_id && weapon.rarity == '5'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
-                    {{refinement}}
+                <div class="text-center rounded-btn w-6 h-6 font-bold text-white" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
+                    <span v-if="Object.values(build.equipList[5].weapon.affixMap) == 0">1</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 1">2</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 2">3</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 3">4</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 4">5</span>
                 </div>
             </div> 
-            <img :src="weapon.icon" >
+            <img v-if="build.equipList[5].weapon.promoteLevel > 1" 
+            :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${build.equipList[5].flat.icon}_Awaken.png`">
+            <img v-else :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${build.equipList[5].flat.icon}.png`">
         </div>
-         <div v-else-if="weapon.id == weapon_id && weapon.rarity == '4'" @change="$emit('update:weapon_id', $event.target.value)"  class="mb-8 rounded-btn w-12 h-12 " 
-        :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
+        <div v-else-if="build.equipList[5].flat.rankLevel == 4" class="mb-8 rounded-btn w-12 h-12 " :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }" >
             <div class="indicator-item avatar">
-                <div v-if="weapon.id == weapon_id && weapon.rarity == '4'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
-                    {{refinement}}
+                <div class="text-center rounded-btn w-6 h-6 font-bold text-white" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
+                    <span v-if="Object.values(build.equipList[5].weapon.affixMap) == 0">1</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 1">2</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 2">3</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 3">4</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 4">5</span>
                 </div>
             </div> 
-            <img :src="weapon.icon" >
+            <img v-if="build.equipList[5].weapon.promoteLevel > 1" 
+            :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${build.equipList[5].flat.icon}_Awaken.png`">
+            <img v-else :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${build.equipList[5].flat.icon}.png`">
         </div>
-         <div v-else-if="weapon.id == weapon_id && weapon.rarity == '3'" @change="$emit('update:weapon_id', $event.target.value)"  class="mb-8 rounded-btn w-12 h-12 " 
-        :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
+        <div v-else-if="build.equipList[5].flat.rankLevel == 3" class="mb-8 rounded-btn w-12 h-12 " :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }" >
             <div class="indicator-item avatar">
-                <div v-if="weapon.id == weapon_id && weapon.rarity == '3'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
-                    {{refinement}}
+                <div class="text-center rounded-btn w-6 h-6 font-bold text-white" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
+                    <span v-if="Object.values(build.equipList[5].weapon.affixMap) == 0">1</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 1">2</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 2">3</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 3">4</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 4">5</span>
                 </div>
             </div> 
-            <img :src="weapon.icon" >
+            <img v-if="build.equipList[5].weapon.promoteLevel > 1" 
+            :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${build.equipList[5].flat.icon}_Awaken.png`">
+            <img v-else :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${build.equipList[5].flat.icon}.png`">
         </div>
-         <div v-else-if="weapon.id == weapon_id && weapon.rarity == '2'" @change="$emit('update:weapon_id', $event.target.value)"  class="mb-8 rounded-btn w-12 h-12 " 
-        :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
+        <div v-else-if="build.equipList[5].flat.rankLevel == 2" class="mb-8 rounded-btn w-12 h-12 " :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }" >
             <div class="indicator-item avatar">
-                <div v-if="weapon.id == weapon_id && weapon.rarity == '2'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
-                    {{refinement}}
+                <div class="text-center rounded-btn w-6 h-6 font-bold text-white" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
+                    <span v-if="Object.values(build.equipList[5].weapon.affixMap) == 0">1</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 1">2</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 2">3</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 3">4</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 4">5</span>
                 </div>
             </div> 
-            <img :src="weapon.icon" >
+            <img v-if="build.equipList[5].weapon.promoteLevel > 1" 
+            :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${build.equipList[5].flat.icon}_Awaken.png`">
+            <img v-else :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${build.equipList[5].flat.icon}.png`">
         </div>
-         <div v-else-if="weapon.id == weapon_id && weapon.rarity == '1'" @change="$emit('update:weapon_id', $event.target.value)"  class="mb-8 rounded-btn w-12 h-12 " 
-        :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
+        <div v-else-if="build.equipList[5].flat.rankLevel == 1" class="mb-8 rounded-btn w-12 h-12 " :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }" >
             <div class="indicator-item avatar">
-                <div v-if="weapon.id == weapon_id && weapon.rarity == '1'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
-                    {{refinement}}
+                <div class="text-center rounded-btn w-6 h-6 font-bold text-white" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
+                    <span v-if="Object.values(build.equipList[5].weapon.affixMap) == 0">1</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 1">2</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 2">3</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 3">4</span>
+                    <span v-else-if="Object.values(build.equipList[5].weapon.affixMap) == 4">5</span>
                 </div>
             </div> 
-            <img :src="weapon.icon" >
+            <img v-if="build.equipList[5].weapon.promoteLevel > 1" 
+            :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${build.equipList[5].flat.icon}_Awaken.png`">
+            <img v-else :src=" `https://res.cloudinary.com/genshin/image/upload/sprites/${build.equipList[5].flat.icon}.png`">
         </div>
     </div>
-    <div v-for="artifact in artPcs" :key="artifact.id" class="avatar absolute left-2 top-36">
-        <div v-if="flower_id == null" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bgRarity() + ')', backgroundSize:'contain' }">
-        </div>
-        <div v-else-if="artifact.id == flower_id && artifact.rarity == '5'" @change="$emit('update:flower_id', $event.target.value)" class="mb-8 rounded-btn w-12 h-12" 
+    <div  class="avatar absolute left-2 top-36">
+        <div v-if="build.equipList[0].flat.rankLevel == 5" class="mb-8 rounded-btn w-12 h-12" 
         :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[0].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == flower_id && artifact.rarity == '4'" @change="$emit('update:flower_id', $event.target.value)" class="mb-8 rounded-btn w-12 h-12" 
+        <div v-else-if="build.equipList[0].flat.rankLevel == 4" class="mb-8 rounded-btn w-12 h-12" 
         :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[0].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == flower_id && artifact.rarity == '3'" @change="$emit('update:flower_id', $event.target.value)" class="mb-8 rounded-btn w-12 h-12" 
+        <div v-else-if="build.equipList[0].flat.rankLevel == 3" class="mb-8 rounded-btn w-12 h-12" 
         :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[0].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == flower_id && artifact.rarity == '2'" @change="$emit('update:flower_id', $event.target.value)" class="mb-8 rounded-btn w-12 h-12" 
+        <div v-else-if="build.equipList[0].flat.rankLevel == 2" class="mb-8 rounded-btn w-12 h-12" 
         :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[0].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == flower_id && artifact.rarity == '1'" @change="$emit('update:flower_id', $event.target.value)" class="mb-8 rounded-btn w-12 h-12" 
+        <div v-else-if="build.equipList[0].flat.rankLevel == 1" class="mb-8 rounded-btn w-12 h-12" 
         :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[0].flat.icon}.png`">
         </div>
     </div>
-    <div v-for="artifact in artPcs" :key="artifact.id"  class="avatar absolute left-2 top-52">
-            <div v-if="plume_id == null" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bgRarity() + ')', backgroundSize:'contain' }">
-        </div>
-        <div v-else-if="artifact.id == plume_id && artifact.rarity == '5'" class="mb-8 rounded-btn w-12 h-12" 
+    <div  class="avatar absolute left-2 top-52">
+        <div v-if="build.equipList[1].flat.rankLevel == 5" class="mb-8 rounded-btn w-12 h-12" 
         :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[1].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == plume_id && artifact.rarity == '4'" class="mb-8 rounded-btn w-12 h-12" 
+        <div v-else-if="build.equipList[1].flat.rankLevel == 4" class="mb-8 rounded-btn w-12 h-12" 
         :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[1].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == plume_id && artifact.rarity == '3'" class="mb-8 rounded-btn w-12 h-12" 
+        <div v-else-if="build.equipList[1].flat.rankLevel == 3" class="mb-8 rounded-btn w-12 h-12" 
         :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[1].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == plume_id && artifact.rarity == '2'" class="mb-8 rounded-btn w-12 h-12" 
+        <div v-else-if="build.equipList[1].flat.rankLevel == 2" class="mb-8 rounded-btn w-12 h-12" 
         :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[1].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == plume_id && artifact.rarity == '1'" class="mb-8 rounded-btn w-12 h-12" 
+        <div v-else-if="build.equipList[1].flat.rankLevel == 1" class="mb-8 rounded-btn w-12 h-12" 
         :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[1].flat.icon}.png`">
         </div>
     </div>
-    <div v-for="artifact in artPcs" :key="artifact.id" class="avatar absolute left-16 top-28 indicator">
-            <div v-if="sand_id == null" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bgRarity() + ')', backgroundSize:'contain' }">
-        </div>
-        <div v-else-if="artifact.id == sand_id && artifact.rarity == '5'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
-         <div class="indicator-item avatar">
-                <div v-if="artifact.id == sand_id && artifact.rarity == '5'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_sand == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_sand == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_sand == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_sand == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_sand == 'Energy Recharge'" src="/image/attribute/Icon_Attribute_Energy_Recharge.png">    
+    <div class="avatar absolute left-16 top-28 indicator">
+        <div v-if="build.equipList[2].flat.rankLevel == 5" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CHARGE_EFFICIENCY'" src="/image/attribute/Icon_Attribute_Energy_Recharge.png">
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[2].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == sand_id && artifact.rarity == '4'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
-         <div class="indicator-item avatar">
-                <div v-if="artifact.id == sand_id && artifact.rarity == '4'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_sand == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_sand == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_sand == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_sand == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_sand == 'Energy Recharge'" src="/image/attribute/Icon_Attribute_Energy_Recharge.png">    
+        <div v-else-if="build.equipList[2].flat.rankLevel == 4" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CHARGE_EFFICIENCY'" src="/image/attribute/Icon_Attribute_Energy_Recharge.png">
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[2].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == sand_id && artifact.rarity == '3'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
-         <div class="indicator-item avatar">
-                <div v-if="artifact.id == sand_id && artifact.rarity == '3'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_sand == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_sand == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_sand == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_sand == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_sand == 'Energy Recharge'" src="/image/attribute/Icon_Attribute_Energy_Recharge.png">    
+        <div v-else-if="build.equipList[2].flat.rankLevel == 3" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CHARGE_EFFICIENCY'" src="/image/attribute/Icon_Attribute_Energy_Recharge.png">
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[2].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == sand_id && artifact.rarity == '2'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
-         <div class="indicator-item avatar">
-                <div v-if="artifact.id == sand_id && artifact.rarity == '2'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_sand == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_sand == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_sand == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_sand == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_sand == 'Energy Recharge'" src="/image/attribute/Icon_Attribute_Energy_Recharge.png">    
+        <div v-else-if="build.equipList[2].flat.rankLevel == 2" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CHARGE_EFFICIENCY'" src="/image/attribute/Icon_Attribute_Energy_Recharge.png">
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[2].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == sand_id && artifact.rarity == '1'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
-            <div class="indicator-item avatar">
-                <div v-if="artifact.id == sand_id && artifact.rarity == '1'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_sand == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_sand == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_sand == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_sand == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_sand == 'Energy Recharge'" src="/image/attribute/Icon_Attribute_Energy_Recharge.png">    
+        <div v-else-if="build.equipList[2].flat.rankLevel == 1" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
+                    <img v-else-if="build.equipList[2].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CHARGE_EFFICIENCY'" src="/image/attribute/Icon_Attribute_Energy_Recharge.png">
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[2].flat.icon}.png`">
         </div>
     </div>
-    <div v-for="artifact in artPcs" :key="artifact.id" class="avatar absolute left-16 top-44 indicator">
-        <div v-if="goblet_id == null" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bgRarity() + ')', backgroundSize:'contain' }">
-        </div>
-        <div v-else-if="artifact.id == goblet_id && artifact.rarity == '5'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
-            <div class="indicator-item avatar">
-                <div v-if="artifact.id == goblet_id && artifact.rarity == '5'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_goblet == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_goblet == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_goblet == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_goblet == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_goblet == 'Physical DMG Bonus'" src="/image/attribute/Icon_Attribute_Physical2.png">
-                    <img v-else-if="main_goblet == 'Anemo DMG Bonus'" src="/image/attribute/Anemo.png">
-                    <img v-else-if="main_goblet == 'Pyro DMG Bonus'" src="/image/attribute/Pyro.png">
-                    <img v-else-if="main_goblet == 'Hydro DMG Bonus'" src="/image/attribute/Hydro.png">
-                    <img v-else-if="main_goblet == 'Electro DMG Bonus'" src="/image/attribute/Electro.png">
-                    <img v-else-if="main_goblet == 'Dendro DMG Bonus'" src="/image/attribute/Dendro.png">
-                    <img v-else-if="main_goblet == 'Cryo DMG Bonus'" src="/image/attribute/Cryo.png">
-                    <img v-else-if="main_goblet == 'Geo DMG Bonus'" src="/image/attribute/Geo.png">
+    <div class="avatar absolute left-16 top-44 indicator">
+        <div v-if="build.equipList[3].flat.rankLevel == 5" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/attribute/Icon_Attribute_Physical2.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WIND_ADD_HURT'" src="/image/attribute/Anemo.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_FIRE_ADD_HURT'" src="/image/attribute/Pyro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WATER_ADD_HURT'" src="/image/attribute/Hydro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEC_ADD_HURT'" src="/image/attribute/Electro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ICE_ADD_HURT'" src="/image/attribute/Cryo.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ROCK_ADD_HURT'" src="/image/attribute/Geo.png" >
+                    <img v-else src="/image/attribute/Dendro.png" >                   
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[3].flat.icon}.png`">
         </div>
-         <div v-else-if="artifact.id == goblet_id && artifact.rarity == '4'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
-            <div class="indicator-item avatar">
-                <div v-if="artifact.id == goblet_id && artifact.rarity == '4'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_goblet == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_goblet == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_goblet == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_goblet == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_goblet == 'Physical DMG Bonus'" src="/image/attribute/Icon_Attribute_Physical2.png">
-                    <img v-else-if="main_goblet == 'Anemo DMG Bonus'" src="/image/attribute/Anemo.png">
-                    <img v-else-if="main_goblet == 'Pyro DMG Bonus'" src="/image/attribute/Pyro.png">
-                    <img v-else-if="main_goblet == 'Hydro DMG Bonus'" src="/image/attribute/Hydro.png">
-                    <img v-else-if="main_goblet == 'Electro DMG Bonus'" src="/image/attribute/Electro.png">
-                    <img v-else-if="main_goblet == 'Dendro DMG Bonus'" src="/image/attribute/Dendro.png">
-                    <img v-else-if="main_goblet == 'Cryo DMG Bonus'" src="/image/attribute/Cryo.png">
-                    <img v-else-if="main_goblet == 'Geo DMG Bonus'" src="/image/attribute/Geo.png">
+        <div v-else-if="build.equipList[3].flat.rankLevel == 4" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/attribute/Icon_Attribute_Physical2.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WIND_ADD_HURT'" src="/image/attribute/Anemo.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_FIRE_ADD_HURT'" src="/image/attribute/Pyro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WATER_ADD_HURT'" src="/image/attribute/Hydro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEC_ADD_HURT'" src="/image/attribute/Electro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ICE_ADD_HURT'" src="/image/attribute/Cryo.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ROCK_ADD_HURT'" src="/image/attribute/Geo.png" >
+                    <img v-else src="/image/attribute/Dendro.png" >                   
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[3].flat.icon}.png`">
         </div>
-         <div v-else-if="artifact.id == goblet_id && artifact.rarity == '3'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
-            <div class="indicator-item avatar">
-                <div v-if="artifact.id == goblet_id && artifact.rarity == '3'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_goblet == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_goblet == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_goblet == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_goblet == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_goblet == 'Physical DMG Bonus'" src="/image/attribute/Icon_Attribute_Physical2.png">
-                    <img v-else-if="main_goblet == 'Anemo DMG Bonus'" src="/image/attribute/Anemo.png">
-                    <img v-else-if="main_goblet == 'Pyro DMG Bonus'" src="/image/attribute/Pyro.png">
-                    <img v-else-if="main_goblet == 'Hydro DMG Bonus'" src="/image/attribute/Hydro.png">
-                    <img v-else-if="main_goblet == 'Electro DMG Bonus'" src="/image/attribute/Electro.png">
-                    <img v-else-if="main_goblet == 'Dendro DMG Bonus'" src="/image/attribute/Dendro.png">
-                    <img v-else-if="main_goblet == 'Cryo DMG Bonus'" src="/image/attribute/Cryo.png">
-                    <img v-else-if="main_goblet == 'Geo DMG Bonus'" src="/image/attribute/Geo.png">
+        <div v-else-if="build.equipList[3].flat.rankLevel == 3" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/attribute/Icon_Attribute_Physical2.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WIND_ADD_HURT'" src="/image/attribute/Anemo.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_FIRE_ADD_HURT'" src="/image/attribute/Pyro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WATER_ADD_HURT'" src="/image/attribute/Hydro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEC_ADD_HURT'" src="/image/attribute/Electro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ICE_ADD_HURT'" src="/image/attribute/Cryo.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ROCK_ADD_HURT'" src="/image/attribute/Geo.png" >
+                    <img v-else src="/image/attribute/Dendro.png" >                   
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[3].flat.icon}.png`">
         </div>
-         <div v-else-if="artifact.id == goblet_id && artifact.rarity == '2'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
-            <div class="indicator-item avatar">
-                <div v-if="artifact.id == goblet_id && artifact.rarity == '2'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_goblet == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_goblet == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_goblet == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_goblet == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_goblet == 'Physical DMG Bonus'" src="/image/attribute/Icon_Attribute_Physical2.png">
-                    <img v-else-if="main_goblet == 'Anemo DMG Bonus'" src="/image/attribute/Anemo.png">
-                    <img v-else-if="main_goblet == 'Pyro DMG Bonus'" src="/image/attribute/Pyro.png">
-                    <img v-else-if="main_goblet == 'Hydro DMG Bonus'" src="/image/attribute/Hydro.png">
-                    <img v-else-if="main_goblet == 'Electro DMG Bonus'" src="/image/attribute/Electro.png">
-                    <img v-else-if="main_goblet == 'Dendro DMG Bonus'" src="/image/attribute/Dendro.png">
-                    <img v-else-if="main_goblet == 'Cryo DMG Bonus'" src="/image/attribute/Cryo.png">
-                    <img v-else-if="main_goblet == 'Geo DMG Bonus'" src="/image/attribute/Geo.png">
+        <div v-else-if="build.equipList[3].flat.rankLevel == 2" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/attribute/Icon_Attribute_Physical2.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WIND_ADD_HURT'" src="/image/attribute/Anemo.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_FIRE_ADD_HURT'" src="/image/attribute/Pyro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WATER_ADD_HURT'" src="/image/attribute/Hydro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEC_ADD_HURT'" src="/image/attribute/Electro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ICE_ADD_HURT'" src="/image/attribute/Cryo.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ROCK_ADD_HURT'" src="/image/attribute/Geo.png" >
+                    <img v-else src="/image/attribute/Dendro.png" >                   
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[3].flat.icon}.png`">
         </div>
-         <div v-else-if="artifact.id == goblet_id && artifact.rarity == '1'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
-            <div class="indicator-item avatar">
-                <div v-if="artifact.id == goblet_id && artifact.rarity == '1'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_goblet == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_goblet == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_goblet == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_goblet == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_goblet == 'Physical DMG Bonus'" src="/image/attribute/Icon_Attribute_Physical2.png">
-                    <img v-else-if="main_goblet == 'Anemo DMG Bonus'" src="/image/attribute/Anemo.png">
-                    <img v-else-if="main_goblet == 'Pyro DMG Bonus'" src="/image/attribute/Pyro.png">
-                    <img v-else-if="main_goblet == 'Hydro DMG Bonus'" src="/image/attribute/Hydro.png">
-                    <img v-else-if="main_goblet == 'Electro DMG Bonus'" src="/image/attribute/Electro.png">
-                    <img v-else-if="main_goblet == 'Dendro DMG Bonus'" src="/image/attribute/Dendro.png">
-                    <img v-else-if="main_goblet == 'Cryo DMG Bonus'" src="/image/attribute/Cryo.png">
-                    <img v-else-if="main_goblet == 'Geo DMG Bonus'" src="/image/attribute/Geo.png">
+        <div v-else-if="build.equipList[3].flat.rankLevel == 1" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/attribute/Icon_Attribute_Physical2.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WIND_ADD_HURT'" src="/image/attribute/Anemo.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_FIRE_ADD_HURT'" src="/image/attribute/Pyro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WATER_ADD_HURT'" src="/image/attribute/Hydro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEC_ADD_HURT'" src="/image/attribute/Electro.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ICE_ADD_HURT'" src="/image/attribute/Cryo.png" >
+                    <img v-else-if="build.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ROCK_ADD_HURT'" src="/image/attribute/Geo.png" >
+                    <img v-else src="/image/attribute/Dendro.png" >                   
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[3].flat.icon}.png`">
         </div>
     </div>
-    <div v-for="artifact in artPcs" :key="artifact.id" class="avatar absolute left-16 top-60 indicator">
-        <div v-if="circlet_id == null" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bgRarity() + ')', backgroundSize:'contain' }">
-        </div>
-        <div v-else-if="artifact.id == circlet_id && artifact.rarity == '5'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
-            <div class="indicator-item avatar">
-                <div v-if="artifact.id == circlet_id && artifact.rarity == '5'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_circlet == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_circlet == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_circlet == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_circlet == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_circlet == 'CRIT Rate'" src="/image/attribute/Icon_Attribute_Critical_Hit.png">
-                    <img v-else-if="main_circlet == 'CRIT DMG'" src="/image/attribute/Icon_Attribute_Critical_Hit.png">
-                    <img v-else-if="main_circlet == 'Healing Bonus'" src="/image/attribute/Icon_Attribute_Healing.png">
+    <div :key="index" class="avatar absolute left-16 top-60 indicator">
+        <div v-if="build.equipList[4].flat.rankLevel == 5" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL'" src="/image/svg/FIGHT_PROP_CRITICAL.svg" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL_HURT'" src="/image/attribute/Icon_Attribute_Critical_Damage.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HEAL_ADD'" src="/image/attribute/Icon_Attribute_Healing.png" >
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[4].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == circlet_id && artifact.rarity == '4'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
-            <div class="indicator-item avatar">
-                <div v-if="artifact.id == circlet_id && artifact.rarity == '4'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_circlet == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_circlet == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_circlet == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_circlet == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_circlet == 'CRIT Rate'" src="/image/attribute/Icon_Attribute_Critical_Hit.png">
-                    <img v-else-if="main_circlet == 'CRIT DMG'" src="/image/attribute/Icon_Attribute_Critical_Hit.png">
-                    <img v-else-if="main_circlet == 'Healing Bonus'" src="/image/attribute/Icon_Attribute_Healing.png">
+            <div v-else-if="build.equipList[4].flat.rankLevel == 4" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL'" src="/image/svg/FIGHT_PROP_CRITICAL.svg" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL_HURT'" src="/image/attribute/Icon_Attribute_Critical_Damage.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HEAL_ADD'" src="/image/attribute/Icon_Attribute_Healing.png" >
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[4].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == circlet_id && artifact.rarity == '3'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
-            <div class="indicator-item avatar">
-                <div v-if="artifact.id == circlet_id && artifact.rarity == '3'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_circlet == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_circlet == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_circlet == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_circlet == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_circlet == 'CRIT Rate'" src="/image/attribute/Icon_Attribute_Critical_Hit.png">
-                    <img v-else-if="main_circlet == 'CRIT DMG'" src="/image/attribute/Icon_Attribute_Critical_Hit.png">
-                    <img v-else-if="main_circlet == 'Healing Bonus'" src="/image/attribute/Icon_Attribute_Healing.png">
+        <div v-else-if="build.equipList[4].flat.rankLevel == 3" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL'" src="/image/svg/FIGHT_PROP_CRITICAL.svg" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL_HURT'" src="/image/attribute/Icon_Attribute_Critical_Damage.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HEAL_ADD'" src="/image/attribute/Icon_Attribute_Healing.png" >
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[4].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == circlet_id && artifact.rarity == '2'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
-            <div class="indicator-item avatar">
-                <div v-if="artifact.id == circlet_id && artifact.rarity == '2'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_circlet == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_circlet == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_circlet == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_circlet == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_circlet == 'CRIT Rate'" src="/image/attribute/Icon_Attribute_Critical_Hit.png">
-                    <img v-else-if="main_circlet == 'CRIT DMG'" src="/image/attribute/Icon_Attribute_Critical_Hit.png">
-                    <img v-else-if="main_circlet == 'Healing Bonus'" src="/image/attribute/Icon_Attribute_Healing.png">
+        <div v-else-if="build.equipList[4].flat.rankLevel == 2" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL'" src="/image/svg/FIGHT_PROP_CRITICAL.svg" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL_HURT'" src="/image/attribute/Icon_Attribute_Critical_Damage.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HEAL_ADD'" src="/image/attribute/Icon_Attribute_Healing.png" >
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[4].flat.icon}.png`">
         </div>
-        <div v-else-if="artifact.id == circlet_id && artifact.rarity == '1'" class="mb-8 rounded-btn w-12 h-12" 
-        :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
-            <div class="indicator-item avatar">
-                <div v-if="artifact.id == circlet_id && artifact.rarity == '1'"  class="text-center rounded-btn w-6 h-6" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
-                    <img v-if="main_circlet == 'ATK'" src="/image/attribute/Icon_Attribute_Attack.png">
-                    <img v-else-if="main_circlet == 'DEF'" src="/image/attribute/Icon_Attribute_Defense.png">
-                    <img v-else-if="main_circlet == 'HP'" src="/image/attribute/Icon_Attribute_Health.png">
-                    <img v-else-if="main_circlet == 'Elemental Mastery'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png">
-                    <img v-else-if="main_circlet == 'CRIT Rate'" src="/image/attribute/Icon_Attribute_Critical_Hit.png">
-                    <img v-else-if="main_circlet == 'CRIT DMG'" src="/image/attribute/Icon_Attribute_Critical_Hit.png">
-                    <img v-else-if="main_circlet == 'Healing Bonus'" src="/image/attribute/Icon_Attribute_Healing.png">
+        <div v-else-if="build.equipList[4].flat.rankLevel == 1" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
+            <div class="indicator-item avatar" >
+                <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
+                    <img v-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL'" src="/image/svg/FIGHT_PROP_CRITICAL.svg" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL_HURT'" src="/image/attribute/Icon_Attribute_Critical_Damage.png" >
+                    <img v-else-if="build.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HEAL_ADD'" src="/image/attribute/Icon_Attribute_Healing.png" >
                 </div>
             </div>
-            <img :src="artifact.icon" >
+            <img  :src=" `https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[4].flat.icon}.png`">
         </div>
-    </div>
+    </div> 
+    <!-- end of equip -->
 </template>
 <script>
 export default {
-    props:['character','artPcs','weapons','weapon_id','refinement','flower_id','plume_id','sand_id','goblet_id','circlet_id','main_sand','main_goblet','main_circlet'],
+    props:['build'],
     methods: {
-         showIconWeapon() {
-                return "/storage/images/icon/weapon/";
-            },
-            showIconArtifact() {
-                return "/storage/images/icon/artifact/";
-            },
-            bgRarity(){
-                return "../image/rarity/Background_Item_5_Star.png"
-            },
             bg5(){
-                return "../image/rarity/Background_Item_5_Star.png"
+                return "../../image/rarity/Background_Item_5_Star.png"
             },
             bg4(){
-                return "../image/rarity/Background_Item_4_Star.png"
+                return "../../image/rarity/Background_Item_4_Star.png"
             },
             bg3(){
-                return "../image/rarity/Background_Item_3_Star.png"
+                return "../../image/rarity/Background_Item_3_Star.png"
             },
             bg2(){
-                return "../image/rarity/Background_Item_2_Star.png"
+                return "../../image/rarity/Background_Item_2_Star.png"
             },
             bg1(){
-                return "../image/rarity/Background_Item_1_Star.png"
+                return "../../image/rarity/Background_Item_1_Star.png"
             },
     },
-    computed:{
-         test(){
-                this.weapon_id
-            }
-    }
 }
 </script>

@@ -1,8 +1,8 @@
 <template>
     <div class="card glass w-[440px] h-[120px] card-side flex items-center space-x-4 p-2">
         <figure class="">
-        <img class="w-24 h-24"  v-if="sessionData.equipList[5].weapon.promoteLevel > 1" :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${sessionData.equipList[5].flat.icon}_Awaken.png`" alt="" srcset="">
-        <img class="w-24 h-24"  v-else :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${sessionData.equipList[5].flat.icon}.png`" alt="" srcset="">
+        <img class="w-24 h-24"  v-if="sessionData.equipList[5].weapon.promoteLevel > 1" :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${sessionData.equipList[5].flat.icon}_Awaken.png`" alt="" srcset="">
+        <img class="w-24 h-24"  v-else :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${sessionData.equipList[5].flat.icon}.png`" alt="" srcset="">
         <div class="absolute flex flex-row items-center mt-[88px]">
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>

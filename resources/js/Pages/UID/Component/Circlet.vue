@@ -18,10 +18,12 @@
             <h1 class="font-bold" v-else-if="sessionData.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HEAL_ADD	'">Healing Bonus</h1>
             <h1 class="font-bold" v-else-if="sessionData.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL'">CRIT RATE</h1>
             <h1 class="font-bold" v-else-if="sessionData.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL_HURT'">CRIT DMG</h1>
-            <pre class="text-xl" v-if="sessionData.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'">
-            {{sessionData.equipList[4].flat.reliquaryMainstat.statValue}}
-            </pre>
-            <pre v-else class="text-xl">{{sessionData.equipList[4].flat.reliquaryMainstat.statValue}}%</pre>
+           <div v-if="sessionData.equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'">
+                <pre class="text-xl">{{sessionData.equipList[4].flat.reliquaryMainstat.statValue}}</pre>
+            </div>
+            <div v-else>
+                <pre class="text-xl">{{sessionData.equipList[4].flat.reliquaryMainstat.statValue}}%</pre>
+            </div>
             <span class="badge"><pre>+{{sessionData.equipList[4].reliquary.level - 1}}</pre></span> 
         </div>
         <div class="">

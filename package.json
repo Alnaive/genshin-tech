@@ -38,6 +38,7 @@
     },
     "dependencies": {
         "apexcharts": "^3.32.0",
+        "chart.js": "^3.8.2",
         "crypto-browserify": "^3.12.0",
         "crypto-js": "^4.1.1",
         "daisyui": "^2.20.0",
@@ -52,6 +53,7 @@
         "stream": "^0.0.2",
         "sweetalert2": "^11.4.16",
         "vue-advanced-cropper": "^2.8.0",
+        "vue-chartjs": "^4.1.1",
         "vue-feather": "^2.0.0-rc.1",
         "vue-horizontal-scroll": "^0.2.4",
         "vue-number-format": "^1.2.0",

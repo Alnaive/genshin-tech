@@ -14,10 +14,10 @@
         </template>
 
         <div class="flex flex-wrap space-x-3 justify-center p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
-            <div class="avatar" v-for="(item, index) in weapons" :key="index">
+            <div class="avatar" v-for="(item, index) in weapons.data.items" :key="index">
                 <div class="w-24 rounded">
                     <Link :href="route('getWeaponApi')" class="transform hover:scale-105 duration-500 ease-in-out hover:green-500" >
-                    <img @click="weaponData(item)" :src="`https://enka.shinshin.moe/ui/${item.icon}.png`" alt="">
+                    <img @click="weaponData(item)" :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${item.icon}.png`" alt="">
                     </Link>
                 </div>
             </div>

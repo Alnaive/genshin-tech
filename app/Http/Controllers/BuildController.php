@@ -7,9 +7,6 @@ use Inertia\Inertia;
 use App\Models\Build;
 use App\Models\Character;
 use App\Models\Artifact;
-use App\Models\Pcs;
-use App\Models\Constellation;
-use App\Models\Talent;
 use App\Models\Weapon;
 
 use Illuminate\Support\Facades\Request;
@@ -28,11 +25,9 @@ class BuildController extends Controller
      */
     public function index()
     {
-        $query = Build::with('user','character','character.talent','character.constellation', 'party', 'set4','set2','flower','plume','sand','goblet','circlet','weapon')->where('status', 'publish');
+        $query = Build::with('character','weapon');
         if(request('search')){
-            $query->whereHas('user', function($q){
-                $q->where('name', 'LIKE', '%'.request('search').'%');
-            })
+            $query->where('uid', 'LIKE', '%'.request('search').'%')
             ->orWhereHas('character', function($q){
                 $q->where('name',  'LIKE', '%'.request('search').'%');
             });
@@ -40,7 +35,6 @@ class BuildController extends Controller
         return Inertia::render('Builds/index', [
             'filters' => Request::all('search'),
             'characters' => Character::all(),
-            'artifactPcs' => Pcs::all(),
             'weapons' => Weapon::all(),
             'builds' => $query->latest()->paginate(10)->withQueryString(),
         ]);
@@ -85,6 +79,9 @@ class BuildController extends Controller
             'sands' => $request->sands,
             'goblet' => $request->goblet,
             'circlet' => $request->circlet,
+            'normalAttack' => $request->normalAttack,
+            'elementalSkill' => $request->elementalSkill,
+            'elementalBurst' => $request->elementalBurst,
             'talent' => $request->talent,
             'talentExtraLv' => $request->talentExtraLv, 
             'hp' => $request->hp,
@@ -103,7 +100,7 @@ class BuildController extends Controller
             'cryoDamageBonus' => $request->cryoDamageBonus, 
             'geoDamageBonus' => $request->geoDamageBonus, 
             'physicalDamageBonus' => $request->physicalDamageBonus,
-            'status' => $request->status,
+            'serverId' => $request->serverId,
         ]);
         else
         $build = Build::create([
@@ -117,12 +114,14 @@ class BuildController extends Controller
             'refinement' => $request->refinement,
             'four_pcs_art' => $request->four_pcs_art, 
             'two_pcs_art' => $request->two_pcs_art,
-            // 'two_pcs_art' => (!empty($request->two_pcs_art)) ? $request->two_pcs_art : null,
             'one_pcs_art' => $request->one_pcs_art,
             'equipList' => $request->equipList,
             'sands' => $request->sands,
             'goblet' => $request->goblet,
             'circlet' => $request->circlet,
+            'normalAttack' => $request->normalAttack,
+            'elementalSkill' => $request->elementalSkill,
+            'elementalBurst' => $request->elementalBurst,
             'talent' => $request->talent,
             'talentExtraLv' => $request->talentExtraLv, 
             'hp' => $request->hp,
@@ -141,51 +140,9 @@ class BuildController extends Controller
             'cryoDamageBonus' => $request->cryoDamageBonus, 
             'geoDamageBonus' => $request->geoDamageBonus, 
             'physicalDamageBonus' => $request->physicalDamageBonus,
-            'status' => $request->status,
+            'serverId' => $request->serverId,
         ]);
-        // $build = Build::updateOrCreate(
-        //     ['uid' =>  $request->uid, 
-        //     'character_id' => $request->character_id,
-        //     'four_pcs_art' => $request->four_pcs_art, 
-        //     'two_pcs_art' => $request->two_pcs_art,
-        //     ],
-        //     [
-        //     'uid' => $request->uid, 
-        //     'nickname' => $request->nickname,
-        //     'character_id' => $request->character_id, 
-        //     'ascendsion' => $request->ascendsion, 
-        //     'level' => $request->level, 
-        //     'conste' => $request->conste,
-        //     'weapon_id' => $request->weapon_id,
-        //     'refinement' => $request->refinement,
-        //     'four_pcs_art' => $request->four_pcs_art, 
-        //     'two_pcs_art' => (!empty($request->two_pcs_art)) ? [$request->two_pcs_art, true] : null,
-        //     'one_pcs_art' => $request->one_pcs_art,
-        //     'equipList' => $request->equipList,
-        //     'sands' => $request->sands,
-        //     'goblet' => $request->goblet,
-        //     'circlet' => $request->circlet,
-        //     'talent' => $request->talent,
-        //     'talentExtraLv' => $request->talentExtraLv, 
-        //     'hp' => $request->hp,
-        //     'attack' => $request->attack, 
-        //     'defense' => $request->defense,
-        //     'elementalMastery' => $request->elementalMastery, 
-        //     'criticalRate' => $request->criticalRate,
-        //     'criticalDamage' => $request->criticalDamage,
-        //     'healingBonus' => $request->healingBonus,
-        //     'energyRecharge' => $request->energyRecharge,
-        //     'pyroDamageBonus' => $request->pyroDamageBonus,
-        //     'hydroDamageBonus' => $request->hydroDamageBonus,
-        //     'anemoDamageBonus' => $request->anemoDamageBonus,
-        //     'electroDamageBonus' => $request->electroDamageBonus,
-        //     'dendroDamageBonus' => $request->dendroDamageBonus,
-        //     'cryoDamageBonus' => $request->cryoDamageBonus, 
-        //     'geoDamageBonus' => $request->geoDamageBonus, 
-        //     'physicalDamageBonus' => $request->physicalDamageBonus,
-        //     'status' => $request->status,
-        //      ]
-        // );
+      
             return Redirect::route('showBuild', $build);
         
             // $data = $request->all();
@@ -205,17 +162,16 @@ class BuildController extends Controller
     public function seeBuild($slug)
     {
         $character = Character::where('slug',$slug)->first();
-        $build = Build::query()->with('character','weapon','set4','set2','likes')->where('status','publish');
+        $build = Build::join('characters', 'characters.id', 'builds.character_id')->with('character','weapon','likes')->where('slug', $slug);
         if(request('search')){
             $build->where('name', 'LIKE', '%'.request('search').'%')
-            ->orWhere('char_lv', 'like', '%'.request('search').'%')
-                ->orWhere('c_rate', 'like', '%'.request('search').'%')
-                ->orWhere('c_damage', 'like', '%'.request('search').'%')
-                ->orWhere('em', 'like', '%'.request('search').'%')
+            ->orWhere('level', 'like', '%'.request('search').'%')
+                ->orWhere('critRate', 'like', '%'.request('search').'%')
+                ->orWhere('critDamage', 'like', '%'.request('search').'%')
+                ->orWhere('elementalMastery', 'like', '%'.request('search').'%')
                 ->orWhere('defense', 'like', '%'.request('search').'%')
-                ->orWhere('name', 'like', '%'.request('search').'%');
+                ->orWhere('nickname', 'like', '%'.request('search').'%');
         }
-        $ipAddress = $_SERVER['REMOTE_ADDR'];
         return Inertia::render('Builds/build', [
             'filters' => Request::all('search'),
             'character' => $character,
@@ -226,10 +182,15 @@ class BuildController extends Controller
     public function showBuild( $id)
     {
     
-        $build = Build::with('character','weapon')->find($id);
+        $build = Build::with('character','weapon','likes')->withCount('likes','character')->find($id);
+        $ipAddress = $_SERVER['REMOTE_ADDR'];
+        $isLiked = $build->liked($ipAddress);
+        $totalLike = $build;
 
         return Inertia::render('Builds/showBuild', [
             'build' => $build,
+            'isLiked' => $isLiked,
+            'totalLike' => $totalLike,
         ]);
     }
 
@@ -241,69 +202,7 @@ class BuildController extends Controller
      */
     public function editBuild($id)
     {
-        $build = Build::with('character','character.constellation','character.talent')->find($id);
-        $ipAddress = $_SERVER['REMOTE_ADDR'];
-        if(auth::check()){
-            if(auth()->user()->id == $build->user_id ||  auth()->user()->role == 'admin'){
-                $weapon = Weapon::orderBy('name', 'asc')->get();
-                    foreach($weapon as $data){
-                        if($data->type == $build->character->type){
-                            $weapons[] = $data;
-                        }
-                    }
-                    $artifacts =  Artifact::with('pcs')->orderBy('paramRarity','desc')->orderBy('name','asc')->get();
-                    $artPcs =  Pcs::with('artifact')->orderBy('rarity','desc')->orderBy('name', 'asc')->get();
-                
-                    $flowers = Pcs::where('relictype', 'Flower of Life')->orderBy('rarity','desc')->orderBy('name','asc')->get();
-                    $plumes = Pcs::where('relictype', 'Plume of Death')->orderBy('rarity','desc')->orderBy('name','asc')->get();
-                    $sands = Pcs::where('relictype', 'Sands of Eon')->orderBy('rarity','desc')->orderBy('name','asc')->get();
-                    $goblets = Pcs::where('relictype', 'Goblet of Eonothem')->orderBy('rarity','desc')->orderBy('name','asc')->get();
-                    $circlets = Pcs::where('relictype', 'Circlet of Logos')->orderBy('rarity','desc')->orderBy('name','asc')->get();
-                    return Inertia::render('Builds/editBuild', [
-                        'build' => $build,
-                        'characters' => Character::orderBy('name', 'asc')->get(),
-                        'artifacts' => $artifacts,
-                        'artifactPcs' => $artPcs,
-                        'flowers' => $flowers,
-                        'plumes' => $plumes,
-                        'sands' => $sands,
-                        'goblets' => $goblets,
-                        'circlets' => $circlets,
-                        'weapons' => $weapons,
-                    ]); 
-            } else {
-                abort(403);
-            }
-        } elseif($build->ip == $ipAddress){
-            $weapon = Weapon::orderBy('name', 'asc')->get();
-                    foreach($weapon as $data){
-                        if($data->type == $build->character->type){
-                            $weapons[] = $data;
-                        }
-                    }
-                    $artifacts =  Artifact::with('pcs')->orderBy('paramRarity','desc')->orderBy('name','asc')->get();
-        $artPcs =  Pcs::with('artifact')->orderBy('rarity','desc')->orderBy('name', 'asc')->get();
-                
-                    $flowers = Pcs::where('relictype', 'Flower of Life')->orderBy('rarity','desc')->orderBy('name','asc')->get();
-                    $plumes = Pcs::where('relictype', 'Plume of Death')->orderBy('rarity','desc')->orderBy('name','asc')->get();
-                    $sands = Pcs::where('relictype', 'Sands of Eon')->orderBy('rarity','desc')->orderBy('name','asc')->get();
-                    $goblets = Pcs::where('relictype', 'Goblet of Eonothem')->orderBy('rarity','desc')->orderBy('name','asc')->get();
-                    $circlets = Pcs::where('relictype', 'Circlet of Logos')->orderBy('rarity','desc')->orderBy('name','asc')->get();
-                    return Inertia::render('Builds/editBuild', [
-                        'build' => $build,
-                        'characters' => Character::orderBy('name', 'asc')->get(),
-                        'artifacts' => $artifacts,
-                        'artifactPcs' => $artPcs,
-                        'flowers' => $flowers,
-                        'plumes' => $plumes,
-                        'sands' => $sands,
-                        'goblets' => $goblets,
-                        'circlets' => $circlets,
-                        'weapons' => $weapons,
-                    ]); 
-        } else {
-            abort(403);
-        }
+       
     }
 
     /**

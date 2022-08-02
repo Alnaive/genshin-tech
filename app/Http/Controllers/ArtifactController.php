@@ -51,7 +51,7 @@ class ArtifactController extends Controller
      */
     public function create()
     {
-        $artifactSet = json_decode(file_get_contents(public_path() . "/asset/ReliquarySetExcelConfigData.json"), true);
+        $artifactSet = json_decode(file_get_contents("https://api.ambr.top/v2/en/reliquary"), true);
         return Inertia::render('Artifacts/create', [
             'artifactSet' => $artifactSet,
         ]);
@@ -91,7 +91,7 @@ class ArtifactController extends Controller
         $data = $request->all();
         $data['slug'] = SlugService::createSlug(Artifact::class, 'slug',$request->name);
         $artifact = Artifact::create($data);
-        return Redirect::route('getPcsApi', $artifact);
+        return Redirect::route('Artifacts.index');
     }
     public function storePcs(Request $request)
     {

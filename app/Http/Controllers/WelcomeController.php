@@ -18,7 +18,10 @@ use Illuminate\Support\Facades\Http;
 class WelcomeController extends Controller
 {
     public function index() {
-        return Inertia::render('Welcome');
+        return Inertia::render('Welcome', [
+            'build' => Build::with('character','weapon')->inRandomOrder()->limit(1)->get(),
+            'totalBuild' => Build::count(),
+        ]);
     }
     public function uid($uid){
         $character = Character::all();

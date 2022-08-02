@@ -8,8 +8,7 @@
             <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div class="avatar">
                     <div class="w-24 rounded-full">
-                        <img @click="test(data)"  :src="`https://enka.shinshin.moe/ui/${character.SideIconName}.png`">
-                        {{loop()}}
+                        <img @click="test(data)"  :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${character.icon}.png`">
                     </div>
                 </div>
             </div><br>
@@ -33,17 +32,17 @@
                                 <label class="label">
                                     <span class=" text-black dark:text-white">rarity</span>
                                 </label>
-                                <input v-model="form.Rarity" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-accent-content dark:bg-base-100">
+                                <input v-model="form.rarity" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-accent-content dark:bg-base-100">
                             </div>
                              <div class="form-control w-full max-w-xs">
                                 <label class="label">
                                     <span class=" text-black dark:text-white">element</span>
                                 </label>
-                                <input v-model="form.Element" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-accent-content dark:bg-base-100">
+                                <input v-model="form.element" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-accent-content dark:bg-base-100">
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
-                                    <span class=" text-black dark:text-white">CDN Icon</span>
+                                    <span class=" text-black dark:text-white">Icon</span>
                                 </label>
                                 <input v-model="form.icon" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-accent-content dark:bg-base-100"><br>
                             </div>
@@ -84,12 +83,6 @@ export default {
                     return JSON.parse(localStorage.getItem('character')) || []
                 }
             },
-            charKey: {
-                type: Object,
-                default(rawProps) {
-                    return JSON.parse(localStorage.getItem('charKey')) || []
-                }
-            },
             itemName: Object,
            
         },
@@ -101,30 +94,30 @@ export default {
         },
         setup(props, data){
             const form = useForm({
-                id: props.charKey,
-                name: null,
-                Rarity: props.character.QualityType,
-                Element: props.character.Element,
-                SideIconName: props.character.SideIconName,
-                Consts: props.character.Consts,
-                SkillOrder: props.character.SkillOrder,
-                Skills: props.character.Skills,
-                ProudMap: props.character.ProudMap,
-                icon: null,
+                id: props.character.id,
+                name: props.character.name,
+                rarity: props.character.rank,
+                element: props.character.element,
+                icon: props.character.icon,
+                weaponType: props.character.weaponType,
+                Consts: [],
+                SkillOrder: [],
+                Skills: {},
+                ProudMap: {},
                 avatar: null,
             });
             return {form};
         },
-        computed: {
-            
-        },
         methods: {
             loop(){
                 const ItemName = this.itemName;
-                const c = this.character.NameTextMapHash;
+                const c = this.character.id;
                 Object.keys(ItemName).map((key) => {
                     if(c == key){
-                     return this.form.name = ItemName[key].EN; 
+                      this.form.Consts = ItemName[key].Consts; 
+                      this.form.SkillOrder = ItemName[key].SkillOrder; 
+                      this.form.Skills = ItemName[key].Skills; 
+                      this.form.ProudMap = ItemName[key].ProudMap; 
                     }
                 });
             },
@@ -146,5 +139,8 @@ export default {
                 localStorage.setItem('constellation', JSON.stringify(conste));
             },
         },
+        mounted(){
+            this.loop();
+        }
 }
 </script>

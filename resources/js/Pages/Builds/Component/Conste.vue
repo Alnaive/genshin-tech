@@ -1,350 +1,94 @@
 <template>
-    <section  v-if="conste == '1'" @change="$emit('update:conste', $event.target.value)" :value="conste"> 
-        <ul  class="flex flex-col w-12 py-1  bg-transparent  absolute right-4 top-16 space-y-1" >
-        <li>
-            <div class="avatar">
-                <div class="rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c1_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c1_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
+    <section> 
+        <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-16 ">
+            <li  v-if="build.conste > 0">
+                <div>
+                    <div v-if="build.conste == 1" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
+                        <div  class="hero-content text-center text-neutral-content">
+                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[0]}.png`" alt="">
+                        </div>
+                    </div>
+                    <div v-else class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
+                        <div  class="hero-content text-center text-neutral-content">
+                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[0]}.png`" alt="">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c2_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
+                <div>
+                    <div v-if="build.conste <= 1" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
+                        <div  class="hero-content text-center text-neutral-content">
+                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[1]}.png`" alt="">
+                        </div>
+                    </div>
+                    <div v-else class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
+                        <div  class="hero-content text-center text-neutral-content">
+                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[1]}.png`" alt="">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c3_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
+                <div>
+                    <div v-if="build.conste <= 2" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
+                        <div  class="hero-content text-center text-neutral-content">
+                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[2]}.png`" alt="">
+                        </div>
+                    </div>
+                    <div v-else class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
+                        <div  class="hero-content text-center text-neutral-content">
+                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[2]}.png`" alt="">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c4_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
+                <div>
+                    <div v-if="build.conste <= 3" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
+                        <div  class="hero-content text-center text-neutral-content">
+                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[3]}.png`" alt="">
+                        </div>
+                    </div>
+                    <div v-else class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
+                        <div  class="hero-content text-center text-neutral-content">
+                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[3]}.png`" alt="">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c5_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
+                <div>
+                    <div v-if="build.conste <= 4" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
+                        <div  class="hero-content text-center text-neutral-content">
+                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[4]}.png`" alt="">
+                        </div>
+                    </div>
+                    <div v-else class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
+                        <div  class="hero-content text-center text-neutral-content">
+                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[4]}.png`" alt="">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c6_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
+                <div>
+                    <div v-if="build.conste <= 5" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
+                        <div  class="hero-content text-center text-neutral-content">
+                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[5]}.png`" alt="">
+                        </div>
+                    </div>
+                    <div v-else class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
+                        <div  class="hero-content text-center text-neutral-content">
+                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[5]}.png`" alt="">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </li>
+            </li>
+            <li v-else>
+                <div v-for="cons in build.character.Consts" :key="cons" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
+                    <div class="hero-content text-center text-neutral-content">
+                        <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${cons}.png`" alt="">
+                    </div>
+                </div>
+            </li>
         </ul>
     </section>
-
-    <section v-else-if="conste == '2'" @change="$emit('update:conste', $event.target.value)" :value="conste"> 
-        <ul  class="flex flex-col w-12 py-1  bg-transparent  absolute right-4 top-16 space-y-1" >
-        <li>
-            <div class="avatar">
-                <div class="rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c1_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c1_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c2_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c2_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c3_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c4_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c5_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c6_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        </ul>
-    </section>
-
-    <section v-else-if="conste == '3'" @change="$emit('update:conste', $event.target.value)" :value="conste"> 
-        <ul  class="flex flex-col w-12 py-1  bg-transparent  absolute right-4 top-16 space-y-1" >
-        <li>
-            <div class="avatar">
-                <div class="rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c1_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c1_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c2_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c2_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c3_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c3_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c4_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c5_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c6_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        </ul>
-    </section>
-
-    <section v-else-if="conste == '4'" @change="$emit('update:conste', $event.target.value)" :value="conste"> 
-        <ul  class="flex flex-col w-12 py-1  bg-transparent  absolute right-4 top-16 space-y-1" >
-        <li>
-            <div class="avatar">
-                <div class="rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c1_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c1_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c2_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c2_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c3_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c3_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c4_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c4_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c5_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c6_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        </ul>
-    </section>
-
-    <section v-else-if="conste == '5'" @change="$emit('update:conste', $event.target.value)" :value="conste"> 
-        <ul  class="flex flex-col w-12 py-1  bg-transparent  absolute right-4 top-16 space-y-1" >
-        <li>
-            <div class="avatar">
-                <div class="rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c1_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c1_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c2_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c2_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c3_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c3_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c4_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c4_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c5_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c5_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c6_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        </ul>
-    </section>
-
-    <section v-else-if="conste == '6'" @change="$emit('update:conste', $event.target.value)" :value="conste"> 
-        <ul  class="flex flex-col w-12 py-1  bg-transparent  absolute right-4 top-16 space-y-1" >
-        <li>
-            <div class="avatar">
-                <div class="rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c1_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c1_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c2_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c2_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c3_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c3_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c4_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c4_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c5_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c5_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c6_icon + ')', backgroundSize:'contain' }">
-                    <img :src="character.constellation.c6_icon" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        </ul>
-    </section>
-
-   <section v-else>
-        <ul  class="flex flex-col w-12 py-1  bg-transparent  absolute right-4 top-16 space-y-1" >
-        <li>
-            <div class="avatar">
-                <div class="rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c1_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c2_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li> 
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c3_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c4_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c5_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="avatar">
-                <div class=" rounded-full w-10 h-10 ring" :class="[ringColor()]" :style="{ backgroundImage: 'url(' + character.constellation.c6_icon + ')', backgroundSize:'contain', backgroundColor:'black', opacity:'50' }">
-                    <img :src="lock()" style="width:20px; height:20px; margin-top:8px; margin-left:10px">
-                </div>
-            </div>
-        </li>
-        </ul>
-        
-   </section>
 </template>
 
 <script>
-import {  useForm } from '@inertiajs/inertia-vue3';
-
 export default {
-    props: ['character','conste'],
-     setup(props) {
-            const form = useForm({
-                
-                conste: '',
-               
-            });
-            return {
-                form
-            };
-        },
+    props: [ 'build'],
     data(){
         return{
             isPyro: 'ring-red-800',
@@ -357,22 +101,22 @@ export default {
         }
     },
     methods:{
-            ringColor(){
-                const ele = this.character.element;
-                if(ele == "Cryo"){
+            constBorder(){
+                const ele = this.build.character.element;
+                if(ele == "Ice"){
                     return this.isCryo;
-                } else if(ele == "Geo"){
-                    return this.isGeo;
+                } else if(ele == "Rock"){
+                    return "../image/svg/Const_Geo.svg";
                 } else if(ele == "Dendro"){
                     return this.isDendro;
-                } else if(ele == "Anemo"){
-                    return this.isAnemo;
-                } else if(ele == "Electro"){
-                    return this.isElectro;
-                } else if(ele == "Hydro"){
-                    return this.isHydro;
-                } else if(ele == "Pyro"){
-                    return this.isPyro;
+                } else if(ele == "Wind"){
+                    return "../image/svg/Const_Anemo.svg";
+                } else if(ele == "Electric"){
+                    return "../image/svg/Const_Electro.svg";
+                } else if(ele == "Water"){
+                    return "../image/svg/Const_Hydro.svg";
+                } else if(ele == "Fire"){
+                    return "../image/svg/Const_Pyro.svg";
                 }
             },
             lock(){

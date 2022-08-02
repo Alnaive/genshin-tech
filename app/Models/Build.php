@@ -36,26 +36,12 @@ class Build extends Model
         return $this->belongsToJson(Character::class, 'party_id')->withdefault();
     }
 
-    public function flower(){
-        return $this->belongsTo(Pcs::class, 'flower_id')->withdefault();
-    }
-    public function plume(){
-        return $this->belongsTo(Pcs::class, 'plume_id')->withdefault();
-    }
-    public function sand(){
-        return $this->belongsTo(Pcs::class, 'sand_id')->withdefault();
-    }
-    public function goblet(){
-        return $this->belongsTo(Pcs::class, 'goblet_id')->withdefault();
-    }
-    public function circlet(){
-        return $this->belongsTo(Pcs::class, 'circlet_id')->withdefault();
-    }
+   
     public function set4(){
-        return $this->belongsTo(Artifact::class, 'four_pcs_art')->withdefault();
+        return $this->belongsTo(Artifact::class, 'four_pcs_art','name')->withdefault();
     }
     public function set2(){
-        return $this->belongsToJson(Artifact::class, 'two_pcs_art')->withdefault();
+        return $this->belongsToJson(Artifact::class, 'two_pcs_art','name')->withdefault();
     }
     
 }

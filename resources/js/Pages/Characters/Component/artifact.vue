@@ -3,18 +3,18 @@
         <div class="relative inline-block w-24 m-2 rounded-lg h-26 h-auto w-32 " >
             <div  class=" flex flex-row justify-center rounded-t-lg bg-gray-scale" >
                 <span>
-                    <img v-if="artifact.set4.paramRarity == 5" :src="artifact.set4.icon" class="h-24 h-32 rounded-br-3xl"
+                    <img v-if="artifact.set4.rarity == '4,5'" :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${artifact.set4.icon}`" class="h-24 h-32 rounded-br-3xl"
                     :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }" style="border-top-right-radius:0.5rem; border-top-left-radius:0.5rem;">
                     
-                    <img v-else-if="artifact.set4.paramRarity == 4" :src="artifact.set4.icon" class="h-24 h-32 rounded-br-3xl"
+                    <img v-else-if="artifact.set4.rarity == '3,4'" :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${artifact.set4.icon}`" class="h-24 h-32 rounded-br-3xl"
                     :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }" style="border-top-right-radius:0.5rem; border-top-left-radius:0.5rem;">
-                    <img v-else-if="artifact.set4.paramRarity == 3" :src="artifact.set4.icon" class="h-24 h-32 rounded-br-3xl"
+                    <img v-else-if="artifact.set4.rarity == 3" :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${artifact.set4.icon}`" class="h-24 h-32 rounded-br-3xl"
                     :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }" style="border-top-right-radius:0.5rem; border-top-left-radius:0.5rem;">
                 </span>
                 <div class="absolute flex flex-row top-28" style="margin-top:5px">
-                        <img v-if="artifact.set4.paramRarity == 5" src="/image/rarity/Icon_5_Stars.png" class="w-24">
-                        <img v-else-if="artifact.set4.paramRarity == 4" src="/image/rarity/Icon_4_Stars.png" style="width:78px;">
-                        <img v-else-if="artifact.set4.paramRarity == 3" src="/image/rarity/Icon_3_Stars.png" style="width:78px;">
+                        <img v-if="artifact.set4.rarity == '4,5'" src="/image/rarity/Icon_5_Stars.png" class="w-24">
+                        <img v-else-if="artifact.set4.rarity == '3,4'" src="/image/rarity/Icon_4_Stars.png" style="width:78px;">
+                        <img v-else-if="artifact.set4.rarity == 3" src="/image/rarity/Icon_3_Stars.png" style="width:78px;">
                 </div>
             </div>
             <div class="flex items-center justify-center overflow-auto text-sm bg-gray-scale text-black text-center rounded-b-lg h-9 ">
@@ -26,17 +26,17 @@
             <div class="relative inline-block w-24 m-2 rounded-lg h-26 h-auto w-32 ">
                 <div  class=" flex flex-row justify-center rounded-t-lg bg-gray-scale" >
                     <span>
-                        <img v-if="data.paramRarity == '5'" :src="data.icon" class="h-24 h-32 rounded-br-3xl"
+                        <img v-if="data.rarity == '4,5'" :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${data.icon}`" class="h-24 h-32 rounded-br-3xl"
                         :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }" style="border-top-right-radius:0.5rem; border-top-left-radius:0.5rem;">
-                        <img v-else-if="data.paramRarity == '4'" :src="data.icon" class="h-24 h-32 rounded-br-3xl"
+                        <img v-else-if="data.rarity == '3,4'" :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${data.icon}`" class="h-24 h-32 rounded-br-3xl"
                         :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }" style="border-top-right-radius:0.5rem; border-top-left-radius:0.5rem;">
-                        <img v-else-if="data.paramRarity == '3'" :src="data.icon" class="h-24 h-32 rounded-br-3xl"
+                        <img v-else-if="data.rarity == 3" :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${data.icon}`" class="h-24 h-32 rounded-br-3xl"
                         :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }" style="border-top-right-radius:0.5rem; border-top-left-radius:0.5rem;">
                     </span>
                     <div class="absolute flex flex-row top-28" style="margin-top:5px">
-                            <img v-if="data.paramRarity == '5'" src="/image/rarity/Icon_5_Stars.png" class="w-24">
-                            <img v-else-if="data.paramRarity == '4'" src="/image/rarity/Icon_4_Stars.png" style="width:78px;">
-                            <img v-else-if="data.paramRarity == '3'" src="/image/rarity/Icon_3_Stars.png" style="width:78px;">
+                            <img v-if="data.rarity == '4,5'" src="/image/rarity/Icon_5_Stars.png" class="w-24">
+                            <img v-else-if="data.rarity == '3,4'" src="/image/rarity/Icon_4_Stars.png" style="width:78px;">
+                            <img v-else-if="data.rarity == 3" src="/image/rarity/Icon_3_Stars.png" style="width:78px;">
                     </div>
                 </div>
                 <div class="flex items-center justify-center overflow-auto text-sm bg-gray-scale text-black text-center rounded-b-lg h-9 ">

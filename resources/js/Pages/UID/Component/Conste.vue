@@ -102,7 +102,7 @@ export default {
     },
     methods:{
             constBorder(){
-                const ele = this.charData.Element;
+                const ele = this.charData.element;
                 if(ele == "Ice"){
                     return this.isCryo;
                 } else if(ele == "Rock"){

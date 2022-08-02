@@ -32,7 +32,6 @@
                 </div>
                     </li>
                     <li>
-
                 <div class="space-y-1 mt-3 mr-2 text-white">
                     <Weapon :sessionData="sessionData" :weapons="weapons"/>
                     <Flower :sessionData="sessionData"/>
@@ -109,9 +108,7 @@
 
 <script>
 import { Head, Link, useForm, usePage  } from '@inertiajs/inertia-vue3';
-import { ref, reactive, onMounted, computed } from 'vue'
-import Guest from '@/Layouts/Guest.vue'
-import Party from './/Component/Party.vue'
+import Guest from '@/Layouts/Guest.vue';
 import Equip from './Component/Equip.vue';
 import Talent from './Component/Talent.vue';
 import Stats from './Component/Stats.vue';
@@ -134,7 +131,7 @@ export default {
       Head,
       Link,
       Guest,
-       Party, Equip, Talent, Stats, Conste, VueFeather,Weapon, Flower, Goblet,
+        Equip, Talent, Stats, Conste, VueFeather,Weapon, Flower, Goblet,
        Plume, Sands, Circlet,
     },
     props: {
@@ -187,6 +184,9 @@ export default {
             sands: props.sessionData.equipList[2].flat.reliquaryMainstat.mainPropId,
             goblet: props.sessionData.equipList[3].flat.reliquaryMainstat.mainPropId,
             circlet: props.sessionData.equipList[4].flat.reliquaryMainstat.mainPropId,
+            normalAttack:null,
+            elementalSkill: null,
+            elementalBurst: null,
             talent: props.sessionData.skillLevelMap,
             talentExtraLv: null,
             hp: props.sessionData.fightPropMap[2000].toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0}),
@@ -205,7 +205,7 @@ export default {
             cryoDamageBonus: parseFloat(props.sessionData.fightPropMap[46] * 100).toFixed(1),
             geoDamageBonus: parseFloat(props.sessionData.fightPropMap[45] * 100).toFixed(1),
             physicalDamageBonus: parseFloat(props.sessionData.fightPropMap[30] * 100).toFixed(1),
-            status: null,
+            serverId: null,
         });
             return {form }
         },
@@ -214,6 +214,7 @@ export default {
         return{
            arrayOfArtifact: [],
            countedOfArtifact: {},
+           arrayOfTalent: [],
         }
     },
     methods:{
@@ -282,8 +283,8 @@ export default {
                 return "/storage/images/icon/avatar/";
             }, 
         bgElement(){
-            const ele = this.charData.Element;
-                if(ele == "Cryo"){
+            const ele = this.charData.element;
+                if(ele == "Ice"){
                     return "../image/element/bgCryo.jpg"
                 } else if(ele == "Rock"){
                     return "../image/element/bgGeo.jpg"
@@ -329,6 +330,29 @@ export default {
                     this.form.refinement = item;
                 });
             },
+            arrayTalent(){
+                Object.keys(this.charData.SkillOrder).map((skillKey) => {
+                    Object.keys(this.sessionData.skillLevelMap).map((itemKey) => {
+                        if(this.charData.SkillOrder[skillKey] == itemKey){
+                            this.arrayOfTalent.push(this.sessionData.skillLevelMap[itemKey])
+                        }
+                    })
+                })
+                
+            },
+            defineTalent(){
+                const talent = this.arrayOfTalent;
+                if(this.charData.id == 10000002){
+                    this.form.normalAttack = talent[2];
+                    this.form.elementalSkill = talent[0];
+                    this.form.elementalBurst = talent[1];
+                } else {
+                    this.form.normalAttack = talent[0];
+                    this.form.elementalSkill = talent[1];
+                    this.form.elementalBurst = talent[2];
+                }
+                
+            },
             defineSkill(){
                 if(this.sessionData.proudSkillExtraLevelMap){
                     this.form.talentExtraLv = this.sessionData.proudSkillExtraLevelMap;
@@ -354,6 +378,20 @@ export default {
                     this.form.conste = 6;
                 }
             },
+            serverUID(){
+                let x = this.uid.charAt(0);
+                if(x = 8){
+                     this.form.serverId = 'Asia'
+                } else if(x = 1 || 2 || 5){
+                     this.form.serverId = 'China'
+                } else if(x = 6){
+                     this.form.serverId = 'America'
+                } else if(x = 7){
+                     this.form.serverId = 'Europe'
+                } else if(x = 9){
+                     this.form.serverId = 'TW, HK, MO'
+                }
+            }
     },
     async mounted(){
         await this.defineArtifact();
@@ -362,6 +400,9 @@ export default {
         await this.defineRefinement();
         await this.defineSkill();
         await this.defineConstellation();
+        await this.serverUID();
+        this.arrayTalent();
+        this.defineTalent();
     }
 }
 

@@ -129,18 +129,13 @@
     import Pagination from '@/Components/Pagination'
     import pickBy from 'lodash/pickBy'
     import throttle from 'lodash/throttle'
-    import Party from './/Component/show/Party.vue'
-import Equip from './Component/show/Equip.vue';
-import Talent from './Component/show/Talent.vue';
-import Stats from './Component/show/Stats.vue';
-import Conste from './Component/show/Conste.vue';
+
     export default {
         components: {
             BreezeAuthenticatedLayout,
             Head,
             Pagination,
             Link,
-        Party, Equip, Talent, Stats, Conste,
 
         },
         props: {

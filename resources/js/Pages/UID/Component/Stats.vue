@@ -42,37 +42,37 @@
     <strong class="mr-2 "> <span >{{ parseFloat(sessionData.fightPropMap[23] * 100).toFixed(1) }}%</span> <br>
     </strong>
 </div>
-<div class="flex items-center gap-2" v-if="charData.Element == 'Water' && sessionData.fightPropMap[42] > 0">
+<div class="flex items-center gap-2" v-if="charData.element == 'Water' && sessionData.fightPropMap[42] > 0">
     <img src="/image/attribute/Hydro.png" class="w-8 h-8">
     <strong class="flex-1 w-64">Hydro DMG Bonus</strong>
     <strong class="mr-2 "> <span >{{ parseFloat(sessionData.fightPropMap[42] * 100).toFixed(1) }}%</span> <br>
     </strong>
 </div>
-<div class="flex items-center gap-2" v-if="charData.Element == 'Wind' && sessionData.fightPropMap[44] > 0">
+<div class="flex items-center gap-2" v-if="charData.element == 'Wind' && sessionData.fightPropMap[44] > 0">
     <img src="/image/attribute/Anemo.png" class="w-8 h-8">
     <strong class="flex-1 w-64">Anemo DMG Bonus</strong>
     <strong class="mr-2 "> <span >{{ parseFloat(sessionData.fightPropMap[44] * 100).toFixed(1) }}%</span> <br>
     </strong>
 </div> 
-<div class="flex items-center gap-2" v-if="charData.Element == 'Fire' && sessionData.fightPropMap[40] > 0">
+<div class="flex items-center gap-2" v-if="charData.element == 'Fire' && sessionData.fightPropMap[40] > 0">
     <img src="/image/attribute/Pyro.png" class="w-8 h-8">
     <strong class="flex-1 w-64">Pyro DMG Bonus</strong>
     <strong class="mr-2 "> <span >{{ parseFloat(sessionData.fightPropMap[40] * 100).toFixed(1) }}%</span> <br>
     </strong>
 </div>
-<div class="flex items-center gap-2" v-if="charData.Element == 'Ice' && sessionData.fightPropMap[46] > 0">
+<div class="flex items-center gap-2" v-if="charData.element == 'Ice' && sessionData.fightPropMap[46] > 0">
     <img src="/image/attribute/Cryo.png" class="w-8 h-8">
     <strong class="flex-1 w-64">Cryo DMG Bonus</strong>
     <strong class="mr-2 "> <span >{{ parseFloat(sessionData.fightPropMap[46] * 100).toFixed(1) }}%</span> <br>
     </strong>
 </div>
-<div class="flex items-center gap-2" v-if="charData.Element == 'Electric' && sessionData.fightPropMap[41] > 0">
+<div class="flex items-center gap-2" v-if="charData.element == 'Electric' && sessionData.fightPropMap[41] > 0">
     <img src="/image/attribute/Electro.png" class="w-8 h-8">
     <strong class="flex-1 w-64">Electro DMG Bonus</strong>
     <strong class="mr-2 "> <span >{{ parseFloat(sessionData.fightPropMap[41] * 100).toFixed(1) }}%</span> <br>
     </strong>
 </div>
-<div class="flex items-center gap-2" v-if="charData.Element == 'Rock' && sessionData.fightPropMap[45] > 0">
+<div class="flex items-center gap-2" v-if="charData.element == 'Rock' && sessionData.fightPropMap[45] > 0">
     <img src="/image/attribute/Geo.png" class="w-8 h-8">
     <strong class="flex-1 w-64">Geo DMG Bonus</strong>
     <strong class="mr-2 "> <span >{{ parseFloat(sessionData.fightPropMap[45] * 100).toFixed(1) }}%</span> <br>

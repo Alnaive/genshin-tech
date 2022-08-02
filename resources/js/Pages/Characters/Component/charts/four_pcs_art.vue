@@ -9,36 +9,41 @@ export default {
      components:{
         apexcharts: VueApexCharts,
     },
-    props:['art4Name','art4Total', 'title'],
+    props:['art4Name','totalArt4', 'title'],
     data: function(){
         return{
             series: [{
                name: 'Total',
-            data: this.art4Total
+            data: this.totalArt4
           }],
-          chartOptions: {
-            chart: {
-              type: 'bar',
-              height: 350
-            },
-            plotOptions: {
-              bar: {
-                borderRadius: 4,
-                horizontal: true,
-              }
-            },
-            dataLabels: {
-              enabled: false
+         chartOptions: {
+              chart: {
+              width: '100%',
+              type: 'bar'
+              },
+            title: {
+                text: this.title + ' 4 Set Artifact',
+                align: 'left',
+                margin: 10,
+                offsetX: 0,
+                offsetY: 0,
+                floating: false,
+                style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                color: '#9ca3af'
+                },
             },
             xaxis: {
-              categories: this.art4Name,
-              labels: {
+            categories: this.art4Name,
+             labels: {
                     show: true,
                     style: {
-                    colors: '#22c55e',
-                    fontSize: '12px'
+                    colors: '#9ca3af',
+                    fontSize: '12px',
+                    fontWeight:  'bold',
                     },
-                },
+                }
             },
             yaxis: [
               {
@@ -47,16 +52,37 @@ export default {
                 },
                 labels: {
                   style: {
-                    colors: '#22c55e',
+                    fontWeight:  'bold',
+                    colors: '#9ca3af',
                   }
                 },
                 tooltip: {
-                  enabled: true
+                  enabled: true,
+                        fillSeriesColor: true,
+                              theme: true,
+                  style: {
+                    fontSize:  '14px',
+                    fontWeight:  'bold',
+                    color: '#9ca3af'
+                  },
                 }
               },
             ],
-          },
+        },
+        series: [{
+            name: 'Total',
+            data: this.totalArt4,
+        }],
+        } 
+         
         }
     }
-}
 </script>
+<style>
+ .apexcharts-tooltip-title{
+    color:#008ffb;
+ }
+ .apexcharts-tooltip-text{
+    color:#008ffb;
+ }
+</style>
