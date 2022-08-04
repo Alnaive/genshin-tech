@@ -64,7 +64,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get("/redirectAuthenticatedUsers", [RedirectAuthenticatedUsersController::class, "home"]);
     Route::group(['middleware' => 'checkRole:admin'], function() {
         Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
-        Route::GET('Dashboard', [DashboardController::class, 'index'])->name('Dashboard');
+        // Route::GET('Dashboard', [DashboardController::class, 'index'])->name('Dashboard');
         Route::resource('Arts', ArtController::class);
         Route::resource('Artifacts', ArtifactController::class);
         Route::GET('Artifact/Pieces', [ArtifactController::class, 'pieces'])->name('pieces');

@@ -53,7 +53,7 @@
                 <pre v-else-if="build[0].equipList[0].flat.reliquarySubstats[2].appendPropId == 'FIGHT_PROP_DEFENSE'" >DEF+{{build[0].equipList[0].flat.reliquarySubstats[2].statValue}}</pre>
                 <pre v-else-if="build[0].equipList[0].flat.reliquarySubstats[2].appendPropId == 'FIGHT_PROP_HP'">HP+{{build[0].equipList[0].flat.reliquarySubstats[2].statValue}}</pre>
             </li>
-            <li>
+            <li v-if="build[0].equipList[0].flat.reliquarySubstats.length > 3">
                 <pre v-if="build[0].equipList[0].flat.reliquarySubstats[3].appendPropId == 'FIGHT_PROP_ATTACK_PERCENT'">ATK+{{build[0].equipList[0].flat.reliquarySubstats[3].statValue}}%</pre>
                 <pre v-else-if="build[0].equipList[0].flat.reliquarySubstats[3].appendPropId == 'FIGHT_PROP_HP_PERCENT'" >HP+{{build[0].equipList[0].flat.reliquarySubstats[3].statValue}}%</pre>
                 <pre v-else-if="build[0].equipList[0].flat.reliquarySubstats[3].appendPropId == 'FIGHT_PROP_DEFENSE_PERCENT'">DEF+{{build[0].equipList[0].flat.reliquarySubstats[3].statValue}}%</pre>

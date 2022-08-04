@@ -34,8 +34,6 @@ class BuildController extends Controller
         }
         return Inertia::render('Builds/index', [
             'filters' => Request::all('search'),
-            'characters' => Character::all(),
-            'weapons' => Weapon::all(),
             'builds' => $query->latest()->paginate(10)->withQueryString(),
         ]);
     }

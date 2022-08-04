@@ -50,7 +50,7 @@
                                                 <Link @click="api(data)" :href="route('showBuild', { id: data.id })">
                                                 <div class="avatar">
                                                     <div class="w-24 rounded-xl">
-                                                        <img :src="character.icon" />
+                                                        <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${character.icon}`" />
                                                     </div>
                                                 </div>
                                                 </Link>

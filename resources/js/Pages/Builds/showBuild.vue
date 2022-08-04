@@ -45,7 +45,7 @@
                         <div class="flex flex-col">
                                 <div  v-if="build.two_pcs_art">
                                     <div v-for="data in build.two_pcs_art" :key="data" class="font-bold text-md">
-                                    {{data}}
+                                        {{data}}
                                     </div>
                                 </div>
                                 <div v-if="build.one_pcs_art">
@@ -67,7 +67,7 @@
                                     <div class="font-bold text-md badge mt-[12px]">3</div>
                                 </div>
                                 <div v-if="build.four_pcs_art">
-                                    <div class="font-bold text-md badge mt-[12px]">4</div>
+                                    <div class="font-bold text-md badge mt-[15px]">4</div>
                                 </div>
                             </div>
                         </div>
@@ -76,14 +76,14 @@
                     </li>
                 </ul>
             </div>
-            <div class="mt-5">
-                <div class="flex items-center space-x-2" v-if="!isLiked"> 
-                <button class="btn btn-ghost" @click="liked(build.id)"><VueFeather type="heart" size="18" class="mr-1"></VueFeather>Like</button>
-                </div>
-                <div class="flex items-center space-x-2" v-else> 
-                    <button class="btn btn-ghost" @click="disLiked(build.id)"><VueFeather type="heart" size="18" stroke="red" fill="red" class="mr-1"></VueFeather>Dislike</button>
-                </div>
+            <div class="mt-5 space-x-3">
+                <button v-if="!isLiked" class="btn btn-ghost" @click="liked(build.id)"><VueFeather type="heart" size="18" class="mr-1"></VueFeather>Like</button>
+                <button  v-else class="btn btn-ghost" @click="disLiked(build.id)"><VueFeather type="heart" size="18" stroke="red" fill="red" class="mr-1"></VueFeather>Dislike</button>
+                <button class="btn bg-green-500 hover:bg-green-400 text-white" @click="landscapeImage()"><VueFeather type="image" size="24" class="mr-1" ></VueFeather> Export</button>
             </div>
+            <div class="flex mt-2">
+                        <div class="bg-transparent " id="canvas-landscape"></div>
+                    </div>
     </Guest>
 </template>
 <script>
@@ -99,6 +99,8 @@ import Plume from './Component/Plume.vue';
 import Sands from './Component/Sands.vue';
 import Goblet from './Component/Goblet.vue';
 import Circlet from './Component/Circlet.vue';
+import domtoimage from 'dom-to-image';
+
 export default{
     components:{
         Guest,
@@ -145,6 +147,36 @@ export default{
                 } else if(ele == "Fire"){
                     return "../image/element/bgPyro.jpg"
                 }
+            },
+        portraitImage(){
+                var node = document.getElementById("potraitData");
+                var node1 = document.getElementById("canvas-potrait");
+
+                domtoimage
+                .toPng(node)
+                .then(function (dataUrl) {
+                    var img = new Image();
+                    img.src = dataUrl;
+                    node1.appendChild(img);
+                })
+                .catch(function (error) {
+                    console.error("oops, something went wrong!", error);
+                });
+            },
+        landscapeImage(){
+                var node = document.getElementById("landscapeData");
+                var node1 = document.getElementById("canvas-landscape");
+
+                domtoimage
+                .toPng(node)
+                .then(function (dataUrl) {
+                    var img = new Image();
+                    img.src = dataUrl;
+                    node1.appendChild(img);
+                })
+                .catch(function (error) {
+                    console.error("oops, something went wrong!", error);
+                });
             },
     }
 }

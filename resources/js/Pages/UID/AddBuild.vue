@@ -54,7 +54,7 @@
                         </div>
                         </div>
                         <div class="flex-none ...">
-                            <div class="flex flex-col "  v-for="(key,item) in countedOfArtifact" :key="key">
+                            <div class="flex flex-col "  v-for="(key, item) in countedOfArtifact" :key="key">
                                 <div  v-if="key == 2">
                                     <div class="badge">{{key}}</div>
                                 </div>

@@ -34,11 +34,11 @@
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">
-                                            User Name
+                                            Nickname
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">
-                                            Status
+                                            Server
                                         </th>
                                         <th scope="col" class="relative px-6 py-3">
                                             <span class="sr-only">Edit</span>
@@ -50,7 +50,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0 h-10 w-10">
-                                                    <img :src="build.character.icon"
+                                                    <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.icon}`"
                                                         class="h-10 w-10 rounded-full" />
                                                 </div>
                                                 <div class="ml-4">
@@ -64,49 +64,21 @@
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900 dark:text-white">
-                                                <p v-if="!build.user_id">{{build.name}}  <span class="badge badge-info">Guest</span></p>
-                                                <p v-else>{{build.user.name}} <span class="badge badge-info">User</span></p>
+                                            <div class="text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ build.uid }}
+                                            </div>
+                                            <div class="text-sm text-gray-500">
+                                                {{ build.nickname }}
                                             </div>
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-white">
-                                            {{ build.status}}
+                                            {{ build.serverId}}
                                         </td>
 
                                         <td class="space-x-2 px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <label :for="'my-modal-4'+build.id" class="link modal-button">Detail</label>
-                                            <input type="checkbox" :id="'my-modal-4'+build.id" class="modal-toggle">
-                                            <label :for="'my-modal-4'+build.id" class="modal cursor-pointer">
-                                            <label class="modal-box bg-accent-content dark:bg-black" for="">
-                                                <div class="artboard phone-5 artboard-demo card shadow-xl image-full bg-accent-content dark:bg-base-100">
-                                                    <figure>
-                                                        <img :src="showAvatar() + build.character.avatar" >
-                                                    </figure> 
-                                                    <div class="">
-                                                        <h3 class="text-center text-black dark:text-white absolute inset-x-0 top-0 mt-5">{{build.character.name}} Lv {{build.char_lv}}
-                                                            <br> <p > {{build.name}} </p>
-                                                        </h3>
-                                                        <Equip :build="build" :artifacts="artifacts" :weapons="weapons" :weaponDetail="weaponDetail"
-                                                        ></Equip>
-                                                        <Party :build="build" :characters="characters"
-                                                        > 
-                                                        </Party>
-                                                        <Conste :build="build"/>
-                                                        <Talent :build="build"/> 
-                                                    </div>
-                                                    <div class="card absolute inset-x-0 bottom-0 mt-5">
-                                                        <div class="bg-base-content text-black dark:bg-dark-eval-3 dark:text-white" >
-                                                            <section class="px-2 py-2" >
-                                                                <Stats :build="build"/>
-                                                            </section>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </label>
-                                            </label>
-                                            <Link :href="route('editBuild', { id: build.id })"
-                                                class="link text-indigo-600 hover:text-indigo-900 dark:text-white">Edit
+                                            <Link :href="route('showBuild', { id: build.id })"
+                                                class="link text-indigo-600 hover:text-indigo-900 dark:text-white">Detail
                                             </Link><button @click="destroy(build.id)"
                                                 class="link text-indigo-600 hover:text-indigo-900 dark:text-white">Delete
                                             </button>
@@ -141,9 +113,6 @@
         props: {
             builds: Object,
             filters: Object,
-            characters: Object,
-        artifactPcs: Object,
-        weapons: Object,
         },
         data() {
             return {

@@ -6,8 +6,8 @@
     >
         <SidebarLink
             title="Dashboard"
-            :href="route('Dashboard')"
-            :active="route().current('Dashboard')"
+            :href="route('dashboard')"
+            :active="route().current('dashboard')"
         >
             <template #icon>
                 <DashboardIcon
@@ -17,11 +17,7 @@
             </template>
         </SidebarLink>
         <hr>
-        <SidebarLink title="Account" :href="route('Account')" :active="route().current('Account')"></SidebarLink>
-        <SidebarCollapsible title="Artifacts">
-            <SidebarCollapsibleItem :href="route('Artifacts.index')" title="Artifact" :active="route().current('Artifacts.index')" />
-            <SidebarCollapsibleItem :href="route('pieces')" title="Pieces" :active="route().current('pieces')" />
-        </SidebarCollapsible>
+        <SidebarLink title="Artifact" :href="route('Artifacts.index')" :active="route().current('Artifacts.index')"></SidebarLink>
         <SidebarLink title="Build" :href="route('Builds.index')" :active="route().current('Builds.index')"></SidebarLink>
         <SidebarLink title="Characters" :href="route('Characters.index')" :active="route().current('Characters.index')"></SidebarLink>
         <SidebarLink :href="route('Weapons.index')" title="Weapon" :active="route().current('Weapons.index')" />

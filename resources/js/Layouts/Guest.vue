@@ -83,7 +83,7 @@
                 </template>
                 <template #content>
                     <BreezeDropdownLink
-                        :href="route('Dashboard')"
+                        :href="route('dashboard')"
                         as="button"
                     >
                         Dashboard
@@ -173,9 +173,7 @@ import PageFooter from '@/Components/PageFooter.vue'
 import Button from '@/Components/Button.vue'
 import { toggleDarkMode, isDark } from '@/Composables'
 import { MoonIcon, SunIcon } from '@heroicons/vue/outline'
-import Sidebar from '@/Shared/Sidebar/Sidebar.vue'
 import Navbar from '@/Shared/Navbar.vue'
-import { sidebarState } from '@/Composables'
 import BreezeApplicationLogo from '@/Components/ApplicationLogo.vue'
 import BreezeDropdown from '@/Components/Dropdown.vue'
 import BreezeDropdownLink from '@/Components/DropdownLink.vue'
@@ -188,7 +186,6 @@ export default {
         Button,
         MoonIcon,
         SunIcon,
-        Sidebar,
         Navbar,
          BreezeApplicationLogo,
         BreezeDropdown,
@@ -199,7 +196,6 @@ export default {
         return {
             toggleDarkMode,
             isDark,
-            sidebarState,
         }
     },
 }

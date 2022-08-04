@@ -15,13 +15,6 @@ use Auth; use DB;
 class DashboardController extends Controller
 {
     public function index(){
-        $query = Build::all();
-        return Inertia::render('Admin/Dashboard', [
-            'builds' => $query,
-            'characters' => Character::all(),
-            'artifactPcs' => Pcs::all(),
-            'weapons' => Weapon::all(),
-            
-        ]);
+        return Inertia::render('/Dashboard');
     }
 }

@@ -8,7 +8,7 @@
                     <figure class="">
                     <div class="avatar" >
                         <div class="w-24">
-                            <img :src="avatarProfile">
+                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${avatarProfile}`">
                         </div>
                     </div>
                     </figure>
@@ -31,19 +31,18 @@
                 </div>
             </template>
             
-            <div class="flex ">
-            <tabs v-model="active">
-                <tab  v-for="index in uid.avatarInfoList" :key="index">
-                <div v-for="data in character" :key="data">
-                    <div class="avatar" v-if="data.id == index.avatarId">
-                        <div class="w-16 rounded-full">
-                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${data.icon}`" alt="">
+            <div class="flex overflow-auto lg:overflow-hidden">
+                <tabs v-model="active">
+                    <tab  v-for="index in uid.avatarInfoList" :key="index" >
+                        <div v-for="data in character" :key="data" >
+                            <div class="avatar" v-if="data.id == index.avatarId">
+                                <div class="w-16 rounded-full">
+                                    <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${data.icon}`" alt="">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                
-                </tab>
-            </tabs>
+                    </tab>
+                </tabs>
             </div>
             <tab-panels v-model="active" >
                 <tab-panel v-for="data in uid.avatarInfoList" :key="data" >
@@ -235,11 +234,11 @@
                         <div v-if="data.equipList[goblet].flat.rankLevel == 5" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
                             <div class="indicator-item avatar" >
                                 <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
-                                   <img v-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                                   <img v-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/attribute/Icon_Attribute_Physical2.png" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/svg/FIGHT_PROP_PHYSICAL_ADD_HURT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WIND_ADD_HURT'" src="/image/attribute/Anemo.png" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_FIRE_ADD_HURT'" src="/image/attribute/Pyro.png" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WATER_ADD_HURT'" src="/image/attribute/Hydro.png" >
@@ -254,11 +253,11 @@
                         <div v-else-if="data.equipList[goblet].flat.rankLevel == 4" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
                             <div class="indicator-item avatar" >
                                 <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
-                                   <img v-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                                   <img v-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/attribute/Icon_Attribute_Physical2.png" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/svg/FIGHT_PROP_PHYSICAL_ADD_HURT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WIND_ADD_HURT'" src="/image/attribute/Anemo.png" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_FIRE_ADD_HURT'" src="/image/attribute/Pyro.png" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WATER_ADD_HURT'" src="/image/attribute/Hydro.png" >
@@ -273,11 +272,11 @@
                         <div v-else-if="data.equipList[goblet].flat.rankLevel == 3" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
                             <div class="indicator-item avatar" >
                                 <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
-                                   <img v-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                                   <img v-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/attribute/Icon_Attribute_Physical2.png" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/svg/FIGHT_PROP_PHYSICAL_ADD_HURT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WIND_ADD_HURT'" src="/image/attribute/Anemo.png" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_FIRE_ADD_HURT'" src="/image/attribute/Pyro.png" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WATER_ADD_HURT'" src="/image/attribute/Hydro.png" >
@@ -292,11 +291,11 @@
                         <div v-else-if="data.equipList[goblet].flat.rankLevel == 2" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
                             <div class="indicator-item avatar" >
                                 <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
-                                   <img v-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                                   <img v-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/attribute/Icon_Attribute_Physical2.png" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/svg/FIGHT_PROP_PHYSICAL_ADD_HURT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WIND_ADD_HURT'" src="/image/attribute/Anemo.png" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_FIRE_ADD_HURT'" src="/image/attribute/Pyro.png" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WATER_ADD_HURT'" src="/image/attribute/Hydro.png" >
@@ -311,11 +310,11 @@
                         <div v-else-if="data.equipList[goblet].flat.rankLevel == 1" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
                             <div class="indicator-item avatar" >
                                 <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
-                                   <img v-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                                   <img v-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
-                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/attribute/Icon_Attribute_Physical2.png" >
+                                    <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_PHYSICAL_ADD_HURT'" src="/image/svg/FIGHT_PROP_PHYSICAL_ADD_HURT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WIND_ADD_HURT'" src="/image/attribute/Anemo.png" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_FIRE_ADD_HURT'" src="/image/attribute/Pyro.png" >
                                     <img v-else-if="data.equipList[goblet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WATER_ADD_HURT'" src="/image/attribute/Hydro.png" >
@@ -332,9 +331,9 @@
                         <div v-if="data.equipList[circlet].flat.rankLevel == 5" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
                             <div class="indicator-item avatar" >
                                 <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }">
-                                   <img v-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
-                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
-                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                                   <img v-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL'" src="/image/svg/FIGHT_PROP_CRITICAL.svg" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL_HURT'" src="/image/attribute/Icon_Attribute_Critical_Damage.png" >
@@ -346,9 +345,9 @@
                         <div v-else-if="data.equipList[circlet].flat.rankLevel == 4" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
                             <div class="indicator-item avatar" >
                                 <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg4() + ')', backgroundSize:'contain' }">
-                                   <img v-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
-                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
-                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                                   <img v-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL'" src="/image/svg/FIGHT_PROP_CRITICAL.svg" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL_HURT'" src="/image/attribute/Icon_Attribute_Critical_Damage.png" >
@@ -360,9 +359,9 @@
                         <div v-else-if="data.equipList[circlet].flat.rankLevel == 3" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
                             <div class="indicator-item avatar" >
                                 <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg3() + ')', backgroundSize:'contain' }">
-                                   <img v-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
-                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
-                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                                   <img v-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL'" src="/image/svg/FIGHT_PROP_CRITICAL.svg" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL_HURT'" src="/image/attribute/Icon_Attribute_Critical_Damage.png" >
@@ -374,9 +373,9 @@
                         <div v-else-if="data.equipList[circlet].flat.rankLevel == 2" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
                             <div class="indicator-item avatar" >
                                 <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg2() + ')', backgroundSize:'contain' }">
-                                   <img v-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
-                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
-                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                                   <img v-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL'" src="/image/svg/FIGHT_PROP_CRITICAL.svg" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL_HURT'" src="/image/attribute/Icon_Attribute_Critical_Damage.png" >
@@ -388,9 +387,9 @@
                         <div v-else-if="data.equipList[circlet].flat.rankLevel == 1" class="mb-8 rounded-btn w-12 h-12" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
                             <div class="indicator-item avatar" >
                                 <div class="text-center rounded-btn w-6 h-6 font-bold" :style="{ backgroundImage: 'url(' + bg1() + ')', backgroundSize:'contain' }">
-                                   <img v-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/attribute/Icon_Attribute_Attack.png" >
-                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/attribute/Icon_Attribute_Defense.png" >
-                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/attribute/Icon_Attribute_Health.png" >
+                                   <img v-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'" src="/image/svg/FIGHT_PROP_ATTACK_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'" src="/image/svg/FIGHT_PROP_DEFENSE_PERCENT.svg" class="ml-[3px] mt-[4px]" >
+                                    <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" src="/image/svg/FIGHT_PROP_HP_PERCENT.svg" class="ml-[3px] mt-[4px]" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'" src="/image/attribute/Icon_Attribute_Elemental_Mastery.png" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL'" src="/image/svg/FIGHT_PROP_CRITICAL.svg" >
                                     <img v-else-if="data.equipList[circlet].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL_HURT'" src="/image/attribute/Icon_Attribute_Critical_Damage.png" >
@@ -412,13 +411,13 @@
                                     </strong>
                                 </div> 
                                 <div class="flex items-center gap-2">
-                                    <img src="/image/attribute/Icon_Attribute_Attack.png" class="w-8 h-8">
+                                    <img src="/image/attribute/Icon_Attribute_Attack.png"  class="w-8 h-8">
                                     <strong class="flex-1 w-64">Attack</strong>
                                     <strong class="mr-2 "> <span >{{ data.fightPropMap[2001].toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0}) }}</span> <br>
                                     </strong>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <img src="/image/attribute/Icon_Attribute_Defense.png" class="w-8 h-8">
+                                    <img src="/image/attribute/Icon_Attribute_Defense.png"  class="w-8 h-8">
                                     <strong class="flex-1 w-64">Defense</strong>
                                     <strong class="mr-2 "> <span >{{ data.fightPropMap[2002].toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0}) }}</span> <br>
                                     </strong>
@@ -485,7 +484,7 @@
                                     </strong>
                                 </div>
                                 <div class="flex items-center gap-2" v-if="data.fightPropMap[30] > 0">
-                                    <img src="/image/attribute/Icon_Attribute_Physical2.png" class="w-8 h-8">
+                                    <img src="/image/attribute/Icon_Attribute_Physical2.png"  class="w-8 h-8">
                                     <strong class="flex-1 w-64">Physical DMG Bonus</strong>
                                     <strong class="mr-2 "> <span >{{ parseFloat(data.fightPropMap[30] * 100).toFixed(1) }}%</span> <br>
                                     </strong>
@@ -563,7 +562,6 @@ export default {
             });
             encryptStorage.setItem('charData', JSON.stringify(char));
         },
-       
         showAvatar() {
             return "/storage/images/icon/avatar/";
         },
@@ -592,7 +590,7 @@ export default {
         }
     },
     mounted(){
-        this.profileAvatar()
+        this.profileAvatar();
     }
    
 }
