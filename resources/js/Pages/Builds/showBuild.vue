@@ -44,15 +44,15 @@
                         <div class="flex-none ...">
                         <div class="flex flex-col">
                                 <div  v-if="build.two_pcs_art">
-                                    <div v-for="data in build.two_pcs_art" :key="data" class="font-bold text-md">
+                                    <div v-for="data in build.two_pcs_art" :key="data" class="font-bold whitespace-nowrap text-md">
                                         {{data}}
                                     </div>
                                 </div>
                                 <div v-if="build.one_pcs_art">
-                                    <div class="font-bold text-md mt-[12px]">{{build.one_pcs_art}}</div>
+                                    <div class="font-bold whitespace-nowrap text-md mt-[12px]">{{build.one_pcs_art}}</div>
                                 </div>
                                 <div v-if="build.four_pcs_art">
-                                    <div class="font-bold text-md mt-[12px]">{{build.four_pcs_art}}</div>
+                                    <div class="font-bold whitespace-nowrap text-md mt-[12px]">{{build.four_pcs_art}}</div>
                                 </div>
                         </div>
                         </div>

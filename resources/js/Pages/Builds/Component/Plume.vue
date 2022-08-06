@@ -1,13 +1,19 @@
 <template>
     <div class="card glass w-[440px] h-[105px] card-side flex items-center space-x-4 p-2">
-        <figure class="">
+        <figure class="relative">
         <img class="w-24 h-24" :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${build.equipList[1].flat.icon}.png`" alt="" srcset="">
-        <div class="absolute flex flex-row items-center mt-[65px]">
-                <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
-                <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
-                <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
-                <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
-                <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
+         <div v-if="build.equipList[1].flat.rankLevel == 5" class="absolute inset-x-0 bottom-[-35px] flex flex-row items-center">
+                <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
+                <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
+                <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
+                <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
+                <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
+        </div>
+        <div v-else-if="build.equipList[1].flat.rankLevel == 4" class="absolute inset-x-0 bottom-[-35px] flex flex-row items-center">
+                <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
+                <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
+                <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
+                <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
         </div>
         </figure>
         <div class="w-[95px]">

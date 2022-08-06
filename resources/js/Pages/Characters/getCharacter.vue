@@ -90,11 +90,12 @@ export default {
             return{
                 url:null,
                 op: null,
+                characterID: null,
             }
         },
         setup(props, data){
             const form = useForm({
-                id: props.character.id,
+                id: null,
                 name: props.character.name,
                 rarity: props.character.rank,
                 element: props.character.element,
@@ -109,17 +110,51 @@ export default {
             return {form};
         },
         methods: {
-            loop(){
+            defineId(){
+                const boyWind = this.character.id == '10000005-anemo';
+                const boyGeo = this.character.id == '10000005-geo';
+                const boyElectro = this.character.id == '10000005-electro';
+                const girlWind = this.character.id == '10000007-anemo';
+                const girlGeo = this.character.id == '10000007-geo';
+                const girlElectro = this.character.id == '10000007-electro';
+                if(boyWind){
+                    return this.characterID = 10000005;
+                } else if(boyGeo) {
+                    return this.characterID = "10000005-506";
+                } else if(boyElectro) {
+                    return this.characterID = "10000005-507";
+                } else if(girlWind) {
+                    return this.characterID = "10000007-704";
+                } else if(girlGeo) {
+                    return this.characterID = "10000007-706";
+                } else if(girlElectro) {
+                    return this.characterID = "10000007-707";
+                }
+            },
+            defineCharacterId(){
                 const ItemName = this.itemName;
-                const c = this.character.id;
                 Object.keys(ItemName).map((key) => {
-                    if(c == key){
+                    if(this.characterID == key){
+                      this.form.id = key;
                       this.form.Consts = ItemName[key].Consts; 
                       this.form.SkillOrder = ItemName[key].SkillOrder; 
                       this.form.Skills = ItemName[key].Skills; 
                       this.form.ProudMap = ItemName[key].ProudMap; 
+                      console.log(key);
                     }
-                });
+                })
+            },
+            loop(){
+                // const ItemName = this.itemName;
+                // const c = this.characterID;
+                // Object.keys(ItemName).map((key) => {
+                //     if(c == key){
+                //       this.form.Consts = ItemName[key].Consts; 
+                //       this.form.SkillOrder = ItemName[key].SkillOrder; 
+                //       this.form.Skills = ItemName[key].Skills; 
+                //       this.form.ProudMap = ItemName[key].ProudMap; 
+                //     }
+                // });
             },
             submit() {
                 if (this.$refs.Avatar) {
@@ -141,6 +176,8 @@ export default {
         },
         mounted(){
             this.loop();
+            this.defineId();
+            this.defineCharacterId();
         }
 }
 </script>

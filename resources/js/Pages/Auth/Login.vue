@@ -6,7 +6,39 @@
     <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
         {{ status }}
     </div>
-    <div class="grid grid-cols-4 justify-center "> 
+    <div class="hero min-h-screen ">
+        <div class="hero-content flex-col lg:flex-row-reverse">
+            <div class="text-center lg:text-left">
+            <h1 class="text-5xl font-bold">Login now!</h1>
+            <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+            </div>
+            <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl ">
+            <div class="card-body">
+                <form @submit.prevent="submit">
+                    <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Email</span>
+                    </label>
+                    <input type="text" placeholder="email" class="input input-bordered" v-model="form.email" required autofocus autocomplete="username"/>
+                    </div>
+                    <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Password</span>
+                    </label>
+                    <input type="password" placeholder="password" class="input input-bordered"  v-model="form.password" required autocomplete="current-password"/>
+                    <label class="label">
+                        <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+                    </label>
+                    </div>
+                    <div class="form-control mt-6">
+                    <button class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="grid grid-cols-4 justify-center "> 
     <form @submit.prevent="submit">
         <div class="grid gap-6 card text-center">
             <div class="space-y-2">
@@ -47,25 +79,25 @@
                 </BreezeButton>
             </div>
 
-            <!-- <p class="text-sm text-gray-600 dark:text-gray-400">
+             <p class="text-sm text-gray-600 dark:text-gray-400">
                 Don't have an account?
                 <Link :href="route('register')" class="text-blue-500 hover:underline">
                     Register
                 </Link>
-            </p> -->
+            </p> 
         </div>
     </form>
-    </div>
+    </div> -->
 </template>
 
 <script>
-import BreezeInputIconWrapper from '@/Components/InputIconWrapper.vue'
-import BreezeButton from '@/Components/Button.vue'
-import BreezeCheckbox from '@/Components/Checkbox.vue'
-import BreezeGuestLayout from '@/Layouts/Guest.vue'
-import BreezeInput from '@/Components/Input.vue'
-import BreezeLabel from '@/Components/Label.vue'
-import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
+import BreezeInputIconWrapper from '@/Components/InputIconWrapper.vue';
+import BreezeButton from '@/Components/Button.vue';
+import BreezeCheckbox from '@/Components/Checkbox.vue';
+import BreezeGuestLayout from '@/Layouts/Guest.vue';
+import BreezeInput from '@/Components/Input.vue';
+import BreezeLabel from '@/Components/Label.vue';
+import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import { MailIcon, LockClosedIcon, LoginIcon } from '@heroicons/vue/outline';
 

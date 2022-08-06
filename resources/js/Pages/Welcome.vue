@@ -9,7 +9,7 @@
                         <input v-model="uid" type="text" placeholder="UID" class="input input-bordered w-full max-w-xs bg-accent-content dark:bg-base-100"><br>
                         <button class="btn btn-primary">Search</button>
                     </div>
-                    <pre class="mt-3 normal-case">Powered by enka.network</pre>
+                    <pre class="mt-3 normal-case">Powered by Enka.Network</pre>
                 </form>
             </div>
             <div>
@@ -241,8 +241,3 @@ export default {
 
 
 </script>
-<style>
-    .rounded-br-3xl{
-        color: white;
-    }
-</style>

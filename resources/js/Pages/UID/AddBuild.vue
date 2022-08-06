@@ -43,13 +43,13 @@
                         <div class="flex-none ...">
                         <div class="flex flex-col" v-for="(key,item) in countedOfArtifact" :key="key">
                                 <div  v-if="key == 2">
-                                    <div class="font-bold text-md">{{item}}</div>
+                                    <div class="font-bold whitespace-nowrap text-md">{{item}}</div>
                                 </div>
                                 <div v-else-if="key == 3">
-                                    <div class="font-bold text-md mt-[12px]">{{item}}</div>
+                                    <div class="font-bold whitespace-nowrap text-md mt-[12px]">{{item}}</div>
                                 </div>
                                 <div v-else-if="key == 4">
-                                    <div class="font-bold text-md mt-[12px]">{{item}}</div>
+                                    <div class="font-bold whitespace-nowrap text-md mt-[12px]">{{item}}</div>
                                 </div>
                         </div>
                         </div>
@@ -247,7 +247,6 @@ export default {
                 )
             }
             })
-            console.log(id)
         },
         portraitImage(){
                 var node = document.getElementById("potraitData");
@@ -342,7 +341,7 @@ export default {
             },
             defineTalent(){
                 const talent = this.arrayOfTalent;
-                if(this.charData.id == 10000002){
+                if(this.charData.id == '10000002' || '10000005' || '10000005-506' || '10000005-507' || '10000007-704' || '10000007-706' || '10000007-707'){
                     this.form.normalAttack = talent[2];
                     this.form.elementalSkill = talent[0];
                     this.form.elementalBurst = talent[1];

@@ -27,7 +27,9 @@ class BuildController extends Controller
     {
         $query = Build::with('character','weapon');
         if(request('search')){
-            $query->where('uid', 'LIKE', '%'.request('search').'%')
+            $query->where('id', 'LIKE', '%'.request('search').'%')
+            ->orWhere('uid', 'LIKE', '%'.request('search').'%')
+            ->orWhere('nickname', 'LIKE', '%'.request('search').'%')
             ->orWhereHas('character', function($q){
                 $q->where('name',  'LIKE', '%'.request('search').'%');
             });

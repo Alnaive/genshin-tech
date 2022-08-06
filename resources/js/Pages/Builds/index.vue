@@ -29,6 +29,10 @@
                                 <thead class="bg-gray-50 dark:bg-dark-eval-2 ">
                                     <tr>
                                         <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase ">
+                                            ID
+                                        </th>
+                                        <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">
                                             Character Name
                                         </th>
@@ -47,6 +51,9 @@
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 dark:bg-dark-eval-3">
                                     <tr v-for="build in builds.data" :key="build.id">
+                                        <td class="px-6 py-4">
+                                            <div>{{build.id}}</div>
+                                        </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0 h-10 w-10">
@@ -101,7 +108,8 @@
     import Pagination from '@/Components/Pagination'
     import pickBy from 'lodash/pickBy'
     import throttle from 'lodash/throttle'
-
+    import Swal from 'sweetalert2/dist/sweetalert2.js'
+    import 'sweetalert2/src/sweetalert2.scss'
     export default {
         components: {
             BreezeAuthenticatedLayout,
@@ -132,8 +140,30 @@
         methods: {
             
             destroy(id) {
-            this.$inertia.delete(route("Builds.destroy", id));
-            console.log(id);
+                 Swal.fire({
+                    title: "Are you sure ?",
+                    text: "Delete this data",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#ff0000",
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    closeOnConfirm: false,
+                    closeOnCancel: false 
+                }).then((result) => {
+                if (result.value) {
+                    this.$inertia.delete(route("Builds.destroy", id));
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    Swal.fire(
+                    'Cancel',
+                    'Data is not deleted! ',
+                    'error'
+                    )
+                }
+                })
             },
             showImage() {
                 return "/storage/images/icon/character/";
