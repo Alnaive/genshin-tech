@@ -27,7 +27,7 @@
       </div>
       <div class="flex items-center">
           <a href="https://enka.network" target="_BLANK">
-            <img src="https://cdn.discordapp.com/attachments/873515567930290237/1002860095178280980/unknown.png" alt="" srcset="">
+            <img src="https://cdn.discordapp.com/attachments/971472744820650035/971482996572057600/Frame_4905.png" alt="" srcset="">
           </a>
       </div>
   </div>

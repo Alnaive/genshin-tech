@@ -12,7 +12,7 @@
                     <pre class="mt-3 normal-case">Powered by Enka.Network</pre>
                 </form>
             </div>
-            <div>
+            <div class="">
                 <div  class="flex flex-row card shadow-lg overflow-x-auto" >
                     <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
                         <li>

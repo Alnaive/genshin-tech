@@ -3,12 +3,12 @@
         <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-16 ">
             <li  v-if="build[0].conste > 0">
                 <div>
-                    <div v-if="build[0].conste == 1" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
+                    <div v-if="build[0].conste >= 1" class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
                         <div  class="hero-content text-center text-neutral-content">
                             <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build[0].character.Consts[0]}.png`" alt="">
                         </div>
                     </div>
-                    <div v-else class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
+                    <div v-else class="hero w-14 h-14"  style="background-image: url('/image/svg/Const.svg');">
                         <div  class="hero-content text-center text-neutral-content">
                             <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build[0].character.Consts[0]}.png`" alt="">
                         </div>
@@ -104,7 +104,7 @@ export default {
             constBorder(){
                 const ele = this.build[0].character.element;
                 if(ele == "Ice"){
-                    return this.isCryo;
+                    return "../image/svg/Const_Cryo.svg";
                 } else if(ele == "Rock"){
                     return "../image/svg/Const_Geo.svg";
                 } else if(ele == "Dendro"){

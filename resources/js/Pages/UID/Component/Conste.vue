@@ -3,12 +3,12 @@
         <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-16 ">
             <li  v-if="sessionData.talentIdList">
                 <div>
-                    <div v-if="sessionData.talentIdList.length == 1" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
+                    <div v-if="sessionData.talentIdList.length >= 1" class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
                         <div  class="hero-content text-center text-neutral-content">
                             <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${charData.Consts[0]}.png`" alt="">
                         </div>
                     </div>
-                    <div v-else class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
+                    <div v-else class="hero w-14 h-14"  style="background-image: url('/image/svg/Const.svg');" >
                         <div  class="hero-content text-center text-neutral-content">
                             <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${charData.Consts[0]}.png`" alt="">
                         </div>
@@ -104,7 +104,7 @@ export default {
             constBorder(){
                 const ele = this.charData.element;
                 if(ele == "Ice"){
-                    return this.isCryo;
+                    return '../image/svg/Const_Cryo.svg';
                 } else if(ele == "Rock"){
                     return "../image/svg/Const_Geo.svg";
                 } else if(ele == "Dendro"){
