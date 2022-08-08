@@ -4,6 +4,8 @@
         <div class="flex gap-2">
             <Link class="btn btn-ghost" :href="route('uid', { id: uid} )">Back</Link>
         </div>
+        <div class="alert alert-info justify-center" v-if="sessionData.propMap[4001]['val'] < 79"><span>Level Up Your Character to Store in This Site!</span></div>
+
         <br>
         <div class="space-y-2 lg:flex lg:space-x-2">
             <div  class="flex flex-row card shadow-lg overflow-x-auto" >
@@ -39,7 +41,7 @@
                     <Sands :sessionData="sessionData"/>
                     <Goblet :sessionData="sessionData"/>
                     <Circlet :sessionData="sessionData"/>
-                    <div  class="flex space-x-4 ml-[120px]" >
+                    <div  class="flex space-x-4 justify-center" >
                         <div class="flex-none ...">
                         <div class="flex flex-col" v-for="(key,item) in countedOfArtifact" :key="key">
                                 <div  v-if="key == 2">
@@ -76,7 +78,8 @@
         
         </div>
         <div class="flex space-x-2 mt-4 ">
-            <button class="btn bg-red-500 hover:bg-red-400 text-white" @click="submit()"><VueFeather type="upload" size="24" class="mr-1" ></VueFeather> Submit</button>
+            <button v-if="sessionData.propMap[4001]['val'] > 79" class="btn bg-red-500 hover:bg-red-400 text-white" @click="submit()"><VueFeather type="upload" size="24" class="mr-1" ></VueFeather>Store</button>
+            
             <!-- The button to open modal -->
             <label for="my-modal-4" class="btn bg-green-500 text-white hover:bg-green-400"><VueFeather type="image" size="24" class="mr-1" ></VueFeather> Export</label>
 
@@ -95,7 +98,7 @@
                         <button @click="landscapeImage()" class="btn btn-primary space-x-2"><VueFeather type="monitor" size="24"></VueFeather></button>
                     </div>
                 </div>
-                 <div class="flex flex-col lg:flex-row mt-2">
+                 <div class="flex flex-col lg:flex-row mt-2 overflow-auto">
                         <div class="bg-transparent " id="canvas-potrait"></div>
                         <div class="bg-transparent " id="canvas-landscape"></div>
                     </div>

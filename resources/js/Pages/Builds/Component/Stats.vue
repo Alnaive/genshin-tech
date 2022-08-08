@@ -36,18 +36,19 @@
     <strong class="mr-2 "> <span >{{ build.criticalDamage }}%</span> <br>
     </strong>
 </div>
+<div class="flex items-center gap-2" v-if="build.healingBonus > 0">
+    <img src="/image/attribute/Icon_Attribute_Healing.png" class="w-8 h-8">
+    <strong class="flex-1 w-64">Healing Bonus</strong>
+    <strong class="mr-2 "> <span >{{ build.healingBonus }}%</span> <br>
+    </strong>
+</div>
 <div class="flex items-center gap-2">
     <img src="/image/attribute/Icon_Attribute_Energy_Recharge.png" class="w-8 h-8">
     <strong class="flex-1 w-64">Energy Recharge</strong>
     <strong class="mr-2 "> <span >{{ build.energyRecharge }}%</span> <br>
     </strong>
 </div>
-<div class="flex items-center gap-2" v-if="build.healingBonus > 0">
-    <img src="/image/attribute/Icon_Attribute_Healing_Bonus.png" class="w-8 h-8">
-    <strong class="flex-1 w-64">Healing Bonus</strong>
-    <strong class="mr-2 "> <span >{{ build.healingBonus }}%</span> <br>
-    </strong>
-</div>
+
 <div class="flex items-center gap-2" v-if="build.character.element == 'Water' && build.hydroDamageBonus > 0">
     <img src="/image/attribute/Hydro.png" class="w-8 h-8">
     <strong class="flex-1 w-64">Hydro DMG Bonus</strong>

@@ -15,6 +15,7 @@ use Auth; use DB;
 class DashboardController extends Controller
 {
     public function index(){
-        return Inertia::render('/Dashboard');
+        // $itemName = file_get_contents(storage_path("/logs/uid.log"));
+        return Inertia::render('Dashboard');
     }
 }

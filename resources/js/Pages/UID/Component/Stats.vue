@@ -36,12 +36,19 @@
     <strong class="mr-2 "> <span >{{ parseFloat(sessionData.fightPropMap[22] * 100).toFixed(1) }}%</span> <br>
     </strong>
 </div>
+<div class="flex items-center gap-2" v-if="sessionData.fightPropMap[26] > 0">
+    <img src="/image/attribute/Icon_Attribute_Healing.png" class="w-8 h-8">
+    <strong class="flex-1 w-64">Healing Bonus</strong>
+    <strong class="mr-2 "> <span >{{ parseFloat(sessionData.fightPropMap[26] * 100).toFixed(1) }}%</span> <br>
+    </strong>
+</div>
 <div class="flex items-center gap-2">
     <img src="/image/attribute/Icon_Attribute_Energy_Recharge.png" class="w-8 h-8">
     <strong class="flex-1 w-64">Energy Recharge</strong>
     <strong class="mr-2 "> <span >{{ parseFloat(sessionData.fightPropMap[23] * 100).toFixed(1) }}%</span> <br>
     </strong>
 </div>
+
 <div class="flex items-center gap-2" v-if="charData.element == 'Water' && sessionData.fightPropMap[42] > 0">
     <img src="/image/attribute/Hydro.png" class="w-8 h-8">
     <strong class="flex-1 w-64">Hydro DMG Bonus</strong>

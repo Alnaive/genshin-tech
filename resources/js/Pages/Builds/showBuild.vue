@@ -40,7 +40,7 @@
                     <Sands :build="build"/>
                     <Goblet :build="build"/>
                     <Circlet :build="build"/>
-                    <div  class="flex space-x-4 ml-[120px]" >
+                    <div  class="flex space-x-4 justify-center" >
                         <div class="flex-none ...">
                         <div class="flex flex-col">
                                 <div  v-if="build.two_pcs_art">

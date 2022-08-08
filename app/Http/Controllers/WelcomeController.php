@@ -14,7 +14,7 @@ use Redirect;
 use Storage;
 use File;
 use Illuminate\Support\Facades\Http;
-
+use Log;
 class WelcomeController extends Controller
 {
     public function index() {
@@ -28,6 +28,7 @@ class WelcomeController extends Controller
         $enkaKey = config('services.ENKA_KEY');
         $itemName = json_decode(file_get_contents(public_path() . "/asset/ItemName.json"), true);
         $response = json_decode(file_get_contents("https://enka.network/u/$uid/__data.json?key=$enkaKey"), true);
+        Log::channel('UID')->info("UID Search: $uid");
         return Inertia::render('UID/UID', [
             'uid' => $response,
             'UID' => $uid,
