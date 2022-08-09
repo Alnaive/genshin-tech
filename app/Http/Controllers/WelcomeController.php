@@ -15,6 +15,7 @@ use Storage;
 use File;
 use Illuminate\Support\Facades\Http;
 use Log;
+use DB;
 class WelcomeController extends Controller
 {
     public function index() {
@@ -43,29 +44,34 @@ class WelcomeController extends Controller
             'itemName' => json_decode(file_get_contents(public_path() . "/asset/ItemName.json"), true),
         ]);
     }
-    public function guess() {
-        $build = Build::query()->with('character','weapon','set4','set2','likes');
+    public function explore(){
+        $query = Build::with('character','weapon');
         if(request('search')){
-            $build->where('name', 'LIKE', '%'.request('search').'%')
-            ->orWhere('char_lv', 'like', '%'.request('search').'%')
-                ->orWhere('c_rate', 'like', '%'.request('search').'%')
-                ->orWhere('c_damage', 'like', '%'.request('search').'%')
-                ->orWhere('em', 'like', '%'.request('search').'%')
-                ->orWhere('defense', 'like', '%'.request('search').'%')
-                ->orWhere('name', 'like', '%'.request('search').'%');
+            $query->where('attack', 'LIKE', '%'.request('search').'%')
+            ->orWhere('critRate', 'LIKE', '%'.request('search').'%')
+            ->orWhere('critDamage', 'LIKE', '%'.request('search').'%')
+            ->orWhereHas('character', function($q){
+                $q->where('name',  'LIKE', '%'.request('search').'%');
+            });
         }
-        $ipAddress = $_SERVER['REMOTE_ADDR'];
-        return Inertia::render('Welcome/guess', [
-            'build' => $build->withCount('likes')->orderBy('likes_count', 'desc')->paginate(10)->withQueryString(),
+        return Inertia::render('Explore', [
             'filters' => Request::all('search'),
-            'characters' => Character::all(),
-            'artifacts' => Artifact::all(),
-            'weapons' => Weapon::all(),
-            'ipAddress' => $ipAddress,
+            'builds' => $query->inRandomOrder()->paginate(20)->withQueryString(),
         ]);
     }
-
-   
+    public function exploreUID($uid){
+        $query = Build::where('uid', $uid)->with('character','weapon');
+        if(request('search')){
+            $query->orWhereHas('character', function($q){
+                $q->where('name',  'LIKE', '%'.request('search').'%');
+            });
+        }
+        return Inertia::render('Builds/showUID', [
+            'builds' => $query->inRandomOrder()->get(),
+            'uid' => $uid,
+            'filters' => Request::all('search'),
+        ]);
+    }
 
     public function character()
     {

@@ -56,7 +56,8 @@
       <div class="flex-none hidden lg:block">
         <ul class="flex flex-row space-x-3">
           <!-- Navbar menu content here -->
-          <li><Link :href="route('character')" class="btn btn-ghost normal-case text-md ">Character</Link></li>
+          <li><Link :href="route('explore')" class="btn btn-ghost normal-case text-md "><VueFeather type="search" size="24" ></VueFeather> Explore</Link></li>
+          <li><Link :href="route('character')" class="btn btn-ghost normal-case text-md "><img src="https://cdn.discordapp.com/attachments/462583582431510528/943893367387988048/n5s6DYBAG0im6vlSAeQAAAAAElFTkSuQmCC.png" alt="">Character</Link></li>
           <li><!-- Dropdwon -->
             <BreezeDropdown align="right" width="48" v-if="$page.props.auth.user">
                 <template #trigger>
@@ -121,7 +122,8 @@
     <label for="my-drawer-3" class="drawer-overlay"></label> 
     <ul class="menu p-4 overflow-y-auto w-80 bg-white dark:bg-base-300 ">
       <!-- Sidebar content here -->
-      <li><Link :href="route('character')" class="btn btn-ghost normal-case text-md">Character</Link></li>
+      <li><Link :href="route('explore')" class="btn btn-ghost normal-case text-md "><VueFeather type="search" size="24" class="mr-1"></VueFeather> Explore</Link></li>
+      <li><Link :href="route('character')" class="btn btn-ghost normal-case text-md"><img src="https://cdn.discordapp.com/attachments/462583582431510528/943893367387988048/n5s6DYBAG0im6vlSAeQAAAAAElFTkSuQmCC.png" alt="">Character</Link></li>
           <li><!-- Dropdwon -->
             <BreezeDropdown align="right" width="48" v-if="$page.props.auth.user">
                 <template #trigger>
@@ -147,6 +149,12 @@
                     </span>
                 </template>
                 <template #content>
+                    <BreezeDropdownLink
+                        :href="route('dashboard')"
+                        as="button"
+                    >
+                        Dashboard
+                    </BreezeDropdownLink>
                     <BreezeDropdownLink
                         :href="route('logout')"
                         method="post"
@@ -177,6 +185,7 @@ import Navbar from '@/Shared/Navbar.vue'
 import BreezeApplicationLogo from '@/Components/ApplicationLogo.vue'
 import BreezeDropdown from '@/Components/Dropdown.vue'
 import BreezeDropdownLink from '@/Components/DropdownLink.vue'
+import VueFeather from 'vue-feather';
 
 export default {
     components: {
@@ -190,6 +199,7 @@ export default {
          BreezeApplicationLogo,
         BreezeDropdown,
         BreezeDropdownLink,
+        VueFeather,
     },
 
     setup() {

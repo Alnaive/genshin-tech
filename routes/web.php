@@ -40,7 +40,8 @@ Route::GET('/u/{uid}', [WelcomeController::class, 'uid'])->name('uid');
 Route::GET('/Character', [WelcomeController::class, 'character'])->name('character');
 Route::POST('liked/{id}', [LikeController::class, 'like'])->name('like');
 Route::POST('disliked/{id}', [LikeController::class, 'dislike'])->name('dislike');
-Route::GET('my-page/', [WelcomeController::class, 'guess'])->name('guess');
+Route::GET('/showcase/build/{uid}', [WelcomeController::class, 'exploreUID'])->name('exploreUID');
+Route::GET('/explore', [WelcomeController::class, 'explore'])->name('explore');
 Route::POST('store/build/d', [BuildController::class, 'storeBuild'])->name('storeBuild');
 Route::GET('show/{slug}', [CharacterController::class, 'showCharacter'])->name('showCharacter');
 

@@ -1,6 +1,6 @@
 <template>
     <section> 
-        <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-16 ">
+        <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-12 ">
             <li v-if="build.conste > 0" >
                 <div>
                     <div v-if="build.conste >= 1" class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}" >

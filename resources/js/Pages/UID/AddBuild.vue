@@ -7,13 +7,32 @@
         <div class="alert alert-info justify-center" v-if="sessionData.propMap[4001]['val'] < 79"><span>Level Up Your Character to Store in This Site!</span></div>
 
         <br>
+        <div class="form-control w-full max-w-xs">
+            <label class="label">
+                <span class=" text-black dark:text-white">Change Avatar</span>
+            </label>
+            <input type="file" @change="onFileChange" ref="Avatar"/>
+        </div>
+        <div class="container invisible hover:visible">
+            <Moveable
+                className="moveable"
+                v-bind:target="['.target']"
+                v-bind:draggable="true"
+                v-bind:scalable="true"
+                v-bind:rotatable="false"
+                @drag="onDrag"
+                @scale="onScale"
+                @rotate="onRotate"
+            />
+        </div>
         <div class="space-y-2 lg:flex lg:space-x-2">
             <div  class="flex flex-row card shadow-lg overflow-x-auto" >
                 <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
                     <li>
                         <div id="potraitData" class="w-[414px] h-[736px] card " :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
-                        <figure>
-                            <img :src="showAvatar() + charData.avatar" >
+                        <figure id="preview" class="target" ref="target">
+                            <img v-if="!url" :src="showAvatar() + charData.avatar" >
+                            <img v-else :src="url" />
                         </figure> 
                         <div class="drop-shadow-lg shadow-black font-bold text-white absolute ml-4 top-0 mt-1">
                         <pre data-prefix="$"><code>{{charData.name}}</code></pre> 
@@ -128,12 +147,13 @@ import { saveAs } from 'file-saver';
 import VueFeather from 'vue-feather';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
+import Moveable from "vue3-moveable";
 
 export default {
     components: {
       Head,
       Link,
-      Guest,
+      Guest, Moveable,
         Equip, Talent, Stats, Conste, VueFeather,Weapon, Flower, Goblet,
        Plume, Sands, Circlet,
     },
@@ -218,13 +238,19 @@ export default {
            arrayOfArtifact: [],
            countedOfArtifact: {},
            arrayOfTalent: [],
+           url:null,
         }
     },
     methods:{
-    //    submit(){
-    //         console.log(this.form);
-    //         this.form.post(route("storeBuild"));
-    //    },
+    onDrag({ transform }) {
+        this.$refs.target.style.transform = transform;
+        },
+        onScale({ drag }) {
+        this.$refs.target.style.transform = drag.transform;
+        },
+        onRotate({ drag }) {
+        this.$refs.target.style.transform = drag.transform;
+        },
        submit() {
             Swal.fire({
                 title: "Are you sure ?",
@@ -284,6 +310,10 @@ export default {
         showAvatar() {
                 return "/storage/images/icon/avatar/";
             }, 
+         onFileChange(e) {
+            const file = e.target.files[0];
+            this.url = URL.createObjectURL(file);
+        },
         bgElement(){
             const ele = this.charData.element;
                 if(ele == "Ice"){

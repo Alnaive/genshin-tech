@@ -1,5 +1,5 @@
 <template>
-<div  class="space-x-2 absolute left-[10px] top-[48%]">
+<div  class="space-x-2 absolute left-[10px] top-[45%]">
     <div v-if="!sessionData.proudSkillExtraLevelMap"  class="flex flex-row space-x-2">
         <div v-for="(skillLv, skillKey) in sessionData.skillLevelMap" :key="skillKey">
             <div v-for="(icon, iconKey) in charData.Skills" :key="iconKey" > 

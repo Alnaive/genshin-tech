@@ -21,7 +21,7 @@
             <h1 class="font-bold" v-else-if="build[0].equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" >HP</h1>
             <h1 class="font-bold" v-else-if="build[0].equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_DEFENSE_PERCENT'">DEF</h1>
             <h1 class="font-bold" v-else-if="build[0].equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'">Elemental Mastery</h1>
-            <h1 class="font-bold" v-else-if="build[0].equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HEAL_ADD	'">Healing Bonus</h1>
+            <h1 class="font-bold" v-else-if="build[0].equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HEAL_ADD'">Healing Bonus</h1>
             <h1 class="font-bold" v-else-if="build[0].equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL'">CRIT RATE</h1>
             <h1 class="font-bold" v-else-if="build[0].equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_CRITICAL_HURT'">CRIT DMG</h1>
            <div v-if="build[0].equipList[4].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'">

@@ -43,7 +43,7 @@
     </strong>
 </div>
 <div class="flex items-center gap-2" v-if="build[0].healingBonus > 0">
-    <img src="/image/attribute/Icon_Attribute_Healing_Bonus.png" class="w-8 h-8">
+    <img src="/image/attribute/Icon_Attribute_Healing.png" class="w-8 h-8">
     <strong class="flex-1 w-64">Healing Bonus</strong>
     <strong class="mr-2 "> <span >{{ build[0].healingBonus }}%</span> <br>
     </strong>

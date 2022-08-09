@@ -1,6 +1,6 @@
 <template>
     <section> 
-        <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-16 ">
+        <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-12 ">
             <li  v-if="sessionData.talentIdList">
                 <div>
                     <div v-if="sessionData.talentIdList.length >= 1" class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
