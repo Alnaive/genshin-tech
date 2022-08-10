@@ -9,33 +9,13 @@
             </div>
         </template>
        
-        <div class="form-control w-full max-w-xs">
-            <label class="label">
-                <span class=" text-black dark:text-white">Change Avatar</span>
-            </label>
-            <input type="file" @change="onFileChange" ref="Avatar"/>
-        </div>
-        <div class="container invisible hover:visible">
-            <Moveable
-                className="moveable"
-                v-bind:target="['.target']"
-                v-bind:draggable="true"
-                v-bind:scalable="true"
-                v-bind:rotatable="false"
-                @drag="onDrag"
-                @scale="onScale"
-                @rotate="onRotate"
-            />
-        </div>
+        
         <div  class="flex flex-row card shadow-lg overflow-x-auto" >
                 <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
                     <li>
-                        
                         <div id="potraitData" class="w-[414px] h-[736px] card " >
-                        <figure id="preview" class="target" ref="target">
-                             
-                            <img v-if="!url" :src="showAvatar() + build.character.avatar" >
-                            <img v-else :src="url" />
+                        <figure >
+                            <img  :src="showAvatar() + build.character.avatar" >
                         </figure> 
                         <div class="drop-shadow-lg shadow-black font-bold text-white absolute ml-4 top-0 mt-1">
                         <pre data-prefix="$"><code>{{ build.character.name}}</code></pre> 
@@ -124,13 +104,12 @@ import Sands from './Component/Sands.vue';
 import Goblet from './Component/Goblet.vue';
 import Circlet from './Component/Circlet.vue';
 import domtoimage from 'dom-to-image';
-import Moveable from "vue3-moveable";
 
 
 
 export default{
     components:{
-        Guest, Moveable, 
+        Guest,
         VueFeather, Equip, Conste, Talent, Stats, Weapon, Flower, Plume, Sands, Goblet, Circlet,
     },
     props:{
@@ -140,7 +119,6 @@ export default{
     data() {
 		return{
             likeData:'',
-            url: null,
         }
 	},
     watch:{
@@ -158,20 +136,7 @@ export default{
         showAvatar() {
                 return "/storage/images/icon/avatar/";
             }, 
-        onFileChange(e) {
-            const file = e.target.files[0];
-            this.url = URL.createObjectURL(file);
-        },
-        
-        onDrag({ transform }) {
-        this.$refs.target.style.transform = transform;
-        },
-        onScale({ drag }) {
-        this.$refs.target.style.transform = drag.transform;
-        },
-        onRotate({ drag }) {
-        this.$refs.target.style.transform = drag.transform;
-        },
+       
         bgElement(){
             const ele = this.build.character.element;
                 if(ele == "Ice"){

@@ -1,5 +1,5 @@
 <template>
-<div  class="space-x-2 absolute left-[10px] top-[45%]">
+<div  class="space-x-2 absolute  top-[45%]">
     <div v-if="!build.talentExtraLv"  class="flex flex-row space-x-2">
         <div v-for="(skillLv, skillKey) in build.talent" :key="skillKey">
             <div v-for="(icon, iconKey) in build.character.Skills" :key="iconKey" > 

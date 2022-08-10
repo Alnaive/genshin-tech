@@ -29,7 +29,7 @@
             <div  class="flex flex-row card shadow-lg overflow-x-auto" >
                 <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
                     <li>
-                        <div id="potraitData" class="w-[414px] h-[736px] card " :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+                        <div  class="w-[414px] h-[736px] card " >
                         <figure id="preview" class="target" ref="target">
                             <img v-if="!url" :src="showAvatar() + charData.avatar" >
                             <img v-else :src="url" />
@@ -38,14 +38,21 @@
                         <pre data-prefix="$"><code>{{charData.name}}</code></pre> 
                         <pre data-prefix=">" class="text-warning"><code>Level {{sessionData.propMap[4001]['val']}}/{{(sessionData.propMap[1002]['val'] * 10) + (sessionData.propMap[1002]['val']>0?10:0) + 20}}</code></pre> 
                         </div>
+                        <section v-show="!showEquip">
                         <Equip :sessionData="sessionData" />
+                        </section>
                         
                         <Conste :sessionData="sessionData" :charData="charData" />
 
                         <Talent :sessionData="sessionData" :charData="charData" /> 
                         <div class="card absolute inset-x-0 bottom-0 mt-5">
-                            <div class="bg-transparent" >
+                            <div v-if="!url" class="bg-transparent">
                                 <section class="px-2 py-2 text-white" >
+                                    <Stats :sessionData="sessionData" :charData="charData" />
+                                </section>
+                            </div>
+                            <div v-else :style="{ backgroundImage: 'url(' + bgElement() + ')'}">
+                             <section class="px-2 py-2 text-white" >
                                     <Stats :sessionData="sessionData" :charData="charData" />
                                 </section>
                             </div>
@@ -108,17 +115,17 @@
             <label class="modal-box relative bg-accent-content dark:bg-base-100" for="">
                     <label for="my-modal-4" class="btn btn-sm btn-circle absolute right-2 top-2 bg-transparent">✕</label>
 
-                <div class="flex items-center justify-center">
-                    <h1 class="text-lg mb-3">Select Layout</h1>
+                <div class="flex flex-col items-center justify-center">
+                    <button  v-on:click="showEquip = !showEquip" class="btn btn-primary space-x-2"><VueFeather :type=" !showEquip ? 'eye' : 'eye-off' " size="24" class="mr-1"></VueFeather>Left Equip</button>
                 </div>
+                <br>
                 <div class="flex items-center justify-center">
                     <div class="flex space-x-4">
-                        <button @click="portraitImage()" class="btn btn-primary space-x-2"><VueFeather type="smartphone" size="24"></VueFeather></button>
-                        <button @click="landscapeImage()" class="btn btn-primary space-x-2"><VueFeather type="monitor" size="24"></VueFeather></button>
+                        <!-- <button @click="portraitImage()" class="btn btn-primary space-x-2"><VueFeather type="smartphone" size="24"></VueFeather></button> -->
+                        <button @click="landscapeImage()" class="btn btn-primary space-x-2">Export</button>
                     </div>
                 </div>
                  <div class="flex flex-col lg:flex-row mt-2 overflow-auto">
-                        <div class="bg-transparent " id="canvas-potrait"></div>
                         <div class="bg-transparent " id="canvas-landscape"></div>
                     </div>
             </label>
@@ -239,6 +246,7 @@ export default {
            countedOfArtifact: {},
            arrayOfTalent: [],
            url:null,
+           showEquip: false,
         }
     },
     methods:{
@@ -277,21 +285,6 @@ export default {
             }
             })
         },
-        portraitImage(){
-                var node = document.getElementById("potraitData");
-                var node1 = document.getElementById("canvas-potrait");
-
-                domtoimage
-                .toPng(node)
-                .then(function (dataUrl) {
-                    var img = new Image();
-                    img.src = dataUrl;
-                    node1.appendChild(img);
-                })
-                .catch(function (error) {
-                    console.error("oops, something went wrong!", error);
-                });
-            },
         landscapeImage(){
                 var node = document.getElementById("landscapeData");
                 var node1 = document.getElementById("canvas-landscape");
