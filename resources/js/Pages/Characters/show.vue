@@ -27,7 +27,9 @@
                                     <pre data-prefix="$"><code>{{ build[0].character.name}}</code></pre> 
                                     <pre data-prefix=">" class="text-warning"><code>Level {{ build[0].level}}/{{( build[0].ascendsion * 10) + ( build[0].ascendsion>0?10:0) + 20}}</code></pre> 
                                     </div>
+                                    <section class="visible md:invisible">
                                     <Equip :build="build" />
+                                    </section>
                                     <Conste :build="build" />
                                     <Talent :build="build" /> 
                                     <div class="card absolute inset-x-0 bottom-0 mt-5">

@@ -69,6 +69,7 @@ class CharacterController extends Controller
         // $itemName = json_decode(file_get_contents("https://api.ambr.top/v2/en/avatar"), true);
         return Inertia::render('Characters/getCharacter',[
             'itemName' => $itemName,
+            'skillDepot' => json_decode(file_get_contents("https://cdn.jsdelivr.net/gh/Dimbreath/GenshinData@master/ExcelBinOutput/AvatarSkillDepotExcelConfigData.json"), true),
         ]);
     }
     public function getConsTalent($id){
@@ -141,10 +142,26 @@ class CharacterController extends Controller
             $img1 = $request->avatar->getClientOriginalName();
             $request->avatar->storeAS('images/icon/avatar', $img1);
             }
-        $data = $request->all();
-        $data['slug'] = SlugService::createSlug(Character::class, 'slug',$request->name);
-        $data['avatar'] = $img1;
-        $character = Character::create($data);
+        // $data = $request->all();
+        // $data['slug'] = SlugService::createSlug(Character::class, 'slug',$request->name);
+        // $data['avatar'] = $img1;
+        $character = Character::updateOrCreate(['id' => $request->id], [
+            'id' => $request->id,
+            'name' => $request->name,
+            'slug' => SlugService::createSlug(Character::class, 'slug',$request->name),
+            'rarity' => $request->rarity,
+            'element' => $request->element,
+            'Consts' => $request->Consts,
+            'skillDepotId' => $request->skillDepotId,
+            'SkillOrder' => $request->SkillOrder,
+            'Skills' => $request->Skills,
+            'ProudMap' => $request->ProudMap,
+            'icon' => $request->icon,
+            'avatar' => $img1,
+            'weaponType' => $request->weaponType,
+
+
+        ]);
         return Redirect::route('Characters.index');
     }
 

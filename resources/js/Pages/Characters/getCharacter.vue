@@ -84,6 +84,7 @@ export default {
                 }
             },
             itemName: Object,
+            skillDepot: Object,
            
         },
         data(){
@@ -102,6 +103,7 @@ export default {
                 icon: props.character.icon,
                 weaponType: props.character.weaponType,
                 Consts: [],
+                skillDepotId: null,
                 SkillOrder: [],
                 Skills: {},
                 ProudMap: {},
@@ -129,6 +131,8 @@ export default {
                     return this.characterID = "10000007-706";
                 } else if(girlElectro) {
                     return this.characterID = "10000007-707";
+                } else {
+                    return this.characterID = this.character.id;
                 }
             },
             defineCharacterId(){
@@ -140,21 +144,15 @@ export default {
                       this.form.SkillOrder = ItemName[key].SkillOrder; 
                       this.form.Skills = ItemName[key].Skills; 
                       this.form.ProudMap = ItemName[key].ProudMap; 
-                      console.log(key);
                     }
                 })
             },
-            loop(){
-                // const ItemName = this.itemName;
-                // const c = this.characterID;
-                // Object.keys(ItemName).map((key) => {
-                //     if(c == key){
-                //       this.form.Consts = ItemName[key].Consts; 
-                //       this.form.SkillOrder = ItemName[key].SkillOrder; 
-                //       this.form.Skills = ItemName[key].Skills; 
-                //       this.form.ProudMap = ItemName[key].ProudMap; 
-                //     }
-                // });
+            defineSkillDepot(){
+                Object.values(this.skillDepot).map((item) => {
+                    if(this.form.SkillOrder[0] == item.skills[0]){
+                        this.form.skillDepotId = item.id;
+                    }
+                })
             },
             submit() {
                 if (this.$refs.Avatar) {
@@ -166,18 +164,11 @@ export default {
                 const file = e.target.files[0];
                 this.url = URL.createObjectURL(file);
             },
-            addJson(){
-                const i = this.form.name;
-                const talent = GenshinDb.talents(i);
-                const conste = GenshinDb.constellations(i);
-                localStorage.setItem('talent', JSON.stringify(talent));
-                localStorage.setItem('constellation', JSON.stringify(conste));
-            },
         },
         mounted(){
-            this.loop();
             this.defineId();
             this.defineCharacterId();
+            this.defineSkillDepot();
         }
 }
 </script>

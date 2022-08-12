@@ -34,9 +34,10 @@
                             <img v-if="!url" :src="showAvatar() + charData.avatar" >
                             <img v-else :src="url" />
                         </figure> 
-                        <div class="drop-shadow-lg shadow-black font-bold text-white absolute ml-4 top-0 mt-1">
-                        <pre data-prefix="$"><code>{{charData.name}}</code></pre> 
-                        <pre data-prefix=">" class="text-warning"><code>Level {{sessionData.propMap[4001]['val']}}/{{(sessionData.propMap[1002]['val'] * 10) + (sessionData.propMap[1002]['val']>0?10:0) + 20}}</code></pre> 
+                        <div :class="!url ? 'text-white font-bold absolute ml-4 top-0 mt-1':'mix-blend-color-dodge font-bold absolute ml-4 top-0 mt-1'">
+                        <h1 class="font-md">{{charData.name}}</h1> 
+                        <span v-show="!showNickname">{{playerInfo.nickname}} </span>   <span v-show="!showUid"> {{uid}}</span>
+                        <pre :class="!url ? 'text-warning' : 'text-none'">Level {{sessionData.propMap[4001]['val']}}/{{(sessionData.propMap[1002]['val'] * 10) + (sessionData.propMap[1002]['val']>0?10:0) + 20}}</pre> 
                         </div>
                         <section v-show="!showEquip">
                         <Equip :sessionData="sessionData" />
@@ -44,7 +45,7 @@
                         
                         <Conste :sessionData="sessionData" :charData="charData" />
 
-                        <Talent :sessionData="sessionData" :charData="charData" /> 
+                        <Talent :sessionData="sessionData" :charData="charData" :showEquip="showEquip" /> 
                         <div class="card absolute inset-x-0 bottom-0 mt-5">
                             <div v-if="!url" class="bg-transparent">
                                 <section class="px-2 py-2 text-white" >
@@ -115,8 +116,10 @@
             <label class="modal-box relative bg-accent-content dark:bg-base-100" for="">
                     <label for="my-modal-4" class="btn btn-sm btn-circle absolute right-2 top-2 bg-transparent">✕</label>
 
-                <div class="flex flex-col items-center justify-center">
-                    <button  v-on:click="showEquip = !showEquip" class="btn btn-primary space-x-2"><VueFeather :type=" !showEquip ? 'eye' : 'eye-off' " size="24" class="mr-1"></VueFeather>Left Equip</button>
+                <div class="flex flex-col space-x-2 md:flex-row items-center justify-center">
+                    <button  v-on:click="showEquip = !showEquip" class="btn btn-primary space-x-2"><VueFeather :type=" !showEquip ? 'eye-off' : 'eye' " size="24" class="mr-1"></VueFeather>Left Equip</button>
+                    <button  v-on:click="showNickname = !showNickname" class="btn btn-primary space-x-2"><VueFeather :type=" !showNickname ? 'eye-off' : 'eye' " size="24" class="mr-1"></VueFeather>Nickname</button>
+                    <button  v-on:click="showUid = !showUid" class="btn btn-primary space-x-2"><VueFeather :type=" !showUid ? 'eye-off' : 'eye' " size="24" class="mr-1"></VueFeather>UID</button>
                 </div>
                 <br>
                 <div class="flex items-center justify-center">
@@ -247,6 +250,8 @@ export default {
            arrayOfTalent: [],
            url:null,
            showEquip: false,
+           showUid: false,
+           showNickname: false,
         }
     },
     methods:{

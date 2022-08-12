@@ -13,8 +13,8 @@
                 </form>
             </div>
             <div class="">
-                <div  class="flex flex-row card shadow-lg overflow-x-auto" >
-                    <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+                <div  class="flex flex-row card shadow-lg overflow-x-auto" :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+                    <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl">
                         <li>
                             <Link :href="route('showBuild', { id: build[0].id })">
                                 <div id="potraitData" class="w-[414px] h-[736px] card " >
@@ -22,10 +22,13 @@
                                         <img :src="showAvatar() + build[0].character.avatar" >
                                     </figure> 
                                     <div class="drop-shadow-lg shadow-black font-bold text-white absolute ml-4 top-0 mt-1">
-                                    <pre data-prefix="$"><code>{{ build[0].character.name}}</code></pre> 
-                                    <pre data-prefix=">" class="text-warning"><code>Level {{ build[0].level}}/{{( build[0].ascendsion * 10) + ( build[0].ascendsion>0?10:0) + 20}}</code></pre> 
+                                    <h1>{{ build[0].character.name}}</h1> 
+                                    <pre >By {{ build[0].nickname}}</pre> 
+                                    <pre class="text-warning">Level {{ build[0].level}}/{{( build[0].ascendsion * 10) + ( build[0].ascendsion>0?10:0) + 20}}</pre> 
                                     </div>
-                                    <Equip :build="build" />
+                                    <section class="visible md:invisible">
+                                        <Equip :build="build" />
+                                    </section>
                                     <Conste :build="build" />
                                     <Talent :build="build" /> 
                                     <div class="card absolute inset-x-0 bottom-0 mt-5">

@@ -1,6 +1,6 @@
 <template>
-<div  class="space-x-2 absolute  top-[45%]">
-    <div v-if="!build[0].talentExtraLv"  class="flex flex-row space-x-2">
+<div  class=" absolute top-[45%] md:top-[17%] md:left-2">
+    <div v-if="!build[0].talentExtraLv"  class="flex flex-row space-x-2 md:flex-col md:space-x-0 md:space-y-4 ">
         <div v-for="(skillLv, skillKey) in build[0].talent" :key="skillKey">
             <div v-for="(icon, iconKey) in build[0].character.Skills" :key="iconKey" > 
                 <div v-if="iconKey == skillKey">
@@ -18,7 +18,7 @@
     <div v-else-if="Object.keys(build[0].talentExtraLv).length == 1" >
             <div v-for="conS in Object.keys(build[0].talentExtraLv)" :key="conS">
                 <div v-for="(proudVal, proudKey) in build[0].character.ProudMap" :key="proudVal">
-                    <div v-if="proudVal == conS" class="flex flex-row space-x-2">
+                    <div v-if="proudVal == conS" class="flex flex-row space-x-2 md:flex-col md:space-x-0 md:space-y-4 ">
                     <div v-for="(skillLv, skillKey) in build[0].talent" :key="skillKey" >
                         <div v-for="(icon, iconKey) in build[0].character.Skills" :key="iconKey"> 
                             <div v-if="skillKey == iconKey"  class="indicator ">
@@ -41,7 +41,7 @@
         <div v-for="conT in Object.keys(build[0].talentExtraLv).splice(0,1)" :key="conT">
             <div v-for="conS in Object.keys(build[0].talentExtraLv).splice(1,1)" :key="conS">
                 <div v-for="proudVal in build[0].character.ProudMap" :key="proudVal">
-                    <div v-if="proudVal == conT && conS" class="flex flex-row space-x-2">
+                    <div v-if="proudVal == conT && conS" class="flex flex-row space-x-2 md:flex-col md:space-x-0 md:space-y-4 ">
                         <div v-for="(skillLv, skillKey) in build[0].talent" :key="skillKey">
                             <div v-for="(icon, iconKey) in build[0].character.Skills" :key="iconKey" > 
                                     <div class="indicator" v-if="skillKey == iconKey && skillKey == build[0].character.SkillOrder[0]" >
@@ -80,7 +80,7 @@
             <div v-for="conT in Object.keys(build[0].talentExtraLv).splice(1,1)" :key="conT">
                 <div v-for="conS in Object.keys(build[0].talentExtraLv).splice(2,2)" :key="conS">
                 <div v-for="proudVal in build[0].character.ProudMap" :key="proudVal">
-                    <div v-if="proudVal == nT && conT && conS" class="flex flex-row space-x-2">
+                    <div v-if="proudVal == nT && conT && conS" class="flex flex-row space-x-2 md:flex-col md:space-x-0 md:space-y-4 ">
                     <div v-for="(skillLv, skillKey) in build[0].talent" :key="skillKey">
                             <div v-for="(icon, iconKey) in build[0].character.Skills" :key="iconKey"> 
                             <div class="indicator-item" v-if="skillKey == iconKey">

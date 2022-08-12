@@ -179,16 +179,6 @@ import 'sweetalert2/src/sweetalert2.scss'
             }
             })
         },
-            addApi(character){
-                const i = character.name;
-                const char = GenshinDb.characters(i);
-                const talent = GenshinDb.talents(i);
-                const conste = GenshinDb.constellations(i);
-                localStorage.setItem('character', JSON.stringify(char));
-                localStorage.setItem('talent', JSON.stringify(talent));
-                localStorage.setItem('constellation', JSON.stringify(conste));
-            },
-            
         },
     }
 

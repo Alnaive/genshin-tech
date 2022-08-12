@@ -1,6 +1,6 @@
 <template>
-<div  class="space-x-2 absolute  top-[45%]">
-    <div v-if="!sessionData.proudSkillExtraLevelMap"  class="flex flex-row space-x-2">
+<div  :class="!showEquip ? 'absolute top-[45%] left-2' : 'absolute top-[17%] left-2'">
+    <div v-if="!sessionData.proudSkillExtraLevelMap"  :class="!showEquip ? 'flex flex-row space-x-2':'flex flex-col space-x-0 space-y-4'">
         <div v-for="(skillLv, skillKey) in sessionData.skillLevelMap" :key="skillKey">
             <div v-for="(icon, iconKey) in charData.Skills" :key="iconKey" > 
                 <div v-if="iconKey == skillKey">
@@ -18,7 +18,7 @@
     <div v-else-if="Object.keys(sessionData.proudSkillExtraLevelMap).length == 1" >
             <div v-for="conS in Object.keys(sessionData.proudSkillExtraLevelMap)" :key="conS">
                 <div v-for="(proudVal, proudKey) in charData.ProudMap" :key="proudVal">
-                    <div v-if="proudVal == conS" class="flex flex-row space-x-2">
+                    <div v-if="proudVal == conS" :class="!showEquip ? 'flex flex-row space-x-2':'flex flex-col space-x-0 space-y-4'">
                     <div v-for="(skillLv, skillKey) in sessionData.skillLevelMap" :key="skillKey" >
                         <div v-for="(icon, iconKey) in charData.Skills" :key="iconKey"> 
                             <div v-if="skillKey == iconKey"  class="indicator ">
@@ -41,7 +41,7 @@
         <div v-for="conT in Object.keys(sessionData.proudSkillExtraLevelMap).splice(0,1)" :key="conT">
             <div v-for="conS in Object.keys(sessionData.proudSkillExtraLevelMap).splice(1,1)" :key="conS">
                 <div v-for="proudVal in charData.ProudMap" :key="proudVal">
-                    <div v-if="proudVal == conT && conS" class="flex flex-row space-x-2">
+                    <div v-if="proudVal == conT && conS" :class="!showEquip ? 'flex flex-row space-x-2':'flex flex-col space-x-0 space-y-4'">
                         <div v-for="(skillLv, skillKey) in sessionData.skillLevelMap" :key="skillKey">
                             <div v-for="(icon, iconKey) in charData.Skills" :key="iconKey" > 
                                     <div class="indicator" v-if="skillKey == iconKey && skillKey == charData.SkillOrder[0]" >
@@ -80,7 +80,7 @@
             <div v-for="conT in Object.keys(sessionData.proudSkillExtraLevelMap).splice(1,1)" :key="conT">
                 <div v-for="conS in Object.keys(sessionData.proudSkillExtraLevelMap).splice(2,2)" :key="conS">
                 <div v-for="proudVal in charData.ProudMap" :key="proudVal">
-                    <div v-if="proudVal == nT && conT && conS" class="flex flex-row space-x-2">
+                    <div v-if="proudVal == nT && conT && conS" :class="!showEquip ? 'flex flex-row space-x-2':'flex flex-col space-x-0 space-y-4'">
                     <div v-for="(skillLv, skillKey) in sessionData.skillLevelMap" :key="skillKey">
                             <div v-for="(icon, iconKey) in charData.Skills" :key="iconKey"> 
                             <div class="indicator-item" v-if="skillKey == iconKey">
@@ -107,6 +107,6 @@
 
 <script>
 export default {
-    props:['sessionData','charData'],
+    props:['sessionData','charData','showEquip'],
 }
 </script>

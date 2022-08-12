@@ -35,7 +35,7 @@
                 <tabs v-model="active">
                     <tab  v-for="index in uid.avatarInfoList" :key="index" >
                         <div v-for="data in character" :key="data" >
-                            <div class="avatar" v-if="data.id == index.avatarId">
+                            <div class="avatar" v-if="data.skillDepotId == index.skillDepotId">
                                 <div class="w-16 rounded-full">
                                     <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${data.icon}`" alt="">
                                 </div>
@@ -47,7 +47,7 @@
             <tab-panels v-model="active" >
                 <tab-panel v-for="data in uid.avatarInfoList" :key="data" >
         <div class="flex justify-center space-x-2 " v-for="char in character" :key="char.id" >
-            <div v-if="data.avatarId == char.id" class="artboard phone-2 artboard-demo  card shadow-xl image-full bg-dark-eval-2 
+            <div v-if="data.skillDepotId == char.skillDepotId" class="artboard phone-2 artboard-demo  card shadow-xl image-full bg-dark-eval-2 
              transform hover:scale-105 duration-500 ease-in-out" >
              <Link :href="route('AddBuild', { id: UID })" @click="addBuild(data)" v-on:click="addCharacter(char)">
             <figure >
