@@ -19,7 +19,7 @@ class Build extends Model
         'talent' => 'json',
         'talentExtraLv' => 'json',
     ];
-    // protected $withCount = ['likes',];
+    protected $withCount = ['likes',];
 
    
     public function character(){

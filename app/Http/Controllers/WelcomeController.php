@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
+// use Illuminate\Http\Request;
+
 use Inertia\Inertia;
 use App\Models\Character;
 use App\Models\Build;
@@ -44,19 +46,10 @@ class WelcomeController extends Controller
             'itemName' => json_decode(file_get_contents(public_path() . "/asset/ItemName.json"), true),
         ]);
     }
-    public function explore(){
-        $query = Build::with('character','weapon');
-        if(request('search')){
-            $query->where('attack', 'LIKE', '%'.request('search').'%')
-            ->orWhere('critRate', 'LIKE', '%'.request('search').'%')
-            ->orWhere('critDamage', 'LIKE', '%'.request('search').'%')
-            ->orWhereHas('character', function($q){
-                $q->where('name',  'LIKE', '%'.request('search').'%');
-            });
-        }
+    public function explore(Request $request){
+        $query = Build::with('character','weapon','likes');
         return Inertia::render('Explore', [
-            'filters' => Request::all('search'),
-            'builds' => $query->inRandomOrder()->paginate(20)->withQueryString(),
+            'builds' => $query->inRandomOrder()->paginate(12)->withQueryString(),
         ]);
     }
     public function exploreUID($uid){

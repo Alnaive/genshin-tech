@@ -10,32 +10,44 @@
                 </form>
             </div>
         </template>
-        <div class="flex flex-wrap flex-col grow-1 justify-center gap-1 md:flex-row">
-            <div v-for="build in builds.data" :key="build.id" class="card glass w-[300px] justify-center card-side flex   items-center p-2">
-                <Link :href="route('showBuild', {id : build.id})">
-                <figure class="relative">
-                <img class="w-24 h-24" :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.icon}.png`" alt="" srcset="">
-                    <div v-if="build.character.rarity == 5" class="absolute inset-x-0 bottom-[-53px] flex flex-row items-center">
-                            <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
-                            <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
-                            <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
-                            <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
-                            <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
+        <div class="flex  flex-col space-y-5">
+            <div v-for="build in allBuilds" :key="build.id" class="card bg-white shadow-xl dark:bg-base-100">
+                <div class="flex flex-col">
+                    <div class="card ">
+                        <div id="potraitData" class="w-[368px] md:w-[399px] h-[400px] card " >
+                            <Link :href="route('showBuild', { id: build.id })">
+                            <figure>
+                                <img :src="showAvatar() + build.character.avatar" >
+                            </figure> 
+                            </Link>
+                            <div class="drop-shadow-lg shadow-black font-bold text-white absolute ml-4 top-0 mt-1">
+                            <h1 class="text-lg font-bold">{{build.nickname}}</h1>
+                            <pre class="text-warning">Level {{ build.level}}/{{( build.ascendsion * 10) + ( build.ascendsion>0?10:0) + 20}}</pre>
+                            <div class="flex items-center">
+                                <VueFeather type="heart" size="18" stroke="red" fill="red" class="mr-1"></VueFeather>{{build.likes_count}} 
+                            </div>
+                            </div>
+                                <Equip :build="build" />
+                            <Conste :build="build" />
+                            <Talent :build="build" /> 
+                        </div>
                     </div>
-                    <div v-else-if="build.character.rarity == 4" class="absolute inset-x-0 bottom-[-53px] left-[5px] flex flex-row items-center">
-                            <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
-                            <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
-                            <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
-                            <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
+                </div>
+                    <div class="btn-group">
+                        <label :for="`my-modal-4${build.id}`" class="btn w-full btn-ghost ">Stats</label>
                     </div>
-                </figure>
-                </Link>
+                <!-- Put this part before </body> tag -->
+                <input type="checkbox" :id="`my-modal-4${build.id}`" class="modal-toggle" />
+                <label :for="`my-modal-4${build.id}`" class="modal cursor-pointer">
+                <label class="modal-box relative " for="">
+                    <h3 class="text-lg font-bold flex justify-center">{{build.character.name}}</h3>
+                <div class="flex justify-center ">
                 <div class="">
+                    <h1>Basic Stats</h1>
                     <div class="flex items-center gap-2"> 
                         <img src="/image/attribute/Icon_Attribute_Health.png" class="w-8 h-8">
                         <strong class="mr-2">{{build.hp}}</strong>
                     </div>
-
                     <div class="flex items-center gap-2">
                         <img src="/image/attribute/Icon_Attribute_Attack.png" class="w-8 h-8">
                         <strong class="mr-2">{{build.attack}}</strong> 
@@ -49,7 +61,9 @@
                         <strong class="mr-2">{{build.elementalMastery}}</strong>
                     </div>
                 </div>
+                  <div class="divider divider-horizontal"></div>
                 <div class="">
+                    <h1>Advance Stats</h1>
                     <div class="flex items-center gap-2">
                         <img src="/image/svg/FIGHT_PROP_CRITICAL.svg" class="w-8 h-7">
                         <strong class="mr-2 "> <span >{{ build.criticalRate }}%</span> <br>
@@ -106,7 +120,11 @@
                         </strong>
                     </div>
                 </div>
+                </div>
+                </label>
+                </label>
             </div>
+            <span ref="loadMoreIntersect"/> 
         </div>
     </Guest>
 </template>
@@ -114,9 +132,13 @@
 import { Link, } from '@inertiajs/inertia-vue3';
 import Guest from '@/Layouts/Guest.vue';
 import VueFeather from 'vue-feather';
+import Talent from '@/Shared/component/exploreTalent.vue';
+import Equip from './Builds/Component/Equip.vue';
+import Conste from './Builds/Component/Conste.vue';
+
 export default{
     components:{
-        Link,  Guest, VueFeather,
+        Link,  Guest, VueFeather,  Talent, Equip, Conste
     },
     props:{
         builds: Object,
@@ -124,13 +146,39 @@ export default{
     data(){
         return{
             uid: null,
+            allBuilds: this.builds.data,
+            initialUrl: this.$page.url,
         }
     },
     methods:{
         searchUID(uid){
             this.$inertia.get(`/showcase/build/${uid}`, {}, { preserveScroll: true });
         },
-    }
+         showAvatar() {
+                return "/storage/images/icon/avatar/";
+            }, 
+       loadMorePosts() {
+        if (this.builds.next_page_url === null) {
+            return
+        }
+    
+        this.$inertia.get(this.builds.next_page_url, {}, {
+            preserveState: true,
+            preserveScroll: true,
+            only: ['builds'],
+            onSuccess: () => {
+            this.allBuilds = [...this.allBuilds, ...this.builds.data]                      
+            window.history.replaceState({}, this.$page.title, this.initialUrl) 
+            }
+        })
+        }
+    },
+    mounted(){
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.isIntersecting && this.loadMorePosts(), {
+      rootMargin: "-150px 0px 0px 0px"
+    }));
+    observer.observe(this.$refs.loadMoreIntersect);
+  } 
 }
 
 </script>
