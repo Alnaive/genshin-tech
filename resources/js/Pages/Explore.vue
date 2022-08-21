@@ -152,7 +152,7 @@ export default{
     },
     methods:{
         searchUID(uid){
-            this.$inertia.get(`/showcase/build/${uid}`, {}, { preserveScroll: true });
+            this.$inertia.get(`/showcase/${uid}`, {}, { preserveScroll: true });
         },
          showAvatar() {
                 return "/storage/images/icon/avatar/";

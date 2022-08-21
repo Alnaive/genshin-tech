@@ -44,7 +44,7 @@
                     <Sands :build="build"/>
                     <Goblet :build="build"/>
                     <Circlet :build="build"/>
-                    <div  class="flex space-x-4 justify-center" >
+                    <div  class="flex space-x-3 justify-center" >
                         <div class="flex-none ...">
                         <div class="flex flex-col">
                                 <div  v-if="build.two_pcs_art">
@@ -157,27 +157,26 @@ export default{
                     return "../image/element/bgPyro.jpg"
                 }
             },
-        portraitImage(){
-                var node = document.getElementById("potraitData");
-                var node1 = document.getElementById("canvas-potrait");
-
-                domtoimage
-                .toPng(node)
-                .then(function (dataUrl) {
-                    var img = new Image();
-                    img.src = dataUrl;
-                    node1.appendChild(img);
-                })
-                .catch(function (error) {
-                    console.error("oops, something went wrong!", error);
-                });
-            },
+    
         landscapeImage(){
+            const scale = 1    
                 var node = document.getElementById("landscapeData");
                 var node1 = document.getElementById("canvas-landscape");
+                const style = {
+                    transform: 'scale('+scale+')',
+                    transformOrigin: 'top left',
+                    width: node.offsetWidth + "px",
+                    height: node.offsetHeight + "px"
+                }
 
+                const param = {
+                    height: node.offsetHeight * scale,
+                    width: node.offsetWidth * scale,
+                    quality: 1,
+                    style
+                }
                 domtoimage
-                .toPng(node)
+                .toPng(node, param)
                 .then(function (dataUrl) {
                     var img = new Image();
                     img.src = dataUrl;

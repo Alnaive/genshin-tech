@@ -49,38 +49,38 @@
                         <Sands :build="build"/>
                         <Goblet :build="build"/>
                         <Circlet :build="build"/>
-                        <div  class="flex space-x-4 ml-[120px]" >
-                            <div class="flex-none ...">
-                            <div class="flex flex-col">
-                                    <div  v-if="build[0].two_pcs_art">
-                                        <div v-for="data in build[0].two_pcs_art" :key="data" class="font-bold text-md">
+                        <div  class="flex space-x-3 justify-center" >
+                        <div class="flex-none ...">
+                        <div class="flex flex-col">
+                                <div  v-if="build[0].two_pcs_art">
+                                    <div v-for="data in build[0].two_pcs_art" :key="data" class="font-bold whitespace-nowrap text-md">
                                         {{data}}
-                                        </div>
                                     </div>
-                                    <div v-if="build[0].one_pcs_art">
-                                        <div class="font-bold text-md mt-[12px]">{{build[0].one_pcs_art}}</div>
+                                </div>
+                                <div v-if="build[0].one_pcs_art">
+                                    <div class="font-bold whitespace-nowrap text-md mt-[12px]">{{build[0].one_pcs_art}}</div>
+                                </div>
+                                <div v-if="build[0].four_pcs_art">
+                                    <div class="font-bold whitespace-nowrap text-md mt-[12px]">{{build[0].four_pcs_art}}</div>
+                                </div>
+                        </div>
+                        </div>
+                        <div class="flex-none ...">
+                            <div class="flex flex-col " >
+                                <div  v-if="build[0].two_pcs_art">
+                                 <div v-for="data in build[0].two_pcs_art" :key="data" class="font-bold text-md">
+                                    <div class="font-bold text-md badge">2</div>
                                     </div>
-                                    <div v-if="build[0].four_pcs_art">
-                                        <div class="font-bold text-md mt-[12px]">{{build[0].four_pcs_art}}</div>
-                                    </div>
-                            </div>
-                            </div>
-                            <div class="flex-none ...">
-                                <div class="flex flex-col " >
-                                    <div  v-if="build[0].two_pcs_art">
-                                    <div v-for="data in build[0].two_pcs_art" :key="data" class="font-bold text-md">
-                                        <div class="font-bold text-md badge">2</div>
-                                        </div>
-                                    </div>
-                                    <div v-if="build[0].one_pcs_art">
-                                        <div class="font-bold text-md badge mt-[12px]">3</div>
-                                    </div>
-                                    <div v-if="build[0].four_pcs_art">
-                                        <div class="font-bold text-md badge mt-[12px]">4</div>
-                                    </div>
+                                </div>
+                                <div v-if="build[0].one_pcs_art">
+                                    <div class="font-bold text-md badge mt-[12px]">3</div>
+                                </div>
+                                <div v-if="build[0].four_pcs_art">
+                                    <div class="font-bold text-md badge mt-[15px]">4</div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
                         </li>
                     </ul>

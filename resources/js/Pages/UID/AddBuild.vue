@@ -29,12 +29,12 @@
             <div  class="flex flex-row card shadow-lg overflow-x-auto" >
                 <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
                     <li>
-                        <div  class="w-[414px] h-[736px] card " >
-                        <figure id="preview" class="target" ref="target">
+                        <div  class="w-[414px] h-[736px] card shadow-lg  shadow-cyan-500/50 shadow-inner" >
+                        <figure id="preview" class="target " ref="target">
                             <img v-if="!url" :src="showAvatar() + charData.avatar" >
                             <img v-else :src="url" />
                         </figure> 
-                        <div :class="!url ? 'text-white font-bold absolute ml-4 top-0 mt-1':'mix-blend-color-dodge font-bold absolute ml-4 top-0 mt-1'">
+                        <div :class="!url ? 'text-white font-bold absolute ml-4 top-0 mt-1':'mix-blend-color-dodge drop-shadow-2xl font-bold absolute ml-4 top-0 mt-1'">
                         <h1 class="font-md">{{charData.name}}</h1> 
                         <span v-show="!showNickname">{{playerInfo.nickname}} </span>   <span v-show="!showUid"> {{uid}}</span>
                         <pre :class="!url ? 'text-warning' : 'text-none'">Level {{sessionData.propMap[4001]['val']}}/{{(sessionData.propMap[1002]['val'] * 10) + (sessionData.propMap[1002]['val']>0?10:0) + 20}}</pre> 
@@ -47,13 +47,13 @@
 
                         <Talent :sessionData="sessionData" :charData="charData" :showEquip="showEquip" /> 
                         <div class="card absolute inset-x-0 bottom-0 mt-5">
-                            <div v-if="!url" class="bg-transparent">
+                            <div v-if="!url" >
                                 <section class="px-2 py-2 text-white" >
                                     <Stats :sessionData="sessionData" :charData="charData" />
                                 </section>
                             </div>
-                            <div v-else :style="{ backgroundImage: 'url(' + bgElement() + ')'}">
-                             <section class="px-2 py-2 text-white" >
+                            <div v-else :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize: '120%'}">
+                             <section class="px-2 pt-2 text-white" >
                                     <Stats :sessionData="sessionData" :charData="charData" />
                                 </section>
                             </div>
@@ -68,10 +68,10 @@
                     <Sands :sessionData="sessionData"/>
                     <Goblet :sessionData="sessionData"/>
                     <Circlet :sessionData="sessionData"/>
-                    <div  class="flex space-x-4 justify-center" >
+                    <div  class="flex space-x-3 justify-center" >
                         <div class="flex-none ...">
                         <div class="flex flex-col" v-for="(key,item) in countedOfArtifact" :key="key">
-                                <div  v-if="key == 2">
+                                <div  v-if="key >= 2">
                                     <div class="font-bold whitespace-nowrap text-md">{{item}}</div>
                                 </div>
                                 <div v-else-if="key == 3">
@@ -84,7 +84,7 @@
                         </div>
                         <div class="flex-none ...">
                             <div class="flex flex-col "  v-for="(key, item) in countedOfArtifact" :key="key">
-                                <div  v-if="key == 2">
+                                <div  v-if="key >= 2">
                                     <div class="badge">{{key}}</div>
                                 </div>
                                 <div v-else-if="key == 3">
@@ -252,6 +252,9 @@ export default {
            showEquip: false,
            showUid: false,
            showNickname: false,
+           twopcs: [],
+           onepcs: null,
+           fourpcs: null,
         }
     },
     methods:{
@@ -346,10 +349,10 @@ export default {
             },
             artifactSet(){
                 Object.keys(this.countedOfArtifact).forEach((key) => {
-                    if(this.countedOfArtifact[key] == 2){
-                    this.form.two_pcs_art.push(key)
-                    } else if(this.countedOfArtifact[key] == 3){
-                    this.form.one_pcs_art = key;
+                    if(this.countedOfArtifact[key] == 1){
+                        null
+                    } else if(this.countedOfArtifact[key] < 4){
+                    this.form.two_pcs_art.push(key);
                     } else if(this.countedOfArtifact[key] == 4){
                     this.form.four_pcs_art = key;
                     }

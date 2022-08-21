@@ -18,6 +18,11 @@ use File;
 use Illuminate\Support\Facades\Http;
 use Log;
 use DB;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\TwitterCard;
+use Artesaos\SEOTools\Facades\JsonLd;
+use Artesaos\SEOTools\Facades\SEOTools;
 class WelcomeController extends Controller
 {
     public function index() {
@@ -52,15 +57,22 @@ class WelcomeController extends Controller
             'builds' => $query->inRandomOrder()->paginate(12)->withQueryString(),
         ]);
     }
-    public function exploreUID($uid){
+    public function showcaseUID($uid){
         $query = Build::where('uid', $uid)->with('character','weapon');
         if(request('search')){
             $query->orWhereHas('character', function($q){
                 $q->where('name',  'LIKE', '%'.request('search').'%');
             });
         }
+        SEOMeta::setTitle("Showcase");
+        SEOMeta::setDescription('Showcase Character by', $uid);
+        OpenGraph::setDescription("Showcase Character by $uid" );
+        OpenGraph::setTitle("Showcase");
+        OpenGraph::setUrl('genshin-tech.com');
+        OpenGraph::addProperty('type', 'article');
+        OpenGraph::addProperty('locale', 'asia');
         return Inertia::render('Builds/showUID', [
-            'builds' => $query->inRandomOrder()->get(),
+            'builds' => $query->orderBy('character_id')->get(),
             'uid' => $uid,
             'filters' => Request::all('search'),
         ]);

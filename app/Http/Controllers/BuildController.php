@@ -143,7 +143,7 @@ class BuildController extends Controller
             'serverId' => $request->serverId,
         ]);
       
-            return Redirect::route('showBuild', $build);
+            return Redirect::route('showcaseUID', $build->uid);
         
             // $data = $request->all();
             // $build = Build::create($data);

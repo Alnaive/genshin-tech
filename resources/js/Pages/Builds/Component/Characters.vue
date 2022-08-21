@@ -1,6 +1,6 @@
 <template>
     <div v-for="build in builds" :key="build.id" class="flex flex-row card shadow-lg overflow-x-auto" >
-        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" v-if="build.character.element == 'Fire'" :style="{ backgroundImage: 'url(' + bgPyro() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl max-h-[736px]" v-if="build.character.element == 'Fire' && showBuild == build.id" :style="{ backgroundImage: 'url(' + bgPyro() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
             <li>
                 <div id="potraitData" class="w-[414px] h-[736px] card " >
                 <Link :href="route('showBuild', {id: build.id})">
@@ -11,7 +11,9 @@
                 <pre data-prefix=">" class="text-warning"><code>Level {{ build.level}}/{{( build.ascendsion * 10) + ( build.ascendsion>0?10:0) + 20}}</code></pre> 
                 </div>
                    
-                <Equip :build="build"/>
+                <section class="visible md:invisible">
+                    <Equip :build="build"/>
+                </section>
                 <!-- constellation section -->
                 <section> 
                 <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-12 ">
@@ -106,7 +108,7 @@
                             <Stats :build="build" />
                         </section>
                     </div>
-                </div>-->
+                </div>
                 </div> 
             </li> 
             <li>
@@ -152,7 +154,7 @@
             </div>
             </li>
         </ul>
-        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" v-else-if="build.character.element == 'Water'" :style="{ backgroundImage: 'url(' + bgHydro() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl max-h-[736px]" v-else-if="build.character.element == 'Water' && showBuild == build.id" :style="{ backgroundImage: 'url(' + bgHydro() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
             <li>
                 <div id="potraitData" class="w-[414px] h-[736px] card " >
                 <Link :href="route('showBuild', {id: build.id})">
@@ -163,7 +165,9 @@
                 <pre data-prefix=">" class="text-warning"><code>Level {{ build.level}}/{{( build.ascendsion * 10) + ( build.ascendsion>0?10:0) + 20}}</code></pre> 
                 </div>
                    
-                <Equip :build="build"/>
+                <section class="visible md:invisible">
+                    <Equip :build="build"/>
+                </section>
                 <!-- constellation section -->
                 <section> 
                 <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-12 ">
@@ -258,7 +262,7 @@
                             <Stats :build="build" />
                         </section>
                     </div>
-                </div>-->
+                </div>
                 </div> 
             </li> 
             <li>
@@ -304,7 +308,7 @@
             </div>
             </li>
         </ul>
-        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" v-else-if="build.character.element == 'Wind'" :style="{ backgroundImage: 'url(' + bgAnemo() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl max-h-[736px]" v-else-if="build.character.element == 'Wind' && showBuild == build.id" :style="{ backgroundImage: 'url(' + bgAnemo() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
             <li>
                 <div id="potraitData" class="w-[414px] h-[736px] card " >
                 <Link :href="route('showBuild', {id: build.id})">
@@ -315,7 +319,9 @@
                 <pre data-prefix=">" class="text-warning"><code>Level {{ build.level}}/{{( build.ascendsion * 10) + ( build.ascendsion>0?10:0) + 20}}</code></pre> 
                 </div>
                    
-                <Equip :build="build"/>
+                <section class="visible md:invisible">
+                    <Equip :build="build"/>
+                </section>
                 <!-- constellation section -->
                 <section> 
                 <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-12 ">
@@ -410,7 +416,7 @@
                             <Stats :build="build" />
                         </section>
                     </div>
-                </div>-->
+                </div>
                 </div> 
             </li> 
             <li>
@@ -456,7 +462,7 @@
             </div>
             </li>
         </ul>
-        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" v-else-if="build.character.element == 'Electric'" :style="{ backgroundImage: 'url(' + bgElectro() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl max-h-[736px]" v-else-if="build.character.element == 'Electric' && showBuild == build.id" :style="{ backgroundImage: 'url(' + bgElectro() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
             <li>
                 <div id="potraitData" class="w-[414px] h-[736px] card " >
                 <Link :href="route('showBuild', {id: build.id})">
@@ -467,7 +473,9 @@
                 <pre data-prefix=">" class="text-warning"><code>Level {{ build.level}}/{{( build.ascendsion * 10) + ( build.ascendsion>0?10:0) + 20}}</code></pre> 
                 </div>
                    
-                <Equip :build="build"/>
+                <section class="visible md:invisible">
+                    <Equip :build="build"/>
+                </section>
                 <!-- constellation section -->
                 <section> 
                 <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-12 ">
@@ -562,7 +570,7 @@
                             <Stats :build="build" />
                         </section>
                     </div>
-                </div>-->
+                </div>
                 </div> 
             </li> 
             <li>
@@ -608,7 +616,7 @@
             </div>
             </li>
         </ul>
-        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" v-else-if="build.character.element == 'Rock'" :style="{ backgroundImage: 'url(' + bgGeo() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl max-h-[736px]" v-else-if="build.character.element == 'Rock' && showBuild == build.id" :style="{ backgroundImage: 'url(' + bgGeo() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
             <li>
                 <div id="potraitData" class="w-[414px] h-[736px] card " >
                 <Link :href="route('showBuild', {id: build.id})">
@@ -619,7 +627,9 @@
                 <pre data-prefix=">" class="text-warning"><code>Level {{ build.level}}/{{( build.ascendsion * 10) + ( build.ascendsion>0?10:0) + 20}}</code></pre> 
                 </div>
                    
-                <Equip :build="build"/>
+                <section class="visible md:invisible">
+                    <Equip :build="build"/>
+                </section>
                 <!-- constellation section -->
                 <section> 
                 <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-12 ">
@@ -714,7 +724,7 @@
                             <Stats :build="build" />
                         </section>
                     </div>
-                </div>-->
+                </div>
                 </div> 
             </li> 
             <li>
@@ -760,7 +770,7 @@
             </div>
             </li>
         </ul>
-        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" v-else-if="build.character.element == 'Ice'" :style="{ backgroundImage: 'url(' + bgCryo() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl max-h-[736px]" v-else-if="build.character.element == 'Ice' && showBuild == build.id" :style="{ backgroundImage: 'url(' + bgCryo() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
             <li>
                 <div id="potraitData" class="w-[414px] h-[736px] card " >
                 <Link :href="route('showBuild', {id: build.id})">
@@ -771,7 +781,9 @@
                 <pre data-prefix=">" class="text-warning"><code>Level {{ build.level}}/{{( build.ascendsion * 10) + ( build.ascendsion>0?10:0) + 20}}</code></pre> 
                 </div>
                    
-                <Equip :build="build"/>
+                <section class="visible md:invisible">
+                    <Equip :build="build"/>
+                </section>
                 <!-- constellation section -->
                 <section> 
                 <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-12 ">
@@ -866,7 +878,7 @@
                             <Stats :build="build" />
                         </section>
                     </div>
-                </div>-->
+                </div>
                 </div> 
             </li> 
             <li>
@@ -912,7 +924,7 @@
             </div>
             </li>
         </ul>
-        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" v-else :style="{ backgroundImage: 'url(' + bgDendro() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl max-h-[736px]" v-else-if="build.character.element == 'Grass' && showBuild == build.id" :style="{ backgroundImage: 'url(' + bgDendro() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
             <li>
                 <div id="potraitData" class="w-[414px] h-[736px] card " >
                 <Link :href="route('showBuild', {id: build.id})">
@@ -923,7 +935,9 @@
                 <pre data-prefix=">" class="text-warning"><code>Level {{ build.level}}/{{( build.ascendsion * 10) + ( build.ascendsion>0?10:0) + 20}}</code></pre> 
                 </div>
                    
-                <Equip :build="build"/>
+                <section class="visible md:invisible">
+                    <Equip :build="build"/>
+                </section>
                 <!-- constellation section -->
                 <section> 
                 <ul class="flex flex-col w-[70px]  bg-transparent absolute right-[-10px] top-12 ">
@@ -1018,7 +1032,7 @@
                             <Stats :build="build" />
                         </section>
                     </div>
-                </div>-->
+                </div>
                 </div> 
             </li> 
             <li>
@@ -1081,7 +1095,7 @@ export default{
     components:{
         Link, Stats, Equip, Talent, Weapon, Flower, Plume, Sands, Goblet, Circlet
     },
-    props:['builds'],
+    props:['builds','showBuild'],
     methods:{
         showAvatar() {
             return "/storage/images/icon/avatar/";

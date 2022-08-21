@@ -9,7 +9,7 @@ return [
          * The default configurations to be used by the meta generator.
          */
         'defaults'       => [
-            'title'        => "Genshin Impact Build Statistics", // set false to total remove
+            'title'        => "Genshin Impact Build References", // set false to total remove
             'titleBefore'  => false, // Put defaults.title before page title, like 'It's Over 9000! - Dashboard'
             'description'  =>  'Providing you a reference about build characters 
             using data collection from travelers on this site.', // set false to total remove
