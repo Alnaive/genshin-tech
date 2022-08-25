@@ -13,7 +13,7 @@
                 </form>
             </div>
             <div class="">
-                <div  class="flex flex-row card shadow-lg overflow-x-auto" :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+                <div  class="flex flex-row card shadow-lg overflow-x-auto" :style="{ backgroundImage: 'url(' + bgElement() + ')',  backgroundRepeat: 'no-repeat'}">
                     <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl">
                         <li>
                             <Link :href="route('showBuild', { id: build[0].id })">
@@ -87,98 +87,65 @@
                 </div>
             </div>
         </div>
-            <div class="container px-5 py-12 mx-auto">
-                <h1 class="sm:text-3xl text-2xl font-medium title-font text-center  mb-20">What website is this?
-                </h1>
-                <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
-                <div class="p-4 md:w-1/3 flex">
-                    <div class="flex-grow pl-6">
-                    <h2 class=" text-lg title-font font-medium mb-2">Fan made</h2>
-                    <p class="leading-relaxed text-base">
-                        This site is not affiliated with miHoYo & All game content and assets are trademarks and copyrights of miHoYo.
-                    </p>
-                    </div>
-                </div>
-                <div class="p-4 md:w-1/3 flex">
-                    <div class="flex-grow pl-6">
-                    <h2 class=" text-lg title-font font-medium mb-2">Goal</h2>
-                    <p class="leading-relaxed text-base">
-                        Showcase your builds to help other players and provide you reference builds from other players, also giving you a character card.
-                    </p>
-                    </div>
-                </div>
-                <div class="p-4 md:w-1/3 flex">
-                    <div class="flex-grow pl-6">
-                    <h2 class=" text-lg title-font font-medium mb-2">Data Collection</h2>
-                    <p class="leading-relaxed text-base">
-                        The data is used to make statistical about a character for helping players to building their character with a reference on this site.
-                    </p>
-                    </div>
-                </div>
+        <div class="container px-5 py-12 mx-auto">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font text-center  mb-20">What website is this?
+            </h1>
+            <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
+            <div class="p-4 md:w-1/3 flex">
+                <div class="flex-grow pl-6">
+                <h2 class=" text-lg title-font font-medium mb-2">Fan made</h2>
+                <p class="leading-relaxed text-base">
+                    This site is not affiliated with miHoYo & All game content and assets are trademarks and copyrights of miHoYo.
+                </p>
                 </div>
             </div>
-           
-  <div class="container px-5 py-12 mx-auto flex flex-wrap">
-    <div class=" mb-10 lg:mb-0 rounded-lg overflow-hidden">
-      <div  class="flex flex-row card shadow-lg overflow-x-auto" >
-        <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
-            <li>
-                <div id="potraitData" class="w-[414px] h-[736px] card " >
-                <figure>
-                    <img :src="showAvatar() + build[0].character.avatar" >
-                </figure> 
-                <div class="drop-shadow-lg shadow-black font-bold text-white absolute ml-4 top-0 mt-1">
-                <pre data-prefix="$"><code>{{ build[0].character.name}}</code></pre> 
-                <pre data-prefix=">" class="text-warning"><code>Level {{ build[0].level}}/{{( build[0].ascendsion * 10) + ( build[0].ascendsion>0?10:0) + 20}}</code></pre> 
+            <div class="p-4 md:w-1/3 flex">
+                <div class="flex-grow pl-6">
+                <h2 class=" text-lg title-font font-medium mb-2">Goal</h2>
+                <p class="leading-relaxed text-base">
+                    Showcase your builds to help other players and provide you reference builds from other players, also giving you a character card.
+                </p>
                 </div>
-                <Equip :build="build" />
-                <Conste :build="build" />
-                <Talent :build="build" /> 
-                <div class="card absolute inset-x-0 bottom-0 mt-5">
-                    <div class="bg-transparent" >
-                        <section class="px-2 py-2 text-white" >
-                            <Stats :build="build" />
-                        </section>
-                    </div>
-                    </div>
+            </div>
+            <div class="p-4 md:w-1/3 flex">
+                <div class="flex-grow pl-6">
+                <h2 class=" text-lg title-font font-medium mb-2">Data Collection</h2>
+                <p class="leading-relaxed text-base">
+                    The data is used to make statistical about a character for helping players to building their character with a reference on this site.
+                </p>
                 </div>
-            </li>
-        </ul>
-      </div>
-    </div>
-    <div class="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center">
-      <div class="flex flex-col mb-10 lg:items-start items-center">
-        <div class="flex-grow">
-          <h2 class=" text-lg title-font font-medium mb-3">Is it safe?</h2>
-          <p class="leading-relaxed text-base">
-             This site never asks about credentials account info such as email and password.
-          </p>
+            </div>
+            </div>
         </div>
-      </div>
-      <div class="flex flex-col mb-10 lg:items-start items-center">
-        <div class="flex-grow">
-          <h2 class=" text-lg title-font font-medium mb-3">But</h2>
-          <p class="leading-relaxed text-base">
-            How can this site gain the information from my account?
-            Well thanks to EnkaNetwork API for fetch data by uid.
-          </p>
-          <a href="https://enka.network" target="_BLANK" class="mt-3 text-indigo-500 inline-flex items-center">Learn More
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </a>
+        <div class="container px-5 py-12 mx-auto">
+            <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
+            <div class="p-4 md:w-1/3 flex">
+                <div class="flex-grow pl-6">
+                <h2 class=" text-lg title-font font-medium mb-3">Is it safe?</h2>
+                <p class="leading-relaxed text-base">
+                    This site never asks about credentials account info such as email and password.
+                </p>
+                </div>
+            </div>
+            <div class="p-4 md:w-1/3 flex">
+                <div class="flex-grow pl-6">
+                <h2 class=" text-lg title-font font-medium mb-3">But</h2>
+                <p class="leading-relaxed text-base">
+                    How can this site gain the information from my account?
+                    Thanks to Enka Network API for fetch data by uid.
+                </p>
+                </div>
+            </div>
+            <div class="p-4 md:w-1/3 flex">
+                <div class="flex-grow pl-6">
+                <h2 class=" text-lg title-font font-medium mb-3">Important</h2>
+                <p class="leading-relaxed text-base">
+                    By storing your build on this site, your UID will be stored.
+                </p>
+                </div>
+            </div>
+            </div>
         </div>
-      </div>
-      <div class="flex flex-col mb-10 lg:items-start items-center">
-        <div class="flex-grow">
-          <h2 class=" text-lg title-font font-medium mb-3">Important</h2>
-          <p class="leading-relaxed text-base">
-            By storing your build on this site, your UID will be stored.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
     </Guest>
 </template>
 

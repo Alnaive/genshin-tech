@@ -1,6 +1,6 @@
 <template>
-    <div class="card glass w-[440px] h-[105px] card-side flex items-center space-x-4 p-2">
-        <figure class="">
+    <div class="rounded-lg bg-gray-900 bg-opacity-30 w-[440px] h-[105px] card-side flex items-center space-x-4 p-2">
+        <figure class="relative">
         <img class="w-24 h-24" :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/equip/${sessionData.equipList[3].flat.icon}.png`" alt="" srcset="">
         <div v-if="sessionData.equipList[3].flat.rankLevel == 5" class="absolute inset-x-0 bottom-[-35px] flex flex-row items-center">
                 <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
@@ -16,6 +16,7 @@
                 <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
         </div>
         </figure>
+        <div class="divider divider-horizontal w-0"></div>
         <div class="w-[95px]">
             <h1 class="font-bold" v-if="sessionData.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'">ATK</h1>
             <h1 class="font-bold" v-else-if="sessionData.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" >HP</h1>

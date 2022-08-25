@@ -14,8 +14,8 @@
                     <div class="flex md:flex-wrap md:justify-center">
                         <div  v-for="build in builds" :key="build">
                             <div @click="show(build.id)" >
-                                <div class="relative inline-block w-24 m-2 rounded-lg h-26 h-auto w-32 " :class="showBuild == build.id ? ' border-2 border-white ' : ' border-none'">
-                                    <div class=" flex flex-row justify-center rounded-t-lg bg-gray-scale" >
+                                <div class="relative inline-block w-24 m-2 rounded-lg h-26 h-auto w-32 hover:cursor-pointer" :class="showBuild == build.id ? ' border-2 border-white ' : ' border-none'">
+                                    <div class=" flex flex-row justify-center rounded-t-lg bg-gray-scale hover:cursor-pointer" >
                                         <span>
                                             <img v-if="build.character.rarity == 5" :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.icon}.png`" class="h-24 h-32 rounded-br-3xl"
                                             :style="{ backgroundImage: 'url(' + bg5() + ')', backgroundSize:'contain' }" style="border-top-right-radius:0.5rem; border-top-left-radius:0.5rem;">

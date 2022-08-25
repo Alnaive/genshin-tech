@@ -116,21 +116,28 @@ export default {
                 const boyWind = this.character.id == '10000005-anemo';
                 const boyGeo = this.character.id == '10000005-geo';
                 const boyElectro = this.character.id == '10000005-electro';
+                const boyDendro = this.character.id == '10000005-dendro';
                 const girlWind = this.character.id == '10000007-anemo';
                 const girlGeo = this.character.id == '10000007-geo';
                 const girlElectro = this.character.id == '10000007-electro';
+                const girlDendro = this.character.id == '10000007-dendro';
+
                 if(boyWind){
                     return this.characterID = 10000005;
                 } else if(boyGeo) {
                     return this.characterID = "10000005-506";
                 } else if(boyElectro) {
                     return this.characterID = "10000005-507";
+                } else if(boyDendro) {
+                    return this.characterID = "10000005-508";
                 } else if(girlWind) {
                     return this.characterID = "10000007-704";
                 } else if(girlGeo) {
                     return this.characterID = "10000007-706";
                 } else if(girlElectro) {
                     return this.characterID = "10000007-707";
+                } else if(girlDendro) {
+                    return this.characterID = "10000007-708";
                 } else {
                     return this.characterID = this.character.id;
                 }

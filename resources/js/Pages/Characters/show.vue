@@ -149,7 +149,6 @@ import Tabs from '@/Shared/Tabs';
 import Tab from '@/Shared/Tab';
 import TabPanels from '@/Shared/TabPanels';
 import TabPanel from '@/Shared/TabPanel';
-import Charts from '@/Shared/Charts';
 import { ref } from "vue";
 import VueApexCharts from 'vue3-apexcharts'
 import avatar from './Component/avatar.vue'
@@ -180,7 +179,6 @@ export default {
         Guest,
         Tab, Tabs, TabPanel, TabPanels,
         Pagination,
-        Charts,
         apexcharts: VueApexCharts, VueFeather,
         avatar, weaponRecom, artifact,
         CharLv,

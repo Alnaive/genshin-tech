@@ -39,7 +39,6 @@
 
 <script>
 import { Head, Link } from '@inertiajs/inertia-vue3';
-import Navbar from '@/Shared/Navbar';
 import Guest from '@/Layouts/Guest.vue'
 import { ref } from "vue";
 import pickBy from 'lodash/pickBy'
@@ -49,7 +48,6 @@ export default {
     components: {
       Head,
       Link,
-      Navbar,
       Guest,
       Element,
      

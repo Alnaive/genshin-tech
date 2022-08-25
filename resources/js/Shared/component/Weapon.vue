@@ -1,28 +1,29 @@
 <template>
-    <div class="card glass w-[440px] h-[120px] card-side flex items-center space-x-4 p-2">
+    <div class="rounded-lg bg-gray-900 bg-opacity-30 w-[440px] h-[120px] card-side flex items-center space-x-4 p-2">
         <figure class="relative">
         <img class="w-24 h-24"  v-if="build[0].equipList[5].weapon.promoteLevel > 1" :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build[0].equipList[5].flat.icon}_Awaken.png`" alt="" srcset="">
         <img class="w-24 h-24"  v-else :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build[0].equipList[5].flat.icon}.png`" alt="" srcset="">
-        <div v-if="build[0].weapon.rarity == 5" class="absolute inset-x-0 bottom-[-45px] flex flex-row items-center">
+        <div v-if="build[0].weapon.rarity == 5" class="absolute inset-x-0  bottom-[-45px] flex flex-row items-center">
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
         </div>
-        <div v-else-if="build[0].weapon.rarity == 4" class="absolute inset-x-0 bottom-[-45px] flex flex-row items-center">
+        <div v-else-if="build[0].weapon.rarity == 4" class="absolute inset-x-0  bottom-[-45px] flex flex-row items-center">
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
         </div>
-        <div v-else-if="build[0].weapon.rarity == 3" class="absolute inset-x-0 bottom-[-45px] flex flex-row items-center">
+        <div v-else-if="build[0].weapon.rarity == 3" class="absolute inset-x-0  bottom-[-45px] flex flex-row items-center">
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
             <vue-feather type="star" stroke="none" fill="orange" size="20"></vue-feather>
         </div>
         </figure>
+          <div class="divider divider-horizontal w-0"></div>
         <div class="flex flex-col">
             <div class="box row-span-1 col-span-2" >
                 <h1 class="text-lg font-bold">{{build[0].weapon.name}}</h1>

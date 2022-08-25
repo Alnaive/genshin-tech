@@ -1,7 +1,7 @@
 <template>
-    <div class="card glass w-[440px] h-[105px] card-side flex items-center space-x-4 p-2">
+    <div class="rounded-lg bg-gray-900 bg-opacity-30 w-[440px] h-[105px] card-side flex items-center space-x-4 p-2">
         <figure class="relative">
-        <img class="w-24 h-24" :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build[0].equipList[3].flat.icon}.png`" alt="" srcset="">
+        <img class="w-24 h-24" :src="showIcon()" alt="" srcset="">
         <div v-if="build[0].equipList[3].flat.rankLevel == 5" class="absolute inset-x-0 bottom-[-35px] flex flex-row items-center">
                 <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
                 <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
@@ -9,13 +9,14 @@
                 <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
                 <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
         </div>
-        <div v-else-if="build[0].equipList[3].flat.rankLevel == 4" class="absolute inset-x-0 bottom-[-35px] flex flex-row items-center">
+        <div v-else-if="build[0].equipList[3].flat.rankLevel == 4" class="absolute inset-x-0  bottom-[-35px] flex flex-row items-center">
                 <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
                 <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
                 <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
                 <VueFeather type="star" stroke="none" fill="orange" size="20"></VueFeather>
         </div>
         </figure>
+        <div class="divider divider-horizontal w-0 "></div>
         <div class="w-[95px]">
             <h1 class="font-bold" v-if="build[0].equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ATTACK_PERCENT'">ATK</h1>
             <h1 class="font-bold" v-else-if="build[0].equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_HP_PERCENT'" >HP</h1>
@@ -97,6 +98,11 @@ export default{
     components:{
         VueFeather,
     },
-    props:['build']
+    props:['build'],
+     methods: {
+        showIcon(){
+            return `https://res.cloudinary.com/genshin/image/upload/sprites/${this.build[0].equipList[3].flat.icon}.png`;
+        }
+    },
 }
 </script>

@@ -11,7 +11,7 @@
        
         
         <div  class="flex flex-row card shadow-lg overflow-x-auto" >
-                <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+                <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundRepeat: 'no-repeat'}">
                     <li>
                         <div id="potraitData" class="w-[414px] h-[736px] card " >
                         <figure >

@@ -27,7 +27,7 @@
         </div>
         <div class="space-y-2 lg:flex lg:space-x-2">
             <div  class="flex flex-row card shadow-lg overflow-x-auto" >
-                <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize:'cover', backgroundRepeat: 'no-repeat'}">
+                <ul id="landscapeData" class="flex flex-row space-x-4 rounded-xl" :style="{ backgroundImage: 'url(' + bgElement() + ')',  backgroundRepeat: 'no-repeat'}">
                     <li>
                         <div  class="w-[414px] h-[736px] card shadow-lg  shadow-cyan-500/50 shadow-inner" >
                         <figure id="preview" class="target " ref="target">
@@ -52,7 +52,7 @@
                                     <Stats :sessionData="sessionData" :charData="charData" />
                                 </section>
                             </div>
-                            <div v-else :style="{ backgroundImage: 'url(' + bgElement() + ')', backgroundSize: '120%'}">
+                            <div v-else :style="{ backgroundImage: 'url(' + bgElement() + ')'}">
                              <section class="px-2 pt-2 text-white" >
                                     <Stats :sessionData="sessionData" :charData="charData" />
                                 </section>
@@ -71,7 +71,7 @@
                     <div  class="flex space-x-3 justify-center" >
                         <div class="flex-none ...">
                         <div class="flex flex-col" v-for="(key,item) in countedOfArtifact" :key="key">
-                                <div  v-if="key >= 2">
+                                <div  v-if="key == 2">
                                     <div class="font-bold whitespace-nowrap text-md">{{item}}</div>
                                 </div>
                                 <div v-else-if="key == 3">
@@ -84,7 +84,7 @@
                         </div>
                         <div class="flex-none ...">
                             <div class="flex flex-col "  v-for="(key, item) in countedOfArtifact" :key="key">
-                                <div  v-if="key >= 2">
+                                <div  v-if="key == 2">
                                     <div class="badge">{{key}}</div>
                                 </div>
                                 <div v-else-if="key == 3">
@@ -204,7 +204,7 @@ export default {
         const form = useForm({
             uid: props.uid,
             nickname: props.playerInfo.nickname,
-            character_id: props.charData.id,
+            character_id: null,
             ascendsion: props.sessionData.propMap[1002]['val'],
             level: props.sessionData.propMap[4001]['val'],
             conste: null,
@@ -334,10 +334,17 @@ export default {
                 }
             },
             defineArtifact(){
+                // Object.keys(this.sessionData.equipList).map((key) => {
+                //     Object.keys(this.itemName).map((item) => {
+                //         if(item == this.sessionData.equipList[key].flat.setNameTextMapHash){
+                //             return this.arrayOfArtifact.push(this.itemName[item].EN)
+                //         }
+                //     })
+                // })
                 Object.keys(this.sessionData.equipList).map((key) => {
-                    Object.keys(this.itemName).map((item) => {
+                    Object.keys(this.itemName.en).map((item) => {
                         if(item == this.sessionData.equipList[key].flat.setNameTextMapHash){
-                            return this.arrayOfArtifact.push(this.itemName[item].EN)
+                            return this.arrayOfArtifact.push(this.itemName.en[item])
                         }
                     })
                 })
@@ -373,9 +380,35 @@ export default {
                 })
                 
             },
+            defineCharacterId(){
+                const charId = this.charData.id;
+                const depotId = this.sessionData.skillDepotId;
+                if(depotId == '504'){
+                    return this.form.character_id = 10000005
+                }
+                if(depotId == '504'){
+                    return this.form.character_id = 10000005;
+                } else if(depotId == '506') {
+                    return this.form.character_id = "10000005-506";
+                } else if(depotId == '507') {
+                    return this.form.character_id = "10000005-507";
+                } else if(depotId == '508') {
+                    return this.form.character_id = "10000007-508";
+                } else if(depotId == '704') {
+                    return this.form.character_id = "10000007";
+                } else if(depotId == '706') {
+                    return this.form.character_id = "10000007-706";
+                } else if(depotId == '707') {
+                    return this.form.character_id = "10000007-707";
+                } else if(depotId == '708') {
+                    return this.form.character_id = "10000007-708";
+                }  else {
+                    return this.form.character_id = charId;
+                }
+            },
             defineTalent(){
                 const talent = this.arrayOfTalent;
-                if(this.charData.id == '10000002' || '10000005' || '10000005-506' || '10000005-507' || '10000007-704' || '10000007-706' || '10000007-707'){
+                if(this.charData.skillDepotId == '201' || '504' || '506' || '507' || '508' || '704' || '706' || '707' || '708'){
                     this.form.normalAttack = talent[2];
                     this.form.elementalSkill = talent[0];
                     this.form.elementalBurst = talent[1];
@@ -427,6 +460,7 @@ export default {
             }
     },
     async mounted(){
+        this.defineCharacterId();
         await this.defineArtifact();
         await this.countArrayArt();
         await this.artifactSet();

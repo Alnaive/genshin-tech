@@ -64,7 +64,7 @@ class BuildController extends Controller
     public function storeBuild(BuildRequest $request)
     { 
         $build = Build::where(['uid' =>  $request->uid, 'character_id' => $request->character_id, 'four_pcs_art' => $request->four_pcs_art,])
-                ->whereJsonContains('two_pcs_art', $request->two_pcs_art)
+                // ->whereJsonContains('two_pcs_art', $request->two_pcs_art)
                 ->first();
         if($build) //will be empty if no result
         $build->update([
@@ -74,6 +74,7 @@ class BuildController extends Controller
             'conste' => $request->conste,
             'weapon_id' => $request->weapon_id,
             'refinement' => $request->refinement,
+            'two_pcs_art' => $request->two_pcs_art,
             'one_pcs_art' => $request->one_pcs_art,
             'equipList' => $request->equipList,
             'sands' => $request->sands,
