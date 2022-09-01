@@ -36,9 +36,10 @@
                         </figure> 
                         <div :class="!url ? 'text-white font-bold absolute ml-4 top-0 mt-1':'mix-blend-color-dodge drop-shadow-2xl font-bold absolute ml-4 top-0 mt-1'">
                         <h1 class="font-md">{{charData.name}}</h1> 
-                        <span v-show="!showNickname">{{playerInfo.nickname}} </span>   <span v-show="!showUid"> {{uid}}</span>
+                        <span v-show="!showNickname">{{playerInfo.nickname}} </span>   
                         <pre :class="!url ? 'text-warning' : 'text-none'">Level {{sessionData.propMap[4001]['val']}}/{{(sessionData.propMap[1002]['val'] * 10) + (sessionData.propMap[1002]['val']>0?10:0) + 20}}</pre> 
                         </div>
+                        <div class="absolute top-0 right-0 mt-1 mr-[12px]"><h1 class="font-bold" v-show="!showUid"> {{uid}}</h1></div>
                         <section v-show="!showEquip">
                         <Equip :sessionData="sessionData" />
                         </section>
@@ -234,7 +235,7 @@ export default {
             hydroDamageBonus: parseFloat(props.sessionData.fightPropMap[42] * 100).toFixed(1),
             anemoDamageBonus: parseFloat(props.sessionData.fightPropMap[44] * 100).toFixed(1),
             electroDamageBonus: parseFloat(props.sessionData.fightPropMap[41] * 100).toFixed(1),
-            dendroDamageBonus: null,
+            dendroDamageBonus: parseFloat(props.sessionData.fightPropMap[43] * 100).toFixed(1),
             cryoDamageBonus: parseFloat(props.sessionData.fightPropMap[46] * 100).toFixed(1),
             geoDamageBonus: parseFloat(props.sessionData.fightPropMap[45] * 100).toFixed(1),
             physicalDamageBonus: parseFloat(props.sessionData.fightPropMap[30] * 100).toFixed(1),
@@ -331,6 +332,8 @@ export default {
                     return "../image/element/bgHydro.jpg"
                 } else if(ele == "Fire"){
                     return "../image/element/bgPyro.jpg"
+                } else {
+                    return "../image/element/bgDendro.jpg"
                 }
             },
             defineArtifact(){

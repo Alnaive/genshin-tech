@@ -1125,7 +1125,7 @@ export default{
             return "../../image/element/bgAnemo.jpg"
         },
         bgDendro(){
-
+            return "../../image/element/bgDendro.jpg"
         },
         bgElectro(){
              return "../../image/element/bgElectro.jpg"

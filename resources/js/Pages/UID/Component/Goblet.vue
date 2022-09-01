@@ -29,6 +29,7 @@
             <h1 class="font-bold" v-else-if="sessionData.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_WIND_ADD_HURT'">Anemo DMG Bonus</h1>
             <h1 class="font-bold" v-else-if="sessionData.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ICE_ADD_HURT'">Cryo DMG Bonus</h1>
             <h1 class="font-bold" v-else-if="sessionData.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ROCK_ADD_HURT'">Geo DMG Bonus</h1>
+            <h1 class="font-bold" v-else-if="sessionData.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_GRASS_ADD_HURT'">Dendro DMG Bonus</h1>
             <div v-if="sessionData.equipList[3].flat.reliquaryMainstat.mainPropId == 'FIGHT_PROP_ELEMENT_MASTERY'">
                 <pre class="text-xl">{{sessionData.equipList[3].flat.reliquaryMainstat.statValue}}</pre>
             </div>

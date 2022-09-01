@@ -8,7 +8,6 @@
                 <h1 class="text-2xl font-bold">Showcase Character by {{uid}}</h1>
             </div>
         </template>
-        <div >
             <div class="flex flex-col items-stretch md:flex-row justify-center">
                 <perfect-scrollbar  class=" md:w-1/3 md:h-[730px] overflow-auto ">
                     <div class="flex md:flex-wrap md:justify-center">
@@ -35,7 +34,6 @@
                     <Characters :builds="builds" :showBuild="showBuild"/>
                 </div>
             </div>
-        </div>
         <div class="invisible md:visible md:flex md:justify-center md:mt-2">
             <button v-if="showBuild" class="btn bg-green-500 hover:bg-green-400 text-white" @click="exportImage()"><VueFeather type="image" size="24" class="mr-1" ></VueFeather> Export</button>
         </div>

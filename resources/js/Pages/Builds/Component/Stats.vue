@@ -85,6 +85,12 @@
     <strong class="mr-2 "> <span >{{ build.geoDamageBonus }}%</span> <br>
     </strong>
 </div>
+<div class="flex items-center gap-2" v-if="build.character.element == 'Grass' && build.dendroDamageBonus > 0">
+    <img src="/image/attribute/Dendro.png" class="w-8 h-8">
+    <strong class="flex-1 w-64">Dendro DMG Bonus</strong>
+    <strong class="mr-2 "> <span >{{ build.dendroDamageBonus }}%</span> <br>
+    </strong>
+</div>
 <div class="flex items-center gap-2" v-if="build.physicalDamageBonus > 0">
     <img src="/image/attribute/Icon_Attribute_Physical2.png" class="w-8 h-8">
     <strong class="flex-1 w-64">Physical DMG Bonus</strong>

@@ -155,6 +155,8 @@ export default{
                     return "../image/element/bgHydro.jpg"
                 } else if(ele == "Fire"){
                     return "../image/element/bgPyro.jpg"
+                } else {
+                    return "../image/element/bgDendro.jpg"
                 }
             },
     

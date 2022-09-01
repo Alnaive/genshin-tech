@@ -5,72 +5,72 @@
                 <div>
                     <div v-if="build.conste >= 1" class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}" >
                         <div  class="hero-content text-center text-neutral-content">
-                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[0]}.png`" alt="">
+                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.Consts[0]}.png`" alt="">
                         </div>
                     </div>
                     <div v-else class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
                         <div  class="hero-content text-center text-neutral-content">
-                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[0]}.png`" alt="">
+                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.Consts[0]}.png`" alt="">
                         </div>
                     </div>
                 </div>
                 <div>
                     <div v-if="build.conste <= 1" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
                         <div  class="hero-content text-center text-neutral-content">
-                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[1]}.png`" alt="">
+                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.Consts[1]}.png`" alt="">
                         </div>
                     </div>
                     <div v-else class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
                         <div  class="hero-content text-center text-neutral-content">
-                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[1]}.png`" alt="">
+                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.Consts[1]}.png`" alt="">
                         </div>
                     </div>
                 </div>
                 <div>
                     <div v-if="build.conste <= 2" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
                         <div  class="hero-content text-center text-neutral-content">
-                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[2]}.png`" alt="">
+                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.Consts[2]}.png`" alt="">
                         </div>
                     </div>
                     <div v-else class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
                         <div  class="hero-content text-center text-neutral-content">
-                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[2]}.png`" alt="">
+                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.Consts[2]}.png`" alt="">
                         </div>
                     </div>
                 </div>
                 <div>
                     <div v-if="build.conste <= 3" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
                         <div  class="hero-content text-center text-neutral-content">
-                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[3]}.png`" alt="">
+                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.Consts[3]}.png`" alt="">
                         </div>
                     </div>
                     <div v-else class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
                         <div  class="hero-content text-center text-neutral-content">
-                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[3]}.png`" alt="">
+                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.Consts[3]}.png`" alt="">
                         </div>
                     </div>
                 </div>
                 <div>
                     <div v-if="build.conste <= 4" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
                         <div  class="hero-content text-center text-neutral-content">
-                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[4]}.png`" alt="">
+                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.Consts[4]}.png`" alt="">
                         </div>
                     </div>
                     <div v-else class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
                         <div  class="hero-content text-center text-neutral-content">
-                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[4]}.png`" alt="">
+                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.Consts[4]}.png`" alt="">
                         </div>
                     </div>
                 </div>
                 <div>
                     <div v-if="build.conste <= 5" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
                         <div  class="hero-content text-center text-neutral-content">
-                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[5]}.png`" alt="">
+                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.Consts[5]}.png`" alt="">
                         </div>
                     </div>
                     <div v-else class="hero w-14 h-14" :style="{backgroundImage: 'url('+ constBorder() +')'}">
                         <div  class="hero-content text-center text-neutral-content">
-                            <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${build.character.Consts[5]}.png`" alt="">
+                            <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${build.character.Consts[5]}.png`" alt="">
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
             <li v-else>
                 <div v-for="cons in build.character.Consts" :key="cons" class="hero w-14 h-14" style="background-image: url('/image/svg/Const.svg');">
                     <div class="hero-content text-center text-neutral-content">
-                        <img :src="`https://upload-os-bbs.mihoyo.com/game_record/genshin/constellation_icon/${cons}.png`" alt="">
+                        <img :src="`https://res.cloudinary.com/genshin/image/upload/sprites/${cons}.png`" alt="">
                     </div>
                 </div>
             </li>
@@ -89,17 +89,6 @@
 <script>
 export default {
     props: [ 'build'],
-    data(){
-        return{
-            isPyro: 'ring-red-800',
-            isHydro: 'ring-blue-700',
-            isAnemo: 'ring-lime-700',
-            isElectro: 'ring-violet-700',
-            isDendro: 'ring-green-700',
-            isCryo: 'ring-cyan-700',
-            isGeo: 'ring-amber-700',
-        }
-    },
     methods:{
             constBorder(){
                 const ele = this.build.character.element;
@@ -108,7 +97,7 @@ export default {
                 } else if(ele == "Rock"){
                     return "../image/svg/Const_Geo.svg";
                 } else if(ele == "Grass"){
-                    return this.isDendro;
+                    return "../image/svg/Const_Dendro.svg";
                 } else if(ele == "Wind"){
                     return "../image/svg/Const_Anemo.svg";
                 } else if(ele == "Electric"){
@@ -117,10 +106,7 @@ export default {
                     return "../image/svg/Const_Hydro.svg";
                 } else if(ele == "Fire"){
                     return "../image/svg/Const_Pyro.svg";
-                }
-            },
-            lock(){
-                return "../image/attribute/lock.png"
+                } 
             },
     }
 }

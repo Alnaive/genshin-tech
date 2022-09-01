@@ -89,17 +89,6 @@
 <script>
 export default {
     props: [ 'build'],
-    data(){
-        return{
-            isPyro: 'ring-red-800',
-            isHydro: 'ring-blue-700',
-            isAnemo: 'ring-lime-700',
-            isElectro: 'ring-violet-700',
-            isDendro: 'ring-green-700',
-            isCryo: 'ring-cyan-700',
-            isGeo: 'ring-amber-700',
-        }
-    },
     methods:{
             constBorder(){
                 const ele = this.build[0].character.element;
@@ -108,7 +97,7 @@ export default {
                 } else if(ele == "Rock"){
                     return "../image/svg/Const_Geo.svg";
                 } else if(ele == "Dendro"){
-                    return this.isDendro;
+                    return "../image/svg/Const_Dendro.svg";
                 } else if(ele == "Wind"){
                     return "../image/svg/Const_Anemo.svg";
                 } else if(ele == "Electric"){
@@ -118,9 +107,6 @@ export default {
                 } else if(ele == "Fire"){
                     return "../image/svg/Const_Pyro.svg";
                 }
-            },
-            lock(){
-                return "../image/attribute/lock.png"
             },
     }
 }
