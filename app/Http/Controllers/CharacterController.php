@@ -64,8 +64,8 @@ class CharacterController extends Controller
         ]);
     }
     public function getCharacterApi(){
-        // $itemName = json_decode(file_get_contents(public_path() . "/asset/ItemName.json"), true);
-        $itemName = json_decode(file_get_contents("https://cdn.jsdelivr.net/gh/EnkaNetwork/API-docs@master/store/characters.json"), true);
+        $itemName = json_decode(file_get_contents(public_path() . "/asset/characters.json"), true);
+        // $itemName = json_decode(file_get_contents("https://cdn.jsdelivr.net/gh/EnkaNetwork/API-docs@master/store/characters.json"), true);
         // $itemName = json_decode(file_get_contents("https://api.ambr.top/v2/en/avatar"), true);
         return Inertia::render('Characters/getCharacter',[
             'itemName' => $itemName,
@@ -137,11 +137,11 @@ class CharacterController extends Controller
     public function store(characterRequest $request)
     {
         
-        $img1 = $request->avatar;
-        if ($request->file('avatar')) {
-            $img1 = $request->avatar->getClientOriginalName();
-            $request->avatar->storeAS('images/icon/avatar', $img1);
-            }
+        // $img1 = $request->avatar;
+        // if ($request->file('avatar')) {
+        //     $img1 = $request->avatar->getClientOriginalName();
+        //     $request->avatar->storeAS('images/icon/avatar', $img1);
+        //     }
         // $data = $request->all();
         // $data['slug'] = SlugService::createSlug(Character::class, 'slug',$request->name);
         // $data['avatar'] = $img1;
@@ -157,9 +157,14 @@ class CharacterController extends Controller
             'Skills' => $request->Skills,
             'ProudMap' => $request->ProudMap,
             'icon' => $request->icon,
-            'avatar' => $img1,
+            'sideIcon' => $request->sideIcon,
+            'splashArt' => $request->splashArt,
+            'avatar' => $request->avatar,
             'weaponType' => $request->weaponType,
-
+            'detail' => $request->detail,
+            'native' => $request->native,
+            'constellation' => $request->constellation,
+            'title' => $request->title,
 
         ]);
         return Redirect::route('Characters.index');

@@ -46,7 +46,7 @@
     import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
     import {Head,useForm, Link} from '@inertiajs/inertia-vue3'
     import {reactive} from 'vue'
-    const GenshinDb = require('genshin-db');
+    import axios from 'axios'
 
     export default {
         components: {
@@ -69,12 +69,14 @@
         data(){
             return{
                 arr:[],
+                char: {},
             }
         },
         methods: {
             charData(data){
-                const i = this.name = data;
-                localStorage.setItem('character', JSON.stringify(i));
+                axios.get(`https://api.ambr.top/v2/en/avatar/${data.id}`).then(response => { 
+                    localStorage.setItem('character', JSON.stringify(response.data.data));
+                })
             },
             bg5(){
             return "../image/rarity/Background_Item_5_Star.png"

@@ -20,7 +20,6 @@
                                     <span class=" text-black dark:text-white">ID</span>
                                 </label>
                                 <input v-model="form.id" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-accent-content dark:bg-base-100"><br>
-                                <button class="btn btn-success w-24" @click="addJson()">Submit</button>
                             </div>
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
@@ -46,14 +45,32 @@
                                 </label>
                                 <input v-model="form.icon" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-accent-content dark:bg-base-100"><br>
                             </div>
-                             <div class="form-control w-full max-w-xs">
+                        </div>
+                        <div class="flex space-x-4 p-5">
+                            <div class="form-control w-full max-w-xs">
+                                <label class="label">
+                                    <span class=" text-black dark:text-white">Side Icon</span>
+                                </label>
+                                <input v-model="form.sideIcon" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-accent-content dark:bg-base-100"><br>
+                                <button class="btn btn-success w-24" @click="addJson()">Submit</button>
+                            </div>
+                            <div class="form-control w-full max-w-xs">
+                                <label class="label">
+                                    <span class=" text-black dark:text-white">Splash Art</span>
+                                </label>
+                                <input v-model="form.splashArt" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-accent-content dark:bg-base-100"><br>
+                            </div>
+                            <div class="form-control w-full max-w-xs">
                                 <label class="label">
                                     <span class=" text-black dark:text-white">Avatar</span>
                                 </label>
-                                <input type="file" @change="onFileChange" ref="Avatar"/>
-                                <div id="preview">
-                                    <img v-if="url" :src="url" />
-                                </div>
+                                <input v-model="form.avatar" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-accent-content dark:bg-base-100"><br>
+                            </div>
+                            <div class="form-control w-full max-w-xs">
+                                <label class="label">
+                                    <span class=" text-black dark:text-white">Skill ID</span>
+                                </label>
+                                <input v-model="form.skillDepotId" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-accent-content dark:bg-base-100"><br>
                             </div>
                         </div>
                 </form>
@@ -68,8 +85,8 @@
 <script>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import {Head,useForm, Link} from '@inertiajs/inertia-vue3'
-const GenshinDb = require('genshin-db');
-
+import {ref, reactive} from 'vue'
+import axios from 'axios'
 export default {
         components: {
             BreezeAuthenticatedLayout,
@@ -101,6 +118,8 @@ export default {
                 rarity: props.character.rank,
                 element: props.character.element,
                 icon: props.character.icon,
+                sideIcon: null,
+                splashArt: null,
                 weaponType: props.character.weaponType,
                 Consts: [],
                 skillDepotId: null,
@@ -108,10 +127,15 @@ export default {
                 Skills: {},
                 ProudMap: {},
                 avatar: null,
+                detail: props.character.fetter.detail,
+                title: props.character.fetter.title,
+                native: props.character.fetter.native,
+                constellation: props.character.fetter.constellation,
             });
             return {form};
         },
         methods: {
+             
             defineId(){
                 const boyWind = this.character.id == '10000005-anemo';
                 const boyGeo = this.character.id == '10000005-geo';
@@ -171,11 +195,58 @@ export default {
                 const file = e.target.files[0];
                 this.url = URL.createObjectURL(file);
             },
+            defineSideIcon(){
+                Object.keys(this.itemName).map((key) => {
+                    if(this.character.id == key){
+                        this.form.sideIcon = this.itemName[key].SideIconName;
+                    }
+                })
+            },
+            defineSplashArt() {
+                const boyWind = this.character.id == '10000005-anemo';
+                const boyGeo = this.character.id == '10000005-geo';
+                const boyElectro = this.character.id == '10000005-electro';
+                const boyDendro = this.character.id == '10000005-dendro';
+                const girlWind = this.character.id == '10000007-anemo';
+                const girlGeo = this.character.id == '10000007-geo';
+                const girlElectro = this.character.id == '10000007-electro';
+                const girlDendro = this.character.id == '10000007-dendro';
+                const text = this.form.sideIcon
+                const repl = text.replace(/UI_AvatarIcon_Side_/gi, "UI_Gacha_AvatarImg_")
+                if(boyWind){
+                    return this.form.splashArt = null;
+                } else if(boyGeo) {
+                    return this.form.splashArt = null;
+                } else if(boyElectro) {
+                    return this.form.splashArt = null;
+                } else if(boyDendro) {
+                    return this.form.splashArt = null;
+                } else if(girlWind) {
+                    return this.form.splashArt = null;
+                } else if(girlGeo) {
+                    return this.form.splashArt = null;
+                } else if(girlElectro) {
+                    return this.form.splashArt = null;
+                } else if(girlDendro) {
+                    return this.form.splashArt = null;
+                } else {
+                    return this.form.splashArt = repl
+                }
+            },
+            defineHoyoArt(){
+                const text = this.character.icon
+                const text2 = "@2x"
+                const result = text.concat(text2)
+                this.form.avatar = result
+            }
         },
         mounted(){
             this.defineId();
             this.defineCharacterId();
             this.defineSkillDepot();
-        }
+            this.defineSideIcon();
+            this.defineSplashArt();
+            this.defineHoyoArt()
+        },
 }
 </script>

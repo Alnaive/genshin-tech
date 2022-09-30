@@ -26,10 +26,11 @@ use Artesaos\SEOTools\Facades\SEOTools;
 class WelcomeController extends Controller
 {
     public function index() {
-        return Inertia::render('Welcome', [
-            'build' => Build::with('character','weapon')->inRandomOrder()->limit(1)->get(),
-            'totalBuild' => Build::count(),
-        ]);
+        return Redirect::route('login');
+        // return Inertia::render('Welcome', [
+        //     'build' => Build::with('character','weapon')->inRandomOrder()->limit(1)->get(),
+        //     'totalBuild' => Build::count(),
+        // ]);
     }
     public function uid($uid){
         $character = Character::all();

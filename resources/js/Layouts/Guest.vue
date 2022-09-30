@@ -56,9 +56,9 @@
       <div class="flex-none hidden lg:block">
         <ul class="flex flex-row space-x-3">
           <!-- Navbar menu content here -->
-          <li><Link :href="route('explore')" class="btn btn-ghost normal-case text-md "><VueFeather type="search" size="24" ></VueFeather> Explore</Link></li>
+          <!-- <li><Link :href="route('explore')" class="btn btn-ghost normal-case text-md "><VueFeather type="search" size="24" ></VueFeather> Explore</Link></li>
           <li><Link :href="route('character')" class="btn btn-ghost normal-case text-md "><img src="https://cdn.discordapp.com/attachments/462583582431510528/943893367387988048/n5s6DYBAG0im6vlSAeQAAAAAElFTkSuQmCC.png" alt="">Character</Link></li>
-          <li><!-- Dropdwon -->
+          <li>
             <BreezeDropdown align="right" width="48" v-if="$page.props.auth.user">
                 <template #trigger>
                     <span class="inline-flex rounded-md">
@@ -98,7 +98,7 @@
                     </BreezeDropdownLink>
                 </template>
             </BreezeDropdown>
-            </li>
+            </li> -->
         </ul>
       </div>
       </div>
@@ -115,7 +115,7 @@
             <slot />
         </main>
         <br>
-        <PageFooter />
+        <!-- <PageFooter /> -->
     </div>
   </div> 
   <div class="drawer-side ">
